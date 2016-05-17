@@ -1,0 +1,273 @@
+/*  
+**  Elbow-Room Sass -  Sass Margin and Padding Tweaking System by @AndrewBiddinger 
+**  Version: 0.0.3
+*/
+.buffer-xs {
+  margin: 10px; }
+
+.buffer-top-xs {
+  margin-top: 10px; }
+
+.buffer-right-xs {
+  margin-right: 10px; }
+
+.buffer-left-xs {
+  margin-left: 10px; }
+
+.buffer-bottom-xs {
+  margin-bottom: 10px; }
+
+.anti-buffer-xs {
+  margin: -10px; }
+
+.anti-buffer-top-xs {
+  margin-top: -10px; }
+
+.anti-buffer-right-xs {
+  margin-right: -10px; }
+
+.anti-buffer-left-xs {
+  margin-left: -10px; }
+
+.anti-buffer-bottom-xs {
+  margin-bottom: -10px; }
+
+.bosom-xs {
+  padding: 10px; }
+
+.bosom-top-xs {
+  padding-top: 10px; }
+
+.bosom-right-xs {
+  padding-right: 10px; }
+
+.bosom-left-xs {
+  padding-left: 10px; }
+
+.bosom-bottom-xs {
+  padding-bottom: 10px; }
+
+.buffer-sm {
+  margin: 10px; }
+
+.buffer-top-sm {
+  margin-top: 10px; }
+
+.buffer-right-sm {
+  margin-right: 10px; }
+
+.buffer-left-sm {
+  margin-left: 10px; }
+
+.buffer-bottom-sm {
+  margin-bottom: 10px; }
+
+.anti-buffer-sm {
+  margin: -10px; }
+
+.anti-buffer-top-sm {
+  margin-top: -10px; }
+
+.anti-buffer-right-sm {
+  margin-right: -10px; }
+
+.anti-buffer-left-sm {
+  margin-left: -10px; }
+
+.anti-buffer-bottom-sm {
+  margin-bottom: -10px; }
+
+.bosom-sm {
+  padding: 10px; }
+
+.bosom-top-sm {
+  padding-top: 10px; }
+
+.bosom-right-sm {
+  padding-right: 10px; }
+
+.bosom-left-sm {
+  padding-left: 10px; }
+
+.bosom-bottom-sm {
+  padding-bottom: 10px; }
+
+.buffer {
+  margin: 15px; }
+
+.buffer-top {
+  margin-top: 15px; }
+
+.buffer-right {
+  margin-right: 15px; }
+
+.buffer-left {
+  margin-left: 15px; }
+
+.buffer-bottom {
+  margin-bottom: 15px; }
+
+.anti-buffer {
+  margin: -15px; }
+
+.anti-buffer-top {
+  margin-top: -15px; }
+
+.anti-buffer-right {
+  margin-right: -15px; }
+
+.anti-buffer-left {
+  margin-left: -15px; }
+
+.anti-buffer-bottom {
+  margin-bottom: -15px; }
+
+.bosom {
+  padding: 15px; }
+
+.bosom-top {
+  padding-top: 15px; }
+
+.bosom-right {
+  padding-right: 15px; }
+
+.bosom-left {
+  padding-left: 15px; }
+
+.bosom-bottom {
+  padding-bottom: 15px; }
+
+.buffer-md {
+  margin: 22.5px; }
+
+.buffer-top-md {
+  margin-top: 22.5px; }
+
+.buffer-right-md {
+  margin-right: 22.5px; }
+
+.buffer-left-md {
+  margin-left: 22.5px; }
+
+.buffer-bottom-md {
+  margin-bottom: 22.5px; }
+
+.anti-buffer-md {
+  margin: -22.5px; }
+
+.anti-buffer-top-md {
+  margin-top: -22.5px; }
+
+.anti-buffer-right-md {
+  margin-right: -22.5px; }
+
+.anti-buffer-left-md {
+  margin-left: -22.5px; }
+
+.anti-buffer-bottom-md {
+  margin-bottom: -22.5px; }
+
+.bosom-md {
+  padding: 22.5px; }
+
+.bosom-top-md {
+  padding-top: 22.5px; }
+
+.bosom-right-md {
+  padding-right: 22.5px; }
+
+.bosom-left-md {
+  padding-left: 22.5px; }
+
+.bosom-bottom-md {
+  padding-bottom: 22.5px; }
+
+.buffer-lg {
+  margin: 33.75px; }
+
+.buffer-top-lg {
+  margin-top: 33.75px; }
+
+.buffer-right-lg {
+  margin-right: 33.75px; }
+
+.buffer-left-lg {
+  margin-left: 33.75px; }
+
+.buffer-bottom-lg {
+  margin-bottom: 33.75px; }
+
+.anti-buffer-lg {
+  margin: -33.75px; }
+
+.anti-buffer-top-lg {
+  margin-top: -33.75px; }
+
+.anti-buffer-right-lg {
+  margin-right: -33.75px; }
+
+.anti-buffer-left-lg {
+  margin-left: -33.75px; }
+
+.anti-buffer-bottom-lg {
+  margin-bottom: -33.75px; }
+
+.bosom-lg {
+  padding: 33.75px; }
+
+.bosom-top-lg {
+  padding-top: 33.75px; }
+
+.bosom-right-lg {
+  padding-right: 33.75px; }
+
+.bosom-left-lg {
+  padding-left: 33.75px; }
+
+.bosom-bottom-lg {
+  padding-bottom: 33.75px; }
+
+.buffer-xl {
+  margin: 50.625px; }
+
+.buffer-top-xl {
+  margin-top: 50.625px; }
+
+.buffer-right-xl {
+  margin-right: 50.625px; }
+
+.buffer-left-xl {
+  margin-left: 50.625px; }
+
+.buffer-bottom-xl {
+  margin-bottom: 50.625px; }
+
+.anti-buffer-xl {
+  margin: -50.625px; }
+
+.anti-buffer-top-xl {
+  margin-top: -50.625px; }
+
+.anti-buffer-right-xl {
+  margin-right: -50.625px; }
+
+.anti-buffer-left-xl {
+  margin-left: -50.625px; }
+
+.anti-buffer-bottom-xl {
+  margin-bottom: -50.625px; }
+
+.bosom-xl {
+  padding: 50.625px; }
+
+.bosom-top-xl {
+  padding-top: 50.625px; }
+
+.bosom-right-xl {
+  padding-right: 50.625px; }
+
+.bosom-left-xl {
+  padding-left: 50.625px; }
+
+.bosom-bottom-xl {
+  padding-bottom: 50.625px; }

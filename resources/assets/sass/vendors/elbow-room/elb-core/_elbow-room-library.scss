@@ -1,0 +1,343 @@
+// Elbow-Room Class Library
+
+// Buffer Extra Small
+.buffer-xs {
+  margin: $elb-xs;
+}
+
+.buffer-top-xs {
+  margin-top: $elb-xs;
+}
+.buffer-right-xs {
+  margin-right: $elb-xs;
+}
+.buffer-left-xs {
+  margin-left: $elb-xs;
+}
+.buffer-bottom-xs {
+  margin-bottom: $elb-xs;
+}
+.anti-buffer-xs {
+  margin: $elb-anti-xs;
+}
+.anti-buffer-top-xs {
+  margin-top: $elb-anti-xs;
+}
+.anti-buffer-right-xs {
+  margin-right: $elb-anti-xs;
+}
+.anti-buffer-left-xs {
+  margin-left: $elb-anti-xs;
+}
+.anti-buffer-bottom-xs {
+  margin-bottom: $elb-anti-xs;
+}
+
+// Bosom Extra Small
+.bosom-xs {
+  padding: $elb-xs;
+}
+
+.bosom-top-xs {
+  padding-top: $elb-xs;
+}
+.bosom-right-xs {
+  padding-right: $elb-xs;
+}
+.bosom-left-xs {
+  padding-left: $elb-xs;
+}
+.bosom-bottom-xs {
+  padding-bottom: $elb-xs;
+}
+
+
+// Buffer Small
+.buffer-sm {
+  margin: $elb-sm;
+}
+.buffer-top-sm {
+  margin-top: $elb-sm;
+}
+.buffer-right-sm {
+  margin-right: $elb-sm;
+}
+.buffer-left-sm {
+  margin-left: $elb-sm;
+}
+.buffer-bottom-sm {
+  margin-bottom: $elb-sm;
+}
+.anti-buffer-sm {
+  margin: $elb-anti-sm;
+}
+.anti-buffer-top-sm {
+  margin-top: $elb-anti-sm;
+}
+.anti-buffer-right-sm {
+  margin-right: $elb-anti-sm;
+}
+.anti-buffer-left-sm {
+  margin-left: $elb-anti-sm;
+}
+.anti-buffer-bottom-sm {
+  margin-bottom: $elb-anti-sm;
+}
+
+// Bosom Small
+.bosom-sm {
+  padding: $elb-sm;
+}
+
+.bosom-top-sm {
+  padding-top: $elb-sm;
+}
+.bosom-right-sm {
+  padding-right: $elb-sm;
+}
+.bosom-left-sm {
+  padding-left: $elb-sm;
+}
+.bosom-bottom-sm {
+  padding-bottom: $elb-sm;
+}
+
+
+// Buffer Regular
+.buffer {
+  margin: $elb-reg;
+}
+.buffer-top {
+  margin-top: $elb-reg;
+}
+.buffer-right {
+  margin-right: $elb-reg;
+}
+.buffer-left {
+  margin-left: $elb-reg;
+}
+.buffer-bottom {
+  margin-bottom: $elb-reg;
+}
+
+// Buffer Nullify and Void
+.buffer-void {
+  margin: 0px;
+}
+
+.buffer-top-void {
+  margin-top: 0px;
+}
+.buffer-right-void {
+  margin-right: 0px;
+}
+.buffer-left-void {
+  margin-left: 0px;
+}
+.buffer-bottom-void {
+  margin-bottom: 0px;
+}
+
+.anti-buffer {
+  margin: $elb-anti-reg;
+}
+.anti-buffer-top {
+  margin-top: $elb-anti-reg;
+}
+.anti-buffer-right {
+  margin-right: $elb-anti-reg;
+}
+.anti-buffer-left {
+  margin-left: $elb-anti-reg;
+}
+.anti-buffer-bottom {
+  margin-bottom: $elb-anti-reg;
+}
+
+// Bosom
+.bosom {
+  padding: $elb-reg;
+}
+
+.bosom-top {
+  padding-top: $elb-reg;
+}
+.bosom-right {
+  padding-right: $elb-reg;
+}
+.bosom-left {
+  padding-left: $elb-reg;
+}
+.bosom-bottom {
+  padding-bottom: $elb-reg;
+}
+
+// Bosom Nullify and Void
+.bosom-void {
+  padding: 0px;
+}
+
+.bosom-top-void {
+  padding-top: 0px;
+}
+.bosom-right-void {
+  padding-right: 0px;
+}
+.bosom-left-void {
+  padding-left: 0px;
+}
+.bosom-bottom-void {
+  padding-bottom: 0px;
+}
+
+// Buffer Medium
+.buffer-md {
+  margin: $elb-md;
+}
+.buffer-top-md {
+  margin-top: $elb-md;
+}
+.buffer-right-md {
+  margin-right: $elb-md;
+}
+.buffer-left-md {
+  margin-left: $elb-md;
+}
+.buffer-bottom-md {
+  margin-bottom: $elb-md;
+}
+.anti-buffer-md {
+  margin: $elb-anti-md;
+}
+.anti-buffer-top-md {
+  margin-top: $elb-anti-md;
+}
+.anti-buffer-right-md {
+  margin-right: $elb-anti-md;
+}
+.anti-buffer-left-md {
+  margin-left: $elb-anti-md;
+}
+.anti-buffer-bottom-md {
+  margin-bottom: $elb-anti-md;
+}
+
+// Bosom Medium
+.bosom-md {
+  padding: $elb-md;
+}
+
+.bosom-top-md {
+  padding-top: $elb-md;
+}
+.bosom-right-md {
+  padding-right: $elb-md;
+}
+.bosom-left-md {
+  padding-left: $elb-md;
+}
+.bosom-bottom-md {
+  padding-bottom: $elb-md;
+}
+
+
+// Buffer Large
+.buffer-lg {
+  margin: $elb-lg;
+}
+.buffer-top-lg {
+  margin-top: $elb-lg;
+}
+.buffer-right-lg {
+  margin-right: $elb-lg;
+}
+.buffer-left-lg {
+  margin-left: $elb-lg;
+}
+.buffer-bottom-lg {
+  margin-bottom: $elb-lg;
+}
+.anti-buffer-lg {
+  margin: $elb-anti-lg;
+}
+.anti-buffer-top-lg {
+  margin-top: $elb-anti-lg;
+}
+.anti-buffer-right-lg {
+  margin-right: $elb-anti-lg;
+}
+.anti-buffer-left-lg {
+  margin-left: $elb-anti-lg;
+}
+.anti-buffer-bottom-lg {
+  margin-bottom: $elb-anti-lg;
+}
+
+// Bosom Large
+.bosom-lg {
+  padding: $elb-lg;
+}
+
+.bosom-top-lg {
+  padding-top: $elb-lg;
+}
+.bosom-right-lg {
+  padding-right: $elb-lg;
+}
+.bosom-left-lg {
+  padding-left: $elb-lg;
+}
+.bosom-bottom-lg {
+  padding-bottom: $elb-lg;
+}
+
+
+// Buffer Extra Large
+.buffer-xl {
+  margin: $elb-xl;
+}
+.buffer-top-xl {
+  margin-top: $elb-xl;
+}
+.buffer-right-xl {
+  margin-right: $elb-xl;
+}
+.buffer-left-xl {
+  margin-left: $elb-xl;
+}
+.buffer-bottom-xl {
+  margin-bottom: $elb-xl;
+}
+.anti-buffer-xl {
+  margin: $elb-anti-xl;
+}
+.anti-buffer-top-xl {
+  margin-top: $elb-anti-xl;
+}
+.anti-buffer-right-xl {
+  margin-right: $elb-anti-xl;
+}
+.anti-buffer-left-xl {
+  margin-left: $elb-anti-xl;
+}
+.anti-buffer-bottom-xl {
+  margin-bottom: $elb-anti-xl;
+}
+
+// Bosom Extra Large
+.bosom-xl {
+  padding: $elb-xl;
+}
+
+.bosom-top-xl {
+  padding-top: $elb-xl;
+}
+.bosom-right-xl {
+  padding-right: $elb-xl;
+}
+.bosom-left-xl {
+  padding-left: $elb-xl;
+}
+.bosom-bottom-xl {
+  padding-bottom: $elb-xl;
+}

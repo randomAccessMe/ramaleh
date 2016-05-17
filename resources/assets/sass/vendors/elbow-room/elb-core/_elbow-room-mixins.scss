@@ -1,0 +1,93 @@
+// Elbow-Room Mixins
+
+// Bosom Mixin
+
+@mixin bosom ($options: all, $size: $elb-reg, $direction: normal){
+  @if $size == xxxs {
+    $size: $elb-xxxs;
+  }
+  @else if $size == xxs {
+    $size: $elb-xxs;
+  }
+  @else if $size == xs {
+    $size: $elb-xs;
+  }
+  @else if $size == sm {
+    $size: $elb-sm;
+  }
+  @else if $size == reg {
+    $size: $elb-reg;
+  }
+  @else if $size == md {
+    $size: $elb-md;
+  }
+  @else if $size == lg {
+    $size: $elb-lg;
+  }
+  @else if $size == xl {
+    $size: $elb-xl;
+  }
+  @else if $size == xxl {
+    $size: $elb-xxl;
+  }
+  @else if $size == xxxl {
+    $size: $elb-xxxl;
+  }
+  @if $direction == anti {
+    $size: $size * -1;
+  }
+  @if $options == all {
+    padding: $size;
+  }
+  @else {
+    @each $option in $options {
+      padding-#{$option}: $size;
+    }
+  }
+}
+
+// Buffer Mixin
+
+@mixin buffer ($options: all, $size: $elb-reg, $direction: normal) {
+  @if $size == xxxs {
+    $size: $elb-xxxs;
+  }
+  @else if $size == xxs {
+    $size: $elb-xxs;
+  }
+  @else if $size == xs {
+    $size: $elb-xs;
+  }
+  @else if $size == sm {
+    $size: $elb-sm;
+  }
+  @else if $size == reg {
+    $size: $elb-reg;
+  }
+  @else if $size == md {
+    $size: $elb-md;
+  }
+  @else if $size == lg {
+    $size: $elb-lg;
+  }
+  @else if $size == xl {
+    $size: $elb-xl;
+  }
+  @else if $size == xxl {
+    $size: $elb-xxl;
+  }
+  @else if $size == xxxl {
+    $size: $elb-xxxl;
+  }
+  @if $direction == anti {
+    $size: $size * -1;
+  }
+  @if $options == all {
+    margin: $size;
+  }
+  @else {
+    @each $option in $options {
+      margin-#{$option}: $size;
+    }
+  }
+}

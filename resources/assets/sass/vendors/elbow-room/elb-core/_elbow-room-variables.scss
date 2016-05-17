@@ -1,0 +1,27 @@
+//  Elbow-Room Variables
+
+$elb-base: 15px;
+$elb-increment: 1.5;
+
+$elb-reg: $elb-base; // Base Width
+$elb-md: $elb-reg * $elb-increment; // 22.5
+$elb-lg: $elb-md * $elb-increment; // 33.75
+$elb-xl: $elb-lg * $elb-increment; // 50.625
+$elb-xxl: $elb-xl * $elb-increment; // 50.625
+$elb-xxxl: $elb-xxl * $elb-increment; // 50.625
+
+$elb-sm: $elb-base / $elb-increment; // 10
+$elb-xs: $elb-base / $elb-increment; // 6.667
+$elb-xxs: $elb-base / $elb-increment;  /// 4.444
+$elb-xxxs: $elb-base / $elb-increment; /// 2.962
+
+// Negative Buffers
+$elb-anti-reg: $elb-reg * -1; // -15
+$elb-anti-md: $elb-md * -1; // -22.5
+$elb-anti-lg: $elb-lg * -1; // -33.75
+$elb-anti-xl: $elb-xl * -1; // -50.625
+
+$elb-anti-sm: $elb-sm * -1; // -10
+$elb-anti-xs: $elb-xs * -1; // -6.667
+$elb-anti-xxs: $elb-xxs * -1;  /// -4.444
+$elb-anti-xxxs: $elb-xxxs * -1; /// -2.962
