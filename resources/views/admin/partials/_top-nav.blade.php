@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ route('admin::blank') }}">{{ env('APP_NAME', 'RAMaleh') }}</a>
+        <a class="navbar-brand" href="{{ route('admin::blank') }}">{{ env('APP_NAME', 'Rami Al-Maleh') }}</a>
     </div>
     <!-- /.navbar-header -->
 

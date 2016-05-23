@@ -11,14 +11,13 @@
 |
 */
 $router->group([
-    'middleware' => 'web',
-    'prefix'     => 'admin',
-    'namespace'  => 'Admin',
-    'as'         => 'admin::',
+    'prefix'    => 'admin',
+    'namespace' => 'Admin',
+    'as'        => 'admin::',
 ], function ($router) {
-    $router->get('/',              ['as' => 'blank',     'uses' => 'AdminController@blank']);
-    $router->resource('/site',    'SiteController');
-    $router->get('/resume',        ['as' => 'resume',        'uses' => 'ResumeController@index']);
+    $router->get('/', ['as' => 'blank', 'uses' => 'AdminController@blank']);
+    $router->resource('/site', 'SiteController');
+    $router->get('/resume', ['as' => 'resume', 'uses' => 'ResumeController@index']);
 });
 
 Route::get('/home', 'HomeController@index');

@@ -36,24 +36,26 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name'        => 'required',
             'description' => 'required',
-            'url'         => 'required',
+            'url'         => 'required|active_url',
             'screenshot'  => 'required|image',
         ]);
-//        TODO: display errors & refactor
-
-        $filename    = time() . '.jpg';
-        $destination = storage_path('app/public/uploads/' . Site::$screenshot_upload_location);
-
 
         $screenshot = $request->file('screenshot');
-        if ($request->hasFile('screenshot') && $screenshot->isValid()) {
-            $screenshot->move($destination, $filename);
-            dd('psst');
-            Site::create(array_merge($request->except('screenshot'), ['screenshot' => $filename]));
+        $filename    = time() . '.' . $screenshot->guessExtension();
+        $destination = storage_path('public/uploads/' . Site::$screenshot_upload_location);
+
+        if ( ! $screenshot->isValid()) {
+            flash()->error('Invalid screenshot.');
+            return redirect()->back();
         }
+
+        $screenshot->move($destination, $filename);
+        Site::create(array_merge($request->except('screenshot'), ['screenshot' => $filename]));
+        flash()->success($request->get('name') . ' was added successfully.');
 
 
         return redirect()->route('admin::admin.site.index');
@@ -76,7 +78,7 @@ class SiteController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.portfolio.edit');
     }
 
     /**

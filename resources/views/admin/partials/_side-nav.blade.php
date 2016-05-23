@@ -15,6 +15,9 @@
             <li>
                 <a href="{{ route('admin::blank') }}">Blank Page</a>
             </li>
+            <li>
+                <a href="{{ route('admin::admin.site.index') }}">Portfolio</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

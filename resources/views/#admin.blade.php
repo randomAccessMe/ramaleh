@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Ramaleh</title>
 
     <!-- Bootstrap Core CSS -->
     <!-- MetisMenu CSS -->
@@ -46,7 +46,7 @@
     <!-- Bootstrap Core JavaScript -->
     <!-- Metis Menu Plugin JavaScript -->
     <!-- Custom Theme JavaScript -->
-    <script src="js/all.js"></script>
+    <script src="/js/all.js"></script>
     @stack('scripts')
 
     
