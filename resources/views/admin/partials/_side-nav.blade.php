@@ -18,6 +18,9 @@
             <li>
                 <a href="{{ route('admin::admin.site.index') }}">Portfolio</a>
             </li>
+            <li>
+                <a href="{{ route('admin::log') }}">Error Logs</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

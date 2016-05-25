@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Site;
+use ErrorException;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 class SiteController extends Controller
 {
+
+    private $validation_rules = [
+        'name'        => 'required',
+        'description' => 'required',
+        'url'         => 'required|active_url',
+        'screenshot'  => 'required|image',
+    ];
 
     /**
      * Display a listing of the resource.
@@ -37,19 +47,15 @@ class SiteController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'name'        => 'required',
-            'description' => 'required',
-            'url'         => 'required|active_url',
-            'screenshot'  => 'required|image',
-        ]);
+        $this->validate($request, $this->validation_rules);
 
-        $screenshot = $request->file('screenshot');
+        $screenshot  = $request->file('screenshot');
         $filename    = time() . '.' . $screenshot->guessExtension();
-        $destination = storage_path('public/uploads/' . Site::$screenshot_upload_location);
+        $destination = public_path('uploads/' . Site::$screenshot_upload_location);
 
         if ( ! $screenshot->isValid()) {
             flash()->error('Invalid screenshot.');
+
             return redirect()->back();
         }
 
@@ -73,23 +79,50 @@ class SiteController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param  int $id
+     * @param  Site $site
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Site $site)
     {
-        return view('admin.portfolio.edit');
+
+        return view('admin.portfolio.edit')->withSite($site);
     }
 
     /**
      * Update the specified resource in storage.
      * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param  Site                     $site
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Site $site)
     {
-        //
+        $this->validate($request, $this->validation_rules);
+
+        $screenshot  = $request->file('screenshot');
+        $filename    = time() . '.' . $screenshot->guessExtension();
+        $destination = public_path('uploads/' . Site::$screenshot_upload_location);
+
+        if ( ! $screenshot->isValid()) {
+            flash()->error('Invalid screenshot.');
+
+            return redirect()->back();
+        }
+
+        try {
+            unlink($destination . $site->screenshot);
+        }
+        catch (ErrorException $e){
+            Log::info($e->getMessage(), [
+                'request' => $request,
+                'site'    => $site,
+            ]);
+        }
+
+        $screenshot->move($destination, $filename);
+        $site->update(array_merge($request->except('screenshot'), ['screenshot' => $filename]));
+        flash()->success($request->get('name') . ' was updated successfully.');
+
+        return redirect()->route('admin::admin.site.index');
     }
 
     /**

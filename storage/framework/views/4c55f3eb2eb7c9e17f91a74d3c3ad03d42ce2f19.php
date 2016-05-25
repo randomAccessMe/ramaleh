@@ -1,7 +1,14 @@
 <?php $__env->startSection('content'); ?>
     <div class="row">
 
-        <?php echo Form::open(['route' => ['admin::admin.site.store'], 'enctype' => 'multipart/form-data']); ?>
+        <?php echo Form::model($site, [
+            'method'  => 'PATCH',
+            'route'   => [
+                'admin::admin.site.update',
+                'site' => $site
+            ],
+            'enctype' => 'multipart/form-data'
+        ]); ?>
 
 
         <div class="col-lg-12 col-md-12 col-sm-12">

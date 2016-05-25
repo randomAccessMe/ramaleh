@@ -18,6 +18,8 @@ $router->group([
     $router->get('/', ['as' => 'blank', 'uses' => 'AdminController@blank']);
     $router->resource('/site', 'SiteController');
     $router->get('/resume', ['as' => 'resume', 'uses' => 'ResumeController@index']);
+//    $router->get('logs', ['as' => 'log', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
+    $router->get('logs', ['as' => 'log', 'uses' => 'LogController@index']);
 });
 
 Route::get('/home', 'HomeController@index');

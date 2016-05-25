@@ -15,5 +15,5 @@ class Site extends Model
         "screenshot",
     ];
 
-    static $screenshot_upload_location = 'screenshots';
+    static $screenshot_upload_location = 'screenshots/';
 }
