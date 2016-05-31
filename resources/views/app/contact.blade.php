@@ -35,14 +35,14 @@
 
         <div class="contact-text">
 
-            To contact us please use the contact form visible<br/><br/>
+            To contact me please use the contact form visible<br/><br/>
 
             When sending files, please use<br/>
             the following e-mail<br/><br/>
 
-            <strong>Tomasz Mazurczak</strong><br/><br/>
+            <strong>Rami AlMaleh</strong><br/><br/>
 
-            e-mail: <strong>contact@thomsoon.com</strong>
+            e-mail: <strong><a href="mailto:ramaleh91@gmail.com">ramaleh91@gmail.com</a></strong>
 
         </div>
 

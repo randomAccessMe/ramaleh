@@ -425,8 +425,10 @@ h1 span{
   height: 100px;
   position:relative;
   margin:0 auto;
+  padding-top: 26px;
+  padding-left: 29px;
+  color: #ADA074;
   border:2px solid #f0f0f0;
-  background: url(../img/icons/responsive.png) white no-repeat center center;
   -moz-border-radius:100px;
   -webkit-border-radius:100px;
   border-radius: 100px;

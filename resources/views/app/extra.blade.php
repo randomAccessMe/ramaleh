@@ -4,14 +4,33 @@
 
     <div class="content">
 
-        <h2>Thanks for partners</h2>
+        <div class="logo buffer-lg-top">
 
-        <div class="logo">
-
-            <a href="#"><img src="img/logos/alex1.png"></a>
-            <a href="#"><img src="img/logos/archiq.png"></a>
-            <a href="#"><img src="img/logos/thomsoon.png"></a>
-            <a href="#"><img src="img/logos/alex2.png"></a>
+            <a href="https://www.facebook.com/ramaleh">
+                <img src="img/logos/1464743648_facebook2.png">
+            </a>
+            <a href="https://www.linkedin.com/in/rami-al-maleh-81b22b91">
+                <img src="img/logos/1464743655_linkedin2.png">
+            </a>
+            <a href="#contact">
+                <img src="img/logos/1464743675_Outlook.png">
+            </a>
+            <a href="#">
+                <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
+                <img src="img/logos/1464743695_skype.png" id="SkypeButton_Call_ramaleh91_1">
+                    <script type="text/javascript">
+                        Skype.ui({
+                            "name": "chat",
+                            "element": "SkypeButton_Call_ramaleh91_1",
+                            "participants": ["ramaleh91"],
+                            "imageColor": "white",
+                            "imageSize": 32
+                        });
+                    </script>
+            </a>
+            <a href="https://github.com/randomAccessMe">
+                <img src="img/logos/1464743722_github.png">
+            </a>
 
         </div>
 

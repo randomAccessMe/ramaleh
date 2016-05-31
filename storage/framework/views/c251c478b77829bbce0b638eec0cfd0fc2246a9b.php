@@ -96,60 +96,9 @@
                 </a>
             </li>
 
-            <!-- 8 item portoflio-->
-
-            <li>
-                <a href="#">
-                    <img src="img/portfolio/8.png" alt="Portfolio item"/>
-                    <div class="text">
-                        <p>PORTFOLIO 8</p>
-                        <p class="description">Your text here...</p>
-                    </div>
-                </a>
-            </li>
-
-            <!-- 9 item portoflio-->
-
-            <li>
-                <a href="#">
-                    <img src="img/portfolio/9.png" alt="Portfolio item"/>
-                    <div class="text">
-                        <p>PORTFOLIO 9</p>
-                        <p class="description">Your text here...</p>
-                    </div>
-                </a>
-            </li>
-
-            <!-- 10 item portoflio-->
-
-            <li>
-                <a href="#">
-                    <img src="img/portfolio/10.png" alt="Portfolio item"/>
-                    <div class="text">
-                        <p>PORTFOLIO 11</p>
-                        <p class="description">Your text here...</p>
-                    </div>
-                </a>
-            </li>
-
-            <!-- 11 item portoflio-->
-
-            <li>
-                <a href="#">
-                    <img src="img/portfolio/11.png" alt="Portfolio item"/>
-                    <div class="text">
-                        <p>PORTFOLIO 11</p>
-                        <p class="description">Your text here...</p>
-                    </div>
-                </a>
-            </li>
 
 
         </ul>
-
-        <a href="#">
-            <div class="read-more">Read more</div>
-        </a>
 
     </div>
 

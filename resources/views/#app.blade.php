@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

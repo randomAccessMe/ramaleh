@@ -4,16 +4,14 @@
     <div class="menu-footer">
 
         <a href="#home">Home</a>
-        <a href="#">Privacy policy</a>
-        <a href="#">RSS</a>
-        <a href="#">Facebook</a>
-        <a href="#">Dribble</a>
-        <a href="#">Twitter</a>
-        <a href="#">Contact</a>
+        <a href="https://www.facebook.com/ramaleh">Facebook</a>
+        <a href="https://www.linkedin.com/in/rami-al-maleh-81b22b91">Linked In</a>
+        <a href="https://github.com/randomAccessMe">Github</a>
+        <a href="#contact">Contact</a>
 
     </div>
 
-    <div class="copyright">© 2014. All Rights Reserved Thomsoon.com</div>
+    <div class="copyright">© 2016. All Rights Reserved <?php echo e(env('APP_DOMAIN', 'Ramaleh.com')); ?></div>
 
 
 </section>

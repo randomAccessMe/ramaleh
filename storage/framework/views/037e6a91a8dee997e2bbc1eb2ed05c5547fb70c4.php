@@ -8,7 +8,7 @@
 
             <h1><?php echo e(env('APP_NAME', 'Rami AlMaleh')); ?></h1>
             <hr/>
-            <p>Logical, Persistent, Curious, Analytical, Detail Oriented in my programming and generally as a person. I'm also Flexible and i learned about Communication Skills as a lecturer.</p>
+            <p>Please familiarize yourself with our offer</p>
 
             <a href="#about-us">
                 <div class="read-more">Read more</div>
