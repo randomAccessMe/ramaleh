@@ -15,11 +15,13 @@ $router->group([
     'namespace' => 'Admin',
     'as'        => 'admin::',
 ], function ($router) {
-    $router->get('/', ['as' => 'blank', 'uses' => 'AdminController@blank']);
+    $router->get('/',           ['as' => 'blank',   'uses' => 'AdminController@blank']);
+    $router->get('/resume',     ['as' => 'resume',  'uses' => 'ResumeController@index']);
+    $router->get('logs',        ['as' => 'log',     'uses' => 'LogController@index']);
     $router->resource('/site', 'SiteController');
-    $router->get('/resume', ['as' => 'resume', 'uses' => 'ResumeController@index']);
-//    $router->get('logs', ['as' => 'log', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
-    $router->get('logs', ['as' => 'log', 'uses' => 'LogController@index']);
 });
 
-Route::get('/home', 'HomeController@index');
+
+//$router->group(['middleware' => 'guest'], function ($router) {
+    $router->get('/',  ['as' => 'home', 'uses' => 'HomeController@index']);
+//});

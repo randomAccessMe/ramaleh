@@ -14,17 +14,30 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
 
     mix.sass('app.scss')
-    .sass('admin.scss')
-    .version([
-        '/css/app.css',
-        '/css/admin.css',
-        ]);
+    .sass('admin.scss');
 
     mix.scripts([
     		'../vendors/sb-admin/bower_components/jquery/dist/jquery.min.js',
     		'../vendors/sb-admin/bower_components/bootstrap/dist/js/bootstrap.min.js',
 		    '../vendors/sb-admin/bower_components/metisMenu/dist/metisMenu.min.js',
     	]);
+
+    mix.scripts([
+        '../vendors/sb-admin/bower_components/jquery/dist/jquery.min.js',
+        'vendors/jquery-ui-1.10.4.min.js',
+        'vendors/jquery.nicescroll.js',
+        'vendors/jquery.sticky.js',
+        'masonry.pkgd.min.js',
+        'imagesloaded.pkgd.min.js',
+        'vendors/jquery.parallax.js',
+        'script.js',
+    ], 'public/js/app.js')
+        .version([
+            '/css/app.css',
+            '/css/admin.css',
+            '/js/all.js',
+            '/js/app.js',
+        ]);
 
     mix.scripts([
             '../vendors/sb-admin/bower_components/raphael/raphael-min.js',

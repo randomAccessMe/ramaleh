@@ -18,6 +18,9 @@
             <li>
                 <a href="<?php echo e(route('admin::admin.site.index')); ?>">Portfolio</a>
             </li>
+            <li>
+                <a href="<?php echo e(route('admin::log')); ?>">Error Logs</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
