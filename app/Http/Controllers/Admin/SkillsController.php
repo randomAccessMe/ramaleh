@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Skill;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -56,7 +57,9 @@ class SkillsController extends Controller
      */
     public function edit()
     {
-        return view('admin.resume.skills');
+
+        return view('admin.resume.skills')
+            ->withSkills(Skill::all());
     }
 
     /**
@@ -66,9 +69,18 @@ class SkillsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        foreach ($request->get('new') as $new_skill) {
+            dd($new_skill);
+            Skill::create($new_skill);
+        }
+        foreach ($request->except(['new', '_token']) as $old_skill_id => $old_skill) {
+            Skill::find($old_skill_id)->update($old_skill);
+        }
+
+        return redirect()->back();
     }
 
     /**

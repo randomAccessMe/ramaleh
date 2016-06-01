@@ -14,48 +14,82 @@
     </div>
 
     <?php echo Form::open([
-        'route'   => ['admin::admin.site.edit'],
+        'route'   => ['admin::skills.update'],
         'class'   => 'form-inline'
       ]); ?>
 
+        <div id="form-container">
+            <?php foreach($skills as $skill): ?>
+            <div class="row buffer">
+                <div class="col-lg-4">
+                    <div class="input-group'">
+                        <div class="row">
+                            <label for="">Skill</label>
+                        </div>
+                        <div class="row">
+                            <?php echo Form::text('name['.$skill->id.']', $skill->name, ['class'=>'form-control']); ?>
 
-        <div class="row buffer" id="skill-form-fields">
-            <div class="col-lg-4">
-                <div class="input-group'">
-                    <div class="row">
-                        <label for="">Skill</label>
+                        </div>
                     </div>
-                    <div class="row">
-                        <?php echo Form::text('name[]', null, ['class'=>'form-control']); ?>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="input-group'">
+                        <label for="">Date Started Practicing</label>
+<?php /*                        <?php echo Form::date('start_date['.$skill->id.']', $skill->start_date, ['class'=>'form-control']); ?>*/ ?>
+                        <?php echo Form::date('start_date['.$skill->id.']', null, ['class'=>'form-control']); ?>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="input-group'">
+                        <label for="">Date Stopped Practicing</label>
+                        <?php echo Form::date('end_date['.$skill->id.']', null, ['class'=>'form-control']); ?>
 
                     </div>
                 </div>
             </div>
+            <?php endforeach; ?>
+            <div class="row buffer" id="skill-form-fields">
+                <div class="col-lg-4">
+                    <div class="input-group'">
+                        <div class="row">
+                            <label for="">Skill</label>
+                        </div>
+                        <div class="row">
+                            <?php echo Form::text('new[][name]', null, ['class'=>'form-control']); ?>
 
-            <div class="col-lg-4">
-                <div class="input-group'">
-                    <label for="">Date Started Practicing</label>
-                    <?php echo Form::date('start_date[]', null, ['class'=>'form-control']); ?>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-lg-4">
+                    <div class="input-group'">
+                        <label for="">Date Started Practicing</label>
+                        <?php echo Form::date('new[][start_date]', null, ['class'=>'form-control']); ?>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="input-group'">
+                        <label for="">Date Stopped Practicing</label>
+                        <?php echo Form::date('new[][end_date]', null, ['class'=>'form-control']); ?>
+
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-lg-4">
-                <div class="input-group'">
-                    <label for="">Date Stopped Practicing</label>
-                    <?php echo Form::date('end_date[]', null, ['class'=>'form-control']); ?>
+        <div class="row">
+            <?php echo Form::submit('Update', ['class' => 'btn btn-primary pull-right buffer']); ?>
 
-                </div>
-            </div>
         </div>
 
     <?php echo Form::close(); ?>
 
 
-    <div class="row">
-        <?php echo Form::submit('Update', ['class' => 'btn btn-primary pull-right buffer']); ?>
-
-    </div>
 
 </div>
 <?php $__env->stopSection(); ?>
@@ -63,7 +97,11 @@
 <?php $__env->startPush('scripts'); ?>
 <script>
     $('#add-skill').on('click', function(){
-        $('#skill-form-fields').clone().appendTo('form');
+        var clone = $('#skill-form-fields').clone();
+        clone.find('input').each(function () {
+            $(this).val(null);
+        });
+        clone.appendTo('#form-container')
     });
 </script>
 <?php $__env->stopPush(); ?>

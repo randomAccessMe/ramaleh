@@ -24,10 +24,8 @@ $router->group([
     $router->get('experience', ['as' => 'experience', 'uses' => 'ExperienceController@create']);
     $router->post('experience', ['as' => 'experience', 'uses' => 'ExperienceController@store']);
     $router->get('skills', ['as' => 'skills', 'uses' => 'SkillsController@edit']);
-    $router->post('skills', ['as' => 'skills', 'uses' => 'SkillsController@store']);
+    $router->post('skills', ['as' => 'skills.update', 'uses' => 'SkillsController@update']);
 });
 
 
-//$router->group(['middleware' => 'guest'], function ($router) {
-    $router->get('/',  ['as' => 'home', 'uses' => 'HomeController@index']);
-//});
+$router->get('/',  ['as' => 'home', 'uses' => 'HomeController@index']);
