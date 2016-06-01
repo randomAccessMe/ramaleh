@@ -18,8 +18,13 @@ $router->group([
     $router->get('/', ['as' => 'blank', 'uses' => 'AdminController@blank']);
     $router->resource('/site', 'SiteController');
     $router->get('/resume', ['as' => 'resume', 'uses' => 'ResumeController@index']);
-//    $router->get('logs', ['as' => 'log', 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
     $router->get('logs', ['as' => 'log', 'uses' => 'LogController@index']);
+    $router->get('resume', ['as' => 'resume', 'uses' => 'ResumeController@create']);
+    $router->post('resume', ['as' => 'resume', 'uses' => 'ResumeController@store']);
+    $router->get('experience', ['as' => 'experience', 'uses' => 'ExperienceController@create']);
+    $router->post('experience', ['as' => 'experience', 'uses' => 'ExperienceController@store']);
+    $router->get('skills', ['as' => 'skills', 'uses' => 'SkillsController@edit']);
+    $router->post('skills', ['as' => 'skills', 'uses' => 'SkillsController@store']);
 });
 
 Route::get('/home', 'HomeController@index');

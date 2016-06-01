@@ -21,6 +21,9 @@
             <li>
                 <a href="{{ route('admin::log') }}">Error Logs</a>
             </li>
+            <li>
+                <a href="{{ route('admin::resume') }}">Resume</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
