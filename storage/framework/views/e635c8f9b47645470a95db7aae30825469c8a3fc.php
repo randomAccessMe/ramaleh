@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <title><?php echo e(env('APP_NAME', 'Rami AlMaleh')); ?></title>
 
     <title>Ramaleh</title>
 
@@ -46,7 +47,7 @@
     <!-- Bootstrap Core JavaScript -->
     <!-- Metis Menu Plugin JavaScript -->
     <!-- Custom Theme JavaScript -->
-    <script src="/js/all.js"></script>
+    <script src="<?php echo e(elixir('js/all.js')); ?>"></script>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 
     

@@ -27,4 +27,7 @@ $router->group([
     $router->post('skills', ['as' => 'skills', 'uses' => 'SkillsController@store']);
 });
 
-Route::get('/home', 'HomeController@index');
+
+//$router->group(['middleware' => 'guest'], function ($router) {
+    $router->get('/',  ['as' => 'home', 'uses' => 'HomeController@index']);
+//});
