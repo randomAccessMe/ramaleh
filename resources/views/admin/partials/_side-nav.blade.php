@@ -16,13 +16,43 @@
                 <a href="{{ route('admin::blank') }}">Blank Page</a>
             </li>
             <li>
-                <a href="{{ route('admin::admin.site.index') }}">Portfolio</a>
+                <a href="{{ route('admin::resume') }}">
+                    <i class="fa fa-file-text fa-fw"></i>
+                    Resume
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ route('admin::resume') }}">
+                            <i class="fa fa-arrow-circle-o-right"></i>
+                            Info
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin::experience') }}">
+                            <i class="fa fa-arrow-circle-o-right"></i>
+                            Experience
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin::skills') }}">
+                            <i class="fa fa-arrow-circle-o-right"></i>
+                            Skills
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a href="{{ route('admin::log') }}">Error Logs</a>
+                <a href="{{ route('admin::admin.site.index') }}">
+                    <i class="fa fa-book fa-fw"></i>
+                    Portfolio
+                </a>
             </li>
             <li>
-                <a href="{{ route('admin::resume') }}">Resume</a>
+                <a href="{{ route('admin::log') }}">
+                    <i class="fa fa-database fa-fw"></i>
+                    Error Logs
+                </a>
             </li>
         </ul>
     </div>

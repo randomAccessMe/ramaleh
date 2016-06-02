@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?php echo e(route('admin::blank')); ?>"><?php echo e(env('APP_NAME', 'Rami Al-Maleh')); ?></a>
+        <a class="navbar-brand" href="<?php echo e(route('admin::blank')); ?>"><?php echo e(env('APP_NAME', 'Rami AlMaleh')); ?></a>
     </div>
     <!-- /.navbar-header -->
 

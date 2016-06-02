@@ -36,14 +36,14 @@ class SkillsController extends Controller
 //            'end_date'   => 'required|date',
 //        ]);
 
-        foreach ($request->get('new') as $new_skill) {
+        foreach ($request->get('new', []) as $new_skill) {
                 Skill::create($new_skill);
         }
         foreach ($request->get('old', []) as $old_skill_id => $old_skill) {
             Skill::find($old_skill_id)->update($old_skill);
         }
 
-        flash()->success('Experience was updated successfully.');
+        flash()->success('Skills were updated successfully.');
 
         return redirect()->back();
     }

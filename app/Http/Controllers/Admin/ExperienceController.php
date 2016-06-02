@@ -36,7 +36,7 @@ class ExperienceController extends Controller
 //            'end_date'   => 'required|date',
 //        ]);
 
-        foreach ($request->get('new') as $new_skill) {
+        foreach ($request->get('new', []) as $new_skill) {
             Job::create($new_skill);
         }
         foreach ($request->get('old', []) as $old_job_id => $old_job) {

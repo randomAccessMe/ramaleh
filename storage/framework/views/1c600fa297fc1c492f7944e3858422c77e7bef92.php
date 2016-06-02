@@ -41,6 +41,8 @@
 
 <?php $__env->startPush('scripts'); ?>
 <script>
+
+    //TODO: extract into a function
     $('#add-skill').data('iterator', 1).on('click', function () {
         $(this).data('iterator', $(this).data('iterator') + 1);
         var iteration = $(this).data('iterator');

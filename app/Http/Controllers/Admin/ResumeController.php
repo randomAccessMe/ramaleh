@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ResumeInfo;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use XMLReader;
+use XMLWriter;
 
 class ResumeController extends Controller
 {
@@ -23,7 +26,6 @@ class ResumeController extends Controller
      */
     public function create()
     {
-        return view('admin.resume.info');
     }
 
     /**
@@ -41,9 +43,8 @@ class ResumeController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
     }
 
     /**
@@ -51,19 +52,26 @@ class ResumeController extends Controller
      * @param  Site $site
      * @return \Illuminate\Http\Response
      */
-    public function edit(Site $site)
+    public function edit()
     {
+
+        return view('admin.resume.info')->withResume(ResumeInfo::first());
     }
 
     /**
      * Update the specified resource in storage.
      * @param  \Illuminate\Http\Request $request
-     * @param  Site                     $site
+     * @param  ResumeInfo               $resume
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Site $site)
+    public function update(Request $request)
     {
 
+        ResumeInfo::first()->update($request->all());
+
+        flash()->success('Resume updated successfully');
+
+        return redirect()->back();
     }
 
     /**
