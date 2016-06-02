@@ -20,61 +20,12 @@
         'class'   => 'form-inline'
       ]) !!}
         <div id="form-container">
-            @foreach($skills as $skill)
-            <div class="row buffer">
-                <div class="col-lg-4">
-                    <div class="input-group'">
-                        <div class="row">
-                            <label for="">Skill</label>
-                        </div>
-                        <div class="row">
-                            {!! Form::text('name['.$skill->id.']', $skill->name, ['class'=>'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
+            @forelse($skills as $skill)
+                @include('admin.resume.partials._skills_form')
+            @empty
+                @include('admin.resume.partials._skills_form')
+            @endforelse
 
-                <div class="col-lg-4">
-                    <div class="input-group'">
-                        <label for="">Date Started Practicing</label>
-{{--                        {!! Form::date('start_date['.$skill->id.']', $skill->start_date, ['class'=>'form-control']) !!}--}}
-                        {!! Form::date('start_date['.$skill->id.']', null, ['class'=>'form-control']) !!}
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="input-group'">
-                        <label for="">Date Stopped Practicing</label>
-                        {!! Form::date('end_date['.$skill->id.']', null, ['class'=>'form-control']) !!}
-                    </div>
-                </div>
-            </div>
-            @endforeach
-            <div class="row buffer" id="skill-form-fields">
-                <div class="col-lg-4">
-                    <div class="input-group'">
-                        <div class="row">
-                            <label for="">Skill</label>
-                        </div>
-                        <div class="row">
-                            {!! Form::text('new[][name]', null, ['class'=>'form-control']) !!}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="input-group'">
-                        <label for="">Date Started Practicing</label>
-                        {!! Form::date('new[][start_date]', null, ['class'=>'form-control']) !!}
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="input-group'">
-                        <label for="">Date Stopped Practicing</label>
-                        {!! Form::date('new[][end_date]', null, ['class'=>'form-control']) !!}
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="row">
@@ -89,12 +40,17 @@
 
 @push('scripts')
 <script>
-    $('#add-skill').on('click', function(){
+    $('#add-skill').data('iterator', 1).on('click', function () {
+        $(this).data('iterator', $(this).data('iterator') + 1);
+        var iteration = $(this).data('iterator');
         var clone = $('#skill-form-fields').clone();
-        clone.find('input').each(function () {
-            $(this).val(null);
+        clone.find('input, textarea').each(function () {
+            var fieldName = $(this).attr('name');
+            $(this).val(null).attr({
+                name: fieldName.replace(/[a-z]{3}\[\d\]/i, 'new['+iteration+']')
+            });
         });
-        clone.appendTo('#form-container')
+        clone.appendTo('#form-container');
     });
 </script>
 @endpush

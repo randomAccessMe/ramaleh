@@ -21,8 +21,8 @@ $router->group([
     $router->get('logs', ['as' => 'log', 'uses' => 'LogController@index']);
     $router->get('resume', ['as' => 'resume', 'uses' => 'ResumeController@create']);
     $router->post('resume', ['as' => 'resume', 'uses' => 'ResumeController@store']);
-    $router->get('experience', ['as' => 'experience', 'uses' => 'ExperienceController@create']);
-    $router->post('experience', ['as' => 'experience', 'uses' => 'ExperienceController@store']);
+    $router->get('experience', ['as' => 'experience', 'uses' => 'ExperienceController@edit']);
+    $router->post('experience', ['as' => 'experience.update', 'uses' => 'ExperienceController@update']);
     $router->get('skills', ['as' => 'skills', 'uses' => 'SkillsController@edit']);
     $router->post('skills', ['as' => 'skills.update', 'uses' => 'SkillsController@update']);
 });
