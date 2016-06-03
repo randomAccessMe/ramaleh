@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Job;
+use App\ResumeInfo;
+use App\Site;
+use App\Skill;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('#app');
+        return view('#app')
+            ->withResume(ResumeInfo::first())
+            ->withSkills(Skill::all())
+            ->withJobs(Job::all())
+            ->withSites(Site::all());
     }
 }

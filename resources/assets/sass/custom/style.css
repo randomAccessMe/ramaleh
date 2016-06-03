@@ -1,0 +1,8 @@
+.list-group-item .left-side {
+    width: 70%;
+    display: inline-block;
+    background: rgba(1,1,1,0.5);
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}

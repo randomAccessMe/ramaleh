@@ -4,8 +4,11 @@
 
         <h1>ABOUT Me</h1>
         <hr/>
-        <p class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-
+        <?php foreach($jobs as $job): ?>
+        <h2><?php echo e($job->title); ?></h2>
+        <p style="margin: 10px auto"><?php echo e($job->city); ?>, <?php echo e($job->state ? $job->state . ', ' : ''); ?><?php echo e($job->country); ?></p>
+        <p style="width:550px; color: #0c0c0c; margin-top: 0"><?php echo e($job->experience); ?></p>
+        <?php endforeach; ?>
         <div class="column-one">
 
             <a href="https://github.com/randomAccessMe/ramaleh">

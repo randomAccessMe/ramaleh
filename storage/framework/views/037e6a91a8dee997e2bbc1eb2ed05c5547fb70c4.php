@@ -8,7 +8,7 @@
 
             <h1><?php echo e(env('APP_NAME', 'Rami AlMaleh')); ?></h1>
             <hr/>
-            <p>Please familiarize yourself with our offer</p>
+            <p><?php echo e($resume->summary); ?></p>
 
             <a href="#about-us">
                 <div class="read-more">Read more</div>

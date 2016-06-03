@@ -4,8 +4,12 @@
 
         <h1>ABOUT Me</h1>
         <hr/>
-        <p class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-
+        @foreach($jobs as $job)
+        <h2>{{ $job->title }}</h2>
+        {{--TODO: extract this into externall css file --}}
+        <p style="margin: 10px auto">{{ $job->city }}, {{ $job->state ? $job->state . ', ' : '' }}{{ $job->country }}</p>
+        <p style="width:550px; color: #0c0c0c; margin-top: 0">{{ $job->experience }}</p>
+        @endforeach
         <div class="column-one">
 
             <a href="https://github.com/randomAccessMe/ramaleh">
