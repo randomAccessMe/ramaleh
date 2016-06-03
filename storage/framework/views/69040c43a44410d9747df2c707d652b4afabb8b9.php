@@ -13,7 +13,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="<?php echo e(route('admin::blank')); ?>">Blank Page</a>
+                <a href="<?php echo e(route('admin::dashboard')); ?>">
+                    <i class="fa fa-dashboard"></i>
+                    Dashboard
+                </a>
             </li>
             <li>
                 <a href="<?php echo e(route('admin::resume')); ?>">

@@ -24,7 +24,6 @@ class ExperienceController extends Controller
     /**
      * Update the specified resource in storage.
      * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -44,6 +43,20 @@ class ExperienceController extends Controller
         }
 
         flash()->success('Experience was updated successfully.');
+
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param  Job $job
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Job $job)
+    {
+        flash()->success($job->title . ' was deleted successfully.');
+
+        $job->delete();
 
         return redirect()->back();
     }

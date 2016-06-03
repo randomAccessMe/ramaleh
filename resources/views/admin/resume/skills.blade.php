@@ -11,8 +11,10 @@
 
     @include('admin.resume.partials._tabs')
 
-    <div class="row" id="add-skill">
-        <button class="btn btn-primary buffer pull-right"><i class="fa fa-plus-circle"></i></button>
+    <div class="row">
+        <button class="btn btn-primary buffer pull-right" id="add-skill">
+            <i class="fa fa-plus-circle"></i>
+        </button>
     </div>
 
     {!! Form::open([
@@ -45,14 +47,23 @@
     $('#add-skill').data('iterator', 1).on('click', function () {
         $(this).data('iterator', $(this).data('iterator') + 1);
         var iteration = $(this).data('iterator');
-        var clone = $('#skill-form-fields').clone();
+        var clone = $('.skill-form-fields').first().clone();
         clone.find('input, textarea').each(function () {
             var fieldName = $(this).attr('name');
             $(this).val(null).attr({
                 name: fieldName.replace(/[a-z]{3}\[\d\]/i, 'new['+iteration+']')
             });
         });
+        clone.find('.delete-skill').removeAttr('href')
         clone.appendTo('#form-container');
+    });
+
+    $('#form-container').on('click', '.delete-skill', function() {
+        if($('.skill-form-fields').length <= 1) {
+            alert('This is the last Skill!');
+            return;
+        }
+        $(this).parents('.skill-form-fields').remove();
     });
 </script>
 @endpush

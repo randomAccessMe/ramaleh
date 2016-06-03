@@ -43,14 +43,23 @@
     $('#add-job').data('iterator', 1).on('click', function () {
         $(this).data('iterator', $(this).data('iterator') + 1);
         var iteration = $(this).data('iterator');
-        var clone = $('#job-form-fields').clone();
+        var clone = $('.job-form-fields').first().clone();
         clone.find('input, textarea').each(function () {
             var fieldName = $(this).attr('name');
             $(this).val(null).attr({
                 name: fieldName.replace(/[a-z]{3}\[\d\]/i, 'new['+iteration+']')
             });
         });
+        clone.find('.delete-job').removeAttr('href');
         clone.appendTo('#form-container');
+    });
+
+    $('#form-container').on('click', '.delete-job', function() {
+        if($('.job-form-fields').length <= 1) {
+            alert('This is the last Job!');
+            return;
+        }
+        $(this).parents('.job-form-fields').remove();
     });
 </script>
 @endpush

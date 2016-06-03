@@ -22,9 +22,11 @@
         </div>
 
 
-        <a href="{{ route('admin::resume') }}"><div class="column-two"></a>
+        <div class="column-two">
 
-            <div class="circle-two"></div>
+            <a href="{{ route('admin::resume') }}">
+                <div class="circle-two"></div>
+            </a>
 
             <h2>VISIT THE ADMIN AREA</h2>
             <p>

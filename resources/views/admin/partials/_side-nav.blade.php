@@ -13,7 +13,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="{{ route('admin::blank') }}">Blank Page</a>
+                <a href="{{ route('admin::dashboard') }}">
+                    <i class="fa fa-dashboard"></i>
+                    Dashboard
+                </a>
             </li>
             <li>
                 <a href="{{ route('admin::resume') }}">

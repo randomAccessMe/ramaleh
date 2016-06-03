@@ -68,16 +68,6 @@ class SiteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      * @param  Site $site
      * @return \Illuminate\Http\Response
@@ -127,11 +117,15 @@ class SiteController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param  int $id
+     * @param  Site $site
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Site $site)
     {
-        //
+        flash()->success($site->name . ' was deleted successfully.');
+
+        $site->delete();
+
+        return redirect()->back();
     }
 }

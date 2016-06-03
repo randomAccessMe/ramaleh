@@ -11,22 +11,37 @@
 |
 */
 $router->group([
-    'prefix'    => 'admin',
-    'namespace' => 'Admin',
-    'as'        => 'admin::',
+    'prefix'     => 'admin',
+    'namespace'  => 'Admin',
+    'as'         => 'admin::',
+    'middleware' => 'auth',
 ], function ($router) {
-    $router->get('/', ['as' => 'blank',                       'uses' => 'AdminController@blank']);
-    $router->get('resume',      ['as' => 'resume',            'uses' => 'ResumeController@index']);
-    $router->get('resume',      ['as' => 'resume',            'uses' => 'ResumeController@edit']);
-    $router->get('resume/info', ['as' => 'resume.info',       'uses' => 'ResumeController@show']);
-    $router->post('resume',     ['as' => 'resume.update',     'uses' => 'ResumeController@update']);
-    $router->get('experience',  ['as' => 'experience',        'uses' => 'ExperienceController@edit']);
-    $router->post('experience', ['as' => 'experience.update', 'uses' => 'ExperienceController@update']);
-    $router->get('skills',      ['as' => 'skills',            'uses' => 'SkillsController@edit']);
-    $router->post('skills',     ['as' => 'skills.update',     'uses' => 'SkillsController@update']);
-    $router->get('logs',        ['as' => 'log',               'uses' => 'LogController@index']);
+    $router->get('/', ['as' => 'dashboard', 'uses' => 'AdminController@dashboard']);
+    $router->get('resume', ['as' => 'resume', 'uses' => 'ResumeController@index']);
+    $router->get('resume', ['as' => 'resume', 'uses' => 'ResumeController@edit']);
+    $router->get('resume/info', ['as' => 'resume.info', 'uses' => 'ResumeController@show']);
+    $router->get('experience', ['as' => 'experience', 'uses' => 'ExperienceController@edit']);
+    $router->get('skills', ['as' => 'skills', 'uses' => 'SkillsController@edit']);
+    $router->get('logs', ['as' => 'log', 'uses' => 'LogController@index']);
     $router->resource('/site', 'SiteController');
 });
 
+$router->group([
+    'prefix'     => 'admin',
+    'namespace'  => 'Admin',
+    'as'         => 'admin::',
+    'middleware' => ['auth', 'acl'],
+    'is'         => 'administrator',
+], function ($router) {
+    $router->post('resume', ['as' => 'resume.update', 'uses' => 'ResumeController@update']);
+    $router->post('experience', ['as' => 'experience.update', 'uses' => 'ExperienceController@update']);
+    $router->post('skills', ['as' => 'skills.update', 'uses' => 'SkillsController@update']);
+    $router->get('skill/{skill}/delete', ['as' => 'skills.delete', 'uses' => 'SkillsController@destroy']);
+    $router->get('experience/{job}/delete', ['as' => 'experience.delete', 'uses' => 'ExperienceController@destroy']);
+});
 
-$router->get('/',  ['as' => 'home', 'uses' => 'HomeController@index']);
+
+$router->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+Route::auth();
+
