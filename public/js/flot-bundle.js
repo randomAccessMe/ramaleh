@@ -1,3 +1,4497 @@
-document.createElement("canvas").getContext||!function(){function e(){return this.context_||(this.context_=new b(this))}function t(e,t,i){var n=L.call(arguments,2);return function(){return e.apply(t,n.concat(L.call(arguments)))}}function i(e){return String(e).replace(/&/g,"&amp;").replace(/"/g,"&quot;")}function n(e,t,i){e.namespaces[t]||e.namespaces.add(t,i,"#default#VML")}function o(e){if(n(e,"g_vml_","urn:schemas-microsoft-com:vml"),n(e,"g_o_","urn:schemas-microsoft-com:office:office"),!e.styleSheets.ex_canvas_){var t=e.createStyleSheet();t.owningElement.id="ex_canvas_",t.cssText="canvas{display:inline-block;overflow:hidden;text-align:left;width:300px;height:150px}"}}function a(e){var t=e.srcElement;switch(e.propertyName){case"width":t.getContext().clearRect(),t.style.width=t.attributes.width.nodeValue+"px",t.firstChild.style.width=t.clientWidth+"px";break;case"height":t.getContext().clearRect(),t.style.height=t.attributes.height.nodeValue+"px",t.firstChild.style.height=t.clientHeight+"px"}}function r(e){var t=e.srcElement;t.firstChild&&(t.firstChild.style.width=t.clientWidth+"px",t.firstChild.style.height=t.clientHeight+"px")}function s(){return[[1,0,0],[0,1,0],[0,0,1]]}function l(e,t){for(var i=s(),n=0;3>n;n++)for(var o=0;3>o;o++){for(var a=0,r=0;3>r;r++)a+=e[n][r]*t[r][o];i[n][o]=a}return i}function h(e,t){t.fillStyle=e.fillStyle,t.lineCap=e.lineCap,t.lineJoin=e.lineJoin,t.lineWidth=e.lineWidth,t.miterLimit=e.miterLimit,t.shadowBlur=e.shadowBlur,t.shadowColor=e.shadowColor,t.shadowOffsetX=e.shadowOffsetX,t.shadowOffsetY=e.shadowOffsetY,t.strokeStyle=e.strokeStyle,t.globalAlpha=e.globalAlpha,t.font=e.font,t.textAlign=e.textAlign,t.textBaseline=e.textBaseline,t.arcScaleX_=e.arcScaleX_,t.arcScaleY_=e.arcScaleY_,t.lineScale_=e.lineScale_}function c(e){var t=e.indexOf("(",3),i=e.indexOf(")",t+1),n=e.substring(t+1,i).split(",");return 4==n.length&&"a"==e.charAt(3)||(n[3]=1),n}function u(e){return parseFloat(e)/100}function p(e,t,i){return Math.min(i,Math.max(t,e))}function d(e){var t,i,n,o,a,r;if(o=parseFloat(e[0])/360%360,0>o&&o++,a=p(u(e[1]),0,1),r=p(u(e[2]),0,1),0==a)t=i=n=r;else{var s=.5>r?r*(1+a):r+a-r*a,l=2*r-s;t=f(l,s,o+1/3),i=f(l,s,o),n=f(l,s,o-1/3)}return"#"+q[Math.floor(255*t)]+q[Math.floor(255*i)]+q[Math.floor(255*n)]}function f(e,t,i){return 0>i&&i++,i>1&&i--,1>6*i?e+6*(t-e)*i:1>2*i?t:2>3*i?e+(t-e)*(2/3-i)*6:e}function m(e){if(e in V)return V[e];var t,i=1;if(e=String(e),"#"==e.charAt(0))t=e;else if(/^rgb/.test(e)){for(var n,o=c(e),t="#",a=0;3>a;a++)n=-1!=o[a].indexOf("%")?Math.floor(255*u(o[a])):+o[a],t+=q[p(n,0,255)];i=+o[3]}else if(/^hsl/.test(e)){var o=c(e);t=d(o),i=o[3]}else t=X[e]||e;return V[e]={color:t,alpha:i}}function g(e){if(J[e])return J[e];var t=document.createElement("div"),i=t.style;try{i.font=e}catch(n){}return J[e]={style:i.fontStyle||G.style,variant:i.fontVariant||G.variant,weight:i.fontWeight||G.weight,size:i.fontSize||G.size,family:i.fontFamily||G.family}}function x(e,t){var i={};for(var n in e)i[n]=e[n];var o=parseFloat(t.currentStyle.fontSize),a=parseFloat(e.size);return"number"==typeof e.size?i.size=e.size:-1!=e.size.indexOf("px")?i.size=a:-1!=e.size.indexOf("em")?i.size=o*a:-1!=e.size.indexOf("%")?i.size=o/100*a:-1!=e.size.indexOf("pt")?i.size=a/.75:i.size=o,i.size*=.981,i}function v(e){return e.style+" "+e.variant+" "+e.weight+" "+e.size+"px "+e.family}function y(e){return $[e]||"square"}function b(e){this.m_=s(),this.mStack_=[],this.aStack_=[],this.currentPath_=[],this.strokeStyle="#000",this.fillStyle="#000",this.lineWidth=1,this.lineJoin="miter",this.lineCap="butt",this.miterLimit=1*N,this.globalAlpha=1,this.font="10px sans-serif",this.textAlign="left",this.textBaseline="alphabetic",this.canvas=e;var t="width:"+e.clientWidth+"px;height:"+e.clientHeight+"px;overflow:hidden;position:absolute",i=e.ownerDocument.createElement("div");i.style.cssText=t,e.appendChild(i);var n=i.cloneNode(!1);n.style.backgroundColor="red",n.style.filter="alpha(opacity=0)",e.appendChild(n),this.element_=i,this.arcScaleX_=1,this.arcScaleY_=1,this.lineScale_=1}function k(e,t,i,n){e.currentPath_.push({type:"bezierCurveTo",cp1x:t.x,cp1y:t.y,cp2x:i.x,cp2y:i.y,x:n.x,y:n.y}),e.currentX_=n.x,e.currentY_=n.y}function w(e,t){var i=m(e.strokeStyle),n=i.color,o=i.alpha*e.globalAlpha,a=e.lineScale_*e.lineWidth;1>a&&(o*=a),t.push("<g_vml_:stroke",' opacity="',o,'"',' joinstyle="',e.lineJoin,'"',' miterlimit="',e.miterLimit,'"',' endcap="',y(e.lineCap),'"',' weight="',a,'px"',' color="',n,'" />')}function F(e,t,i,n){var o=e.fillStyle,a=e.arcScaleX_,r=e.arcScaleY_,s=n.x-i.x,l=n.y-i.y;if(o instanceof A){var h=0,c={x:0,y:0},u=0,p=1;if("gradient"==o.type_){var d=o.x0_/a,f=o.y0_/r,g=o.x1_/a,x=o.y1_/r,v=_(e,d,f),y=_(e,g,x),b=y.x-v.x,k=y.y-v.y;h=180*Math.atan2(b,k)/Math.PI,0>h&&(h+=360),1e-6>h&&(h=0)}else{var v=_(e,o.x0_,o.y0_);c={x:(v.x-i.x)/s,y:(v.y-i.y)/l},s/=a*N,l/=r*N;var w=z.max(s,l);u=2*o.r0_/w,p=2*o.r1_/w-u}var F=o.colors_;F.sort(function(e,t){return e.offset-t.offset});for(var M=F.length,T=F[0].color,C=F[M-1].color,E=F[0].alpha*e.globalAlpha,D=F[M-1].alpha*e.globalAlpha,P=[],O=0;M>O;O++){var I=F[O];P.push(I.offset*p+u+" "+I.color)}t.push('<g_vml_:fill type="',o.type_,'"',' method="none" focus="100%"',' color="',T,'"',' color2="',C,'"',' colors="',P.join(","),'"',' opacity="',D,'"',' g_o_:opacity2="',E,'"',' angle="',h,'"',' focusposition="',c.x,",",c.y,'" />')}else if(o instanceof S){if(s&&l){var R=-i.x,W=-i.y;t.push("<g_vml_:fill",' position="',R/s*a*a,",",W/l*r*r,'"',' type="tile"',' src="',o.src_,'" />')}}else{var B=m(e.fillStyle),L=B.color,H=B.alpha*e.globalAlpha;t.push('<g_vml_:fill color="',L,'" opacity="',H,'" />')}}function _(e,t,i){var n=e.m_;return{x:N*(t*n[0][0]+i*n[1][0]+n[2][0])-B,y:N*(t*n[0][1]+i*n[1][1]+n[2][1])-B}}function M(e){return isFinite(e[0][0])&&isFinite(e[0][1])&&isFinite(e[1][0])&&isFinite(e[1][1])&&isFinite(e[2][0])&&isFinite(e[2][1])}function T(e,t,i){if(M(t)&&(e.m_=t,i)){var n=t[0][0]*t[1][1]-t[0][1]*t[1][0];e.lineScale_=W(R(n))}}function A(e){this.type_=e,this.x0_=0,this.y0_=0,this.r0_=0,this.x1_=0,this.y1_=0,this.r1_=0,this.colors_=[]}function S(e,t){switch(E(e),t){case"repeat":case null:case"":this.repetition_="repeat";break;case"repeat-x":case"repeat-y":case"no-repeat":this.repetition_=t;break;default:C("SYNTAX_ERR")}this.src_=e.src,this.width_=e.width,this.height_=e.height}function C(e){throw new D(e)}function E(e){e&&1==e.nodeType&&"IMG"==e.tagName||C("TYPE_MISMATCH_ERR"),"complete"!=e.readyState&&C("INVALID_STATE_ERR")}function D(e){this.code=this[e],this.message=e+": DOM Exception "+this.code}var z=Math,P=z.round,O=z.sin,I=z.cos,R=z.abs,W=z.sqrt,N=10,B=N/2,L=(+navigator.userAgent.match(/MSIE ([\d.]+)?/)[1],Array.prototype.slice);o(document);var H={init:function(e){var i=e||document;i.createElement("canvas"),i.attachEvent("onreadystatechange",t(this.init_,this,i))},init_:function(e){for(var t=e.getElementsByTagName("canvas"),i=0;i<t.length;i++)this.initElement(t[i])},initElement:function(t){if(!t.getContext){t.getContext=e,o(t.ownerDocument),t.innerHTML="",t.attachEvent("onpropertychange",a),t.attachEvent("onresize",r);var i=t.attributes;i.width&&i.width.specified?t.style.width=i.width.nodeValue+"px":t.width=t.clientWidth,i.height&&i.height.specified?t.style.height=i.height.nodeValue+"px":t.height=t.clientHeight}return t}};H.init();for(var q=[],Y=0;16>Y;Y++)for(var j=0;16>j;j++)q[16*Y+j]=Y.toString(16)+j.toString(16);var X={aliceblue:"#F0F8FF",antiquewhite:"#FAEBD7",aquamarine:"#7FFFD4",azure:"#F0FFFF",beige:"#F5F5DC",bisque:"#FFE4C4",black:"#000000",blanchedalmond:"#FFEBCD",blueviolet:"#8A2BE2",brown:"#A52A2A",burlywood:"#DEB887",cadetblue:"#5F9EA0",chartreuse:"#7FFF00",chocolate:"#D2691E",coral:"#FF7F50",cornflowerblue:"#6495ED",cornsilk:"#FFF8DC",crimson:"#DC143C",cyan:"#00FFFF",darkblue:"#00008B",darkcyan:"#008B8B",darkgoldenrod:"#B8860B",darkgray:"#A9A9A9",darkgreen:"#006400",darkgrey:"#A9A9A9",darkkhaki:"#BDB76B",darkmagenta:"#8B008B",darkolivegreen:"#556B2F",darkorange:"#FF8C00",darkorchid:"#9932CC",darkred:"#8B0000",darksalmon:"#E9967A",darkseagreen:"#8FBC8F",darkslateblue:"#483D8B",darkslategray:"#2F4F4F",darkslategrey:"#2F4F4F",darkturquoise:"#00CED1",darkviolet:"#9400D3",deeppink:"#FF1493",deepskyblue:"#00BFFF",dimgray:"#696969",dimgrey:"#696969",dodgerblue:"#1E90FF",firebrick:"#B22222",floralwhite:"#FFFAF0",forestgreen:"#228B22",gainsboro:"#DCDCDC",ghostwhite:"#F8F8FF",gold:"#FFD700",goldenrod:"#DAA520",grey:"#808080",greenyellow:"#ADFF2F",honeydew:"#F0FFF0",hotpink:"#FF69B4",indianred:"#CD5C5C",indigo:"#4B0082",ivory:"#FFFFF0",khaki:"#F0E68C",lavender:"#E6E6FA",lavenderblush:"#FFF0F5",lawngreen:"#7CFC00",lemonchiffon:"#FFFACD",lightblue:"#ADD8E6",lightcoral:"#F08080",lightcyan:"#E0FFFF",lightgoldenrodyellow:"#FAFAD2",lightgreen:"#90EE90",lightgrey:"#D3D3D3",lightpink:"#FFB6C1",lightsalmon:"#FFA07A",lightseagreen:"#20B2AA",lightskyblue:"#87CEFA",lightslategray:"#778899",lightslategrey:"#778899",lightsteelblue:"#B0C4DE",lightyellow:"#FFFFE0",limegreen:"#32CD32",linen:"#FAF0E6",magenta:"#FF00FF",mediumaquamarine:"#66CDAA",mediumblue:"#0000CD",mediumorchid:"#BA55D3",mediumpurple:"#9370DB",mediumseagreen:"#3CB371",mediumslateblue:"#7B68EE",mediumspringgreen:"#00FA9A",mediumturquoise:"#48D1CC",mediumvioletred:"#C71585",midnightblue:"#191970",mintcream:"#F5FFFA",mistyrose:"#FFE4E1",moccasin:"#FFE4B5",navajowhite:"#FFDEAD",oldlace:"#FDF5E6",olivedrab:"#6B8E23",orange:"#FFA500",orangered:"#FF4500",orchid:"#DA70D6",palegoldenrod:"#EEE8AA",palegreen:"#98FB98",paleturquoise:"#AFEEEE",palevioletred:"#DB7093",papayawhip:"#FFEFD5",peachpuff:"#FFDAB9",peru:"#CD853F",pink:"#FFC0CB",plum:"#DDA0DD",powderblue:"#B0E0E6",rosybrown:"#BC8F8F",royalblue:"#4169E1",saddlebrown:"#8B4513",salmon:"#FA8072",sandybrown:"#F4A460",seagreen:"#2E8B57",seashell:"#FFF5EE",sienna:"#A0522D",skyblue:"#87CEEB",slateblue:"#6A5ACD",slategray:"#708090",slategrey:"#708090",snow:"#FFFAFA",springgreen:"#00FF7F",steelblue:"#4682B4",tan:"#D2B48C",thistle:"#D8BFD8",tomato:"#FF6347",turquoise:"#40E0D0",violet:"#EE82EE",wheat:"#F5DEB3",whitesmoke:"#F5F5F5",yellowgreen:"#9ACD32"},V={},G={style:"normal",variant:"normal",weight:"normal",size:10,family:"sans-serif"},J={},$={butt:"flat",round:"round"},Q=b.prototype;Q.clearRect=function(){this.textMeasureEl_&&(this.textMeasureEl_.removeNode(!0),this.textMeasureEl_=null),this.element_.innerHTML=""},Q.beginPath=function(){this.currentPath_=[]},Q.moveTo=function(e,t){var i=_(this,e,t);this.currentPath_.push({type:"moveTo",x:i.x,y:i.y}),this.currentX_=i.x,this.currentY_=i.y},Q.lineTo=function(e,t){var i=_(this,e,t);this.currentPath_.push({type:"lineTo",x:i.x,y:i.y}),this.currentX_=i.x,this.currentY_=i.y},Q.bezierCurveTo=function(e,t,i,n,o,a){var r=_(this,o,a),s=_(this,e,t),l=_(this,i,n);k(this,s,l,r)},Q.quadraticCurveTo=function(e,t,i,n){var o=_(this,e,t),a=_(this,i,n),r={x:this.currentX_+2/3*(o.x-this.currentX_),y:this.currentY_+2/3*(o.y-this.currentY_)},s={x:r.x+(a.x-this.currentX_)/3,y:r.y+(a.y-this.currentY_)/3};k(this,r,s,a)},Q.arc=function(e,t,i,n,o,a){i*=N;var r=a?"at":"wa",s=e+I(n)*i-B,l=t+O(n)*i-B,h=e+I(o)*i-B,c=t+O(o)*i-B;s!=h||a||(s+=.125);var u=_(this,e,t),p=_(this,s,l),d=_(this,h,c);this.currentPath_.push({type:r,x:u.x,y:u.y,radius:i,xStart:p.x,yStart:p.y,xEnd:d.x,yEnd:d.y})},Q.rect=function(e,t,i,n){this.moveTo(e,t),this.lineTo(e+i,t),this.lineTo(e+i,t+n),this.lineTo(e,t+n),this.closePath()},Q.strokeRect=function(e,t,i,n){var o=this.currentPath_;this.beginPath(),this.moveTo(e,t),this.lineTo(e+i,t),this.lineTo(e+i,t+n),this.lineTo(e,t+n),this.closePath(),this.stroke(),this.currentPath_=o},Q.fillRect=function(e,t,i,n){var o=this.currentPath_;this.beginPath(),this.moveTo(e,t),this.lineTo(e+i,t),this.lineTo(e+i,t+n),this.lineTo(e,t+n),this.closePath(),this.fill(),this.currentPath_=o},Q.createLinearGradient=function(e,t,i,n){var o=new A("gradient");return o.x0_=e,o.y0_=t,o.x1_=i,o.y1_=n,o},Q.createRadialGradient=function(e,t,i,n,o,a){var r=new A("gradientradial");return r.x0_=e,r.y0_=t,r.r0_=i,r.x1_=n,r.y1_=o,r.r1_=a,r},Q.drawImage=function(e,t){var i,n,o,a,r,s,l,h,c=e.runtimeStyle.width,u=e.runtimeStyle.height;e.runtimeStyle.width="auto",e.runtimeStyle.height="auto";var p=e.width,d=e.height;if(e.runtimeStyle.width=c,e.runtimeStyle.height=u,3==arguments.length)i=arguments[1],n=arguments[2],r=s=0,l=o=p,h=a=d;else if(5==arguments.length)i=arguments[1],n=arguments[2],o=arguments[3],a=arguments[4],r=s=0,l=p,h=d;else{if(9!=arguments.length)throw Error("Invalid number of arguments");r=arguments[1],s=arguments[2],l=arguments[3],h=arguments[4],i=arguments[5],n=arguments[6],o=arguments[7],a=arguments[8]}var f=_(this,i,n),m=[],g=10,x=10;if(m.push(" <g_vml_:group",' coordsize="',N*g,",",N*x,'"',' coordorigin="0,0"',' style="width:',g,"px;height:",x,"px;position:absolute;"),1!=this.m_[0][0]||this.m_[0][1]||1!=this.m_[1][1]||this.m_[1][0]){var v=[];v.push("M11=",this.m_[0][0],",","M12=",this.m_[1][0],",","M21=",this.m_[0][1],",","M22=",this.m_[1][1],",","Dx=",P(f.x/N),",","Dy=",P(f.y/N),"");var y=f,b=_(this,i+o,n),k=_(this,i,n+a),w=_(this,i+o,n+a);y.x=z.max(y.x,b.x,k.x,w.x),y.y=z.max(y.y,b.y,k.y,w.y),m.push("padding:0 ",P(y.x/N),"px ",P(y.y/N),"px 0;filter:progid:DXImageTransform.Microsoft.Matrix(",v.join(""),", sizingmethod='clip');")}else m.push("top:",P(f.y/N),"px;left:",P(f.x/N),"px;");m.push(' ">','<g_vml_:image src="',e.src,'"',' style="width:',N*o,"px;"," height:",N*a,'px"',' cropleft="',r/p,'"',' croptop="',s/d,'"',' cropright="',(p-r-l)/p,'"',' cropbottom="',(d-s-h)/d,'"'," />","</g_vml_:group>"),this.element_.insertAdjacentHTML("BeforeEnd",m.join(""))},Q.stroke=function(e){for(var t=10,i=10,n=5e3,o={x:null,y:null},a={x:null,y:null},r=0;r<this.currentPath_.length;r+=n){var s=[];s.push("<g_vml_:shape",' filled="',!!e,'"',' style="position:absolute;width:',t,"px;height:",i,'px;"',' coordorigin="0,0"',' coordsize="',N*t,",",N*i,'"',' stroked="',!e,'"',' path="');for(var l=r;l<Math.min(r+n,this.currentPath_.length);l++){l%n==0&&l>0&&s.push(" m ",P(this.currentPath_[l-1].x),",",P(this.currentPath_[l-1].y));var h,c=this.currentPath_[l];switch(c.type){case"moveTo":h=c,s.push(" m ",P(c.x),",",P(c.y));break;case"lineTo":s.push(" l ",P(c.x),",",P(c.y));break;case"close":s.push(" x "),c=null;break;case"bezierCurveTo":s.push(" c ",P(c.cp1x),",",P(c.cp1y),",",P(c.cp2x),",",P(c.cp2y),",",P(c.x),",",P(c.y));break;case"at":case"wa":s.push(" ",c.type," ",P(c.x-this.arcScaleX_*c.radius),",",P(c.y-this.arcScaleY_*c.radius)," ",P(c.x+this.arcScaleX_*c.radius),",",P(c.y+this.arcScaleY_*c.radius)," ",P(c.xStart),",",P(c.yStart)," ",P(c.xEnd),",",P(c.yEnd))}c&&((null==o.x||c.x<o.x)&&(o.x=c.x),(null==a.x||c.x>a.x)&&(a.x=c.x),(null==o.y||c.y<o.y)&&(o.y=c.y),(null==a.y||c.y>a.y)&&(a.y=c.y))}s.push(' ">'),e?F(this,s,o,a):w(this,s),s.push("</g_vml_:shape>"),this.element_.insertAdjacentHTML("beforeEnd",s.join(""))}},Q.fill=function(){this.stroke(!0)},Q.closePath=function(){this.currentPath_.push({type:"close"})},Q.save=function(){var e={};h(this,e),this.aStack_.push(e),this.mStack_.push(this.m_),this.m_=l(s(),this.m_)},Q.restore=function(){this.aStack_.length&&(h(this.aStack_.pop(),this),this.m_=this.mStack_.pop())},Q.translate=function(e,t){var i=[[1,0,0],[0,1,0],[e,t,1]];T(this,l(i,this.m_),!1)},Q.rotate=function(e){var t=I(e),i=O(e),n=[[t,i,0],[-i,t,0],[0,0,1]];T(this,l(n,this.m_),!1)},Q.scale=function(e,t){this.arcScaleX_*=e,this.arcScaleY_*=t;var i=[[e,0,0],[0,t,0],[0,0,1]];T(this,l(i,this.m_),!0)},Q.transform=function(e,t,i,n,o,a){var r=[[e,t,0],[i,n,0],[o,a,1]];T(this,l(r,this.m_),!0)},Q.setTransform=function(e,t,i,n,o,a){var r=[[e,t,0],[i,n,0],[o,a,1]];T(this,r,!0)},Q.drawText_=function(e,t,n,o,a){var r=this.m_,s=1e3,l=0,h=s,c={x:0,y:0},u=[],p=x(g(this.font),this.element_),d=v(p),f=this.element_.currentStyle,m=this.textAlign.toLowerCase();switch(m){case"left":case"center":case"right":break;case"end":m="ltr"==f.direction?"right":"left";break;case"start":m="rtl"==f.direction?"right":"left";break;default:m="left"}switch(this.textBaseline){case"hanging":case"top":c.y=p.size/1.75;break;case"middle":break;default:case null:case"alphabetic":case"ideographic":case"bottom":c.y=-p.size/2.25}switch(m){case"right":l=s,h=.05;break;case"center":l=h=s/2}var y=_(this,t+c.x,n+c.y);u.push('<g_vml_:line from="',-l,' 0" to="',h,' 0.05" ',' coordsize="100 100" coordorigin="0 0"',' filled="',!a,'" stroked="',!!a,'" style="position:absolute;width:1px;height:1px;">'),a?w(this,u):F(this,u,{x:-l,y:0},{x:h,y:p.size});var b=r[0][0].toFixed(3)+","+r[1][0].toFixed(3)+","+r[0][1].toFixed(3)+","+r[1][1].toFixed(3)+",0,0",k=P(y.x/N)+","+P(y.y/N);u.push('<g_vml_:skew on="t" matrix="',b,'" ',' offset="',k,'" origin="',l,' 0" />','<g_vml_:path textpathok="true" />','<g_vml_:textpath on="true" string="',i(e),'" style="v-text-align:',m,";font:",i(d),'" /></g_vml_:line>'),this.element_.insertAdjacentHTML("beforeEnd",u.join(""))},Q.fillText=function(e,t,i,n){this.drawText_(e,t,i,n,!1)},Q.strokeText=function(e,t,i,n){this.drawText_(e,t,i,n,!0)},Q.measureText=function(e){if(!this.textMeasureEl_){var t='<span style="position:absolute;top:-20000px;left:0;padding:0;margin:0;border:none;white-space:pre;"></span>';this.element_.insertAdjacentHTML("beforeEnd",t),this.textMeasureEl_=this.element_.lastChild}var i=this.element_.ownerDocument;return this.textMeasureEl_.innerHTML="",this.textMeasureEl_.style.font=this.font,this.textMeasureEl_.appendChild(i.createTextNode(e)),{width:this.textMeasureEl_.offsetWidth}},Q.clip=function(){},Q.arcTo=function(){},Q.createPattern=function(e,t){return new S(e,t)},A.prototype.addColorStop=function(e,t){t=m(t),this.colors_.push({offset:e,color:t.color,alpha:t.alpha})};var U=D.prototype=new Error;U.INDEX_SIZE_ERR=1,U.DOMSTRING_SIZE_ERR=2,U.HIERARCHY_REQUEST_ERR=3,U.WRONG_DOCUMENT_ERR=4,U.INVALID_CHARACTER_ERR=5,U.NO_DATA_ALLOWED_ERR=6,U.NO_MODIFICATION_ALLOWED_ERR=7,U.NOT_FOUND_ERR=8,U.NOT_SUPPORTED_ERR=9,U.INUSE_ATTRIBUTE_ERR=10,U.INVALID_STATE_ERR=11,U.SYNTAX_ERR=12,U.INVALID_MODIFICATION_ERR=13,U.NAMESPACE_ERR=14,U.INVALID_ACCESS_ERR=15,U.VALIDATION_ERR=16,U.TYPE_MISMATCH_ERR=17,G_vmlCanvasManager=H,CanvasRenderingContext2D=b,CanvasGradient=A,CanvasPattern=S,DOMException=D}(),function(e){e.color={},e.color.make=function(t,i,n,o){var a={};return a.r=t||0,a.g=i||0,a.b=n||0,a.a=null!=o?o:1,a.add=function(e,t){for(var i=0;i<e.length;++i)a[e.charAt(i)]+=t;return a.normalize()},a.scale=function(e,t){for(var i=0;i<e.length;++i)a[e.charAt(i)]*=t;return a.normalize()},a.toString=function(){return a.a>=1?"rgb("+[a.r,a.g,a.b].join(",")+")":"rgba("+[a.r,a.g,a.b,a.a].join(",")+")"},a.normalize=function(){function e(e,t,i){return e>t?e:t>i?i:t}return a.r=e(0,parseInt(a.r),255),a.g=e(0,parseInt(a.g),255),a.b=e(0,parseInt(a.b),255),a.a=e(0,a.a,1),a},a.clone=function(){return e.color.make(a.r,a.b,a.g,a.a)},a.normalize()},e.color.extract=function(t,i){var n;do{if(n=t.css(i).toLowerCase(),""!=n&&"transparent"!=n)break;t=t.parent()}while(t.length&&!e.nodeName(t.get(0),"body"));return"rgba(0, 0, 0, 0)"==n&&(n="transparent"),e.color.parse(n)},e.color.parse=function(i){var n,o=e.color.make;if(n=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(i))return o(parseInt(n[1],10),parseInt(n[2],10),parseInt(n[3],10));if(n=/rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(i))return o(parseInt(n[1],10),parseInt(n[2],10),parseInt(n[3],10),parseFloat(n[4]));if(n=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(i))return o(2.55*parseFloat(n[1]),2.55*parseFloat(n[2]),2.55*parseFloat(n[3]));if(n=/rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(i))return o(2.55*parseFloat(n[1]),2.55*parseFloat(n[2]),2.55*parseFloat(n[3]),parseFloat(n[4]));if(n=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(i))return o(parseInt(n[1],16),parseInt(n[2],16),parseInt(n[3],16));if(n=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(i))return o(parseInt(n[1]+n[1],16),parseInt(n[2]+n[2],16),parseInt(n[3]+n[3],16));var a=e.trim(i).toLowerCase();return"transparent"==a?o(255,255,255,0):(n=t[a]||[0,0,0],o(n[0],n[1],n[2]))};var t={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0]}}(jQuery),function(e){function t(t,i){var n=i.children("."+t)[0];if(null==n&&(n=document.createElement("canvas"),n.className=t,e(n).css({direction:"ltr",position:"absolute",left:0,top:0}).appendTo(i),!n.getContext)){if(!window.G_vmlCanvasManager)throw new Error("Canvas is not available. If you're using IE with a fall-back such as Excanvas, then there's either a mistake in your conditional include, or the page has no DOCTYPE and is rendering in Quirks Mode.");n=window.G_vmlCanvasManager.initElement(n)}this.element=n;var o=this.context=n.getContext("2d"),a=window.devicePixelRatio||1,r=o.webkitBackingStorePixelRatio||o.mozBackingStorePixelRatio||o.msBackingStorePixelRatio||o.oBackingStorePixelRatio||o.backingStorePixelRatio||1;this.pixelRatio=a/r,this.resize(i.width(),i.height()),this.textContainer=null,this.text={},this._textCache={}}function i(i,o,a,r){function s(e,t){t=[ge].concat(t);for(var i=0;i<e.length;++i)e[i].apply(this,t)}function l(){for(var i={Canvas:t},n=0;n<r.length;++n){var o=r[n];o.init(ge,i),o.options&&e.extend(!0,oe,o.options)}}function h(t){e.extend(!0,oe,t),t&&t.colors&&(oe.colors=t.colors),null==oe.xaxis.color&&(oe.xaxis.color=e.color.parse(oe.grid.color).scale("a",.22).toString()),null==oe.yaxis.color&&(oe.yaxis.color=e.color.parse(oe.grid.color).scale("a",.22).toString()),null==oe.xaxis.tickColor&&(oe.xaxis.tickColor=oe.grid.tickColor||oe.xaxis.color),null==oe.yaxis.tickColor&&(oe.yaxis.tickColor=oe.grid.tickColor||oe.yaxis.color),null==oe.grid.borderColor&&(oe.grid.borderColor=oe.grid.color),null==oe.grid.tickColor&&(oe.grid.tickColor=e.color.parse(oe.grid.color).scale("a",.22).toString());var n,o,a,r=i.css("font-size"),l=r?+r.replace("px",""):13,h={style:i.css("font-style"),size:Math.round(.8*l),variant:i.css("font-variant"),weight:i.css("font-weight"),family:i.css("font-family")};for(a=oe.xaxes.length||1,n=0;a>n;++n)o=oe.xaxes[n],o&&!o.tickColor&&(o.tickColor=o.color),o=e.extend(!0,{},oe.xaxis,o),oe.xaxes[n]=o,o.font&&(o.font=e.extend({},h,o.font),o.font.color||(o.font.color=o.color),o.font.lineHeight||(o.font.lineHeight=Math.round(1.15*o.font.size)));for(a=oe.yaxes.length||1,n=0;a>n;++n)o=oe.yaxes[n],o&&!o.tickColor&&(o.tickColor=o.color),o=e.extend(!0,{},oe.yaxis,o),oe.yaxes[n]=o,o.font&&(o.font=e.extend({},h,o.font),o.font.color||(o.font.color=o.color),o.font.lineHeight||(o.font.lineHeight=Math.round(1.15*o.font.size)));for(oe.xaxis.noTicks&&null==oe.xaxis.ticks&&(oe.xaxis.ticks=oe.xaxis.noTicks),oe.yaxis.noTicks&&null==oe.yaxis.ticks&&(oe.yaxis.ticks=oe.yaxis.noTicks),oe.x2axis&&(oe.xaxes[1]=e.extend(!0,{},oe.xaxis,oe.x2axis),oe.xaxes[1].position="top",null==oe.x2axis.min&&(oe.xaxes[1].min=null),null==oe.x2axis.max&&(oe.xaxes[1].max=null)),oe.y2axis&&(oe.yaxes[1]=e.extend(!0,{},oe.yaxis,oe.y2axis),oe.yaxes[1].position="right",null==oe.y2axis.min&&(oe.yaxes[1].min=null),null==oe.y2axis.max&&(oe.yaxes[1].max=null)),oe.grid.coloredAreas&&(oe.grid.markings=oe.grid.coloredAreas),oe.grid.coloredAreasColor&&(oe.grid.markingsColor=oe.grid.coloredAreasColor),oe.lines&&e.extend(!0,oe.series.lines,oe.lines),oe.points&&e.extend(!0,oe.series.points,oe.points),oe.bars&&e.extend(!0,oe.series.bars,oe.bars),null!=oe.shadowSize&&(oe.series.shadowSize=oe.shadowSize),null!=oe.highlightColor&&(oe.series.highlightColor=oe.highlightColor),n=0;n<oe.xaxes.length;++n)g(ce,n+1).options=oe.xaxes[n];for(n=0;n<oe.yaxes.length;++n)g(ue,n+1).options=oe.yaxes[n];for(var c in me)oe.hooks[c]&&oe.hooks[c].length&&(me[c]=me[c].concat(oe.hooks[c]));s(me.processOptions,[oe])}function c(e){ne=u(e),x(),v()}function u(t){for(var i=[],n=0;n<t.length;++n){var o=e.extend(!0,{},oe.series);null!=t[n].data?(o.data=t[n].data,delete t[n].data,e.extend(!0,o,t[n]),t[n].data=o.data):o.data=t[n],i.push(o)}return i}function p(e,t){var i=e[t+"axis"];return"object"==typeof i&&(i=i.n),"number"!=typeof i&&(i=1),i}function d(){return e.grep(ce.concat(ue),function(e){return e})}function f(e){var t,i,n={};for(t=0;t<ce.length;++t)i=ce[t],i&&i.used&&(n["x"+i.n]=i.c2p(e.left));for(t=0;t<ue.length;++t)i=ue[t],i&&i.used&&(n["y"+i.n]=i.c2p(e.top));return void 0!==n.x1&&(n.x=n.x1),void 0!==n.y1&&(n.y=n.y1),n}function m(e){var t,i,n,o={};for(t=0;t<ce.length;++t)if(i=ce[t],i&&i.used&&(n="x"+i.n,null==e[n]&&1==i.n&&(n="x"),null!=e[n])){o.left=i.p2c(e[n]);break}for(t=0;t<ue.length;++t)if(i=ue[t],i&&i.used&&(n="y"+i.n,null==e[n]&&1==i.n&&(n="y"),null!=e[n])){o.top=i.p2c(e[n]);break}return o}function g(t,i){return t[i-1]||(t[i-1]={n:i,direction:t==ce?"x":"y",options:e.extend(!0,{},t==ce?oe.xaxis:oe.yaxis)}),t[i-1]}function x(){var t,i=ne.length,n=-1;for(t=0;t<ne.length;++t){var o=ne[t].color;null!=o&&(i--,"number"==typeof o&&o>n&&(n=o))}n>=i&&(i=n+1);var a,r=[],s=oe.colors,l=s.length,h=0;for(t=0;i>t;t++)a=e.color.parse(s[t%l]||"#666"),t%l==0&&t&&(h=h>=0?.5>h?-h-.2:0:-h),r[t]=a.scale("rgb",1+h);var c,u=0;for(t=0;t<ne.length;++t){if(c=ne[t],null==c.color?(c.color=r[u].toString(),++u):"number"==typeof c.color&&(c.color=r[c.color].toString()),null==c.lines.show){var d,f=!0;for(d in c)if(c[d]&&c[d].show){f=!1;break}f&&(c.lines.show=!0)}null==c.lines.zero&&(c.lines.zero=!!c.lines.fill),c.xaxis=g(ce,p(c,"x")),c.yaxis=g(ue,p(c,"y"))}}function v(){function t(e,t,i){t<e.datamin&&t!=-v&&(e.datamin=t),i>e.datamax&&i!=v&&(e.datamax=i)}var i,n,o,a,r,l,h,c,u,p,f,m,g=Number.POSITIVE_INFINITY,x=Number.NEGATIVE_INFINITY,v=Number.MAX_VALUE;for(e.each(d(),function(e,t){t.datamin=g,t.datamax=x,t.used=!1}),i=0;i<ne.length;++i)r=ne[i],r.datapoints={points:[]},s(me.processRawData,[r,r.data,r.datapoints]);for(i=0;i<ne.length;++i){if(r=ne[i],f=r.data,m=r.datapoints.format,!m){if(m=[],m.push({x:!0,number:!0,required:!0}),m.push({y:!0,number:!0,required:!0}),r.bars.show||r.lines.show&&r.lines.fill){var y=!!(r.bars.show&&r.bars.zero||r.lines.show&&r.lines.zero);m.push({y:!0,number:!0,required:!1,defaultValue:0,autoscale:y}),r.bars.horizontal&&(delete m[m.length-1].y,m[m.length-1].x=!0)}r.datapoints.format=m}if(null==r.datapoints.pointsize){r.datapoints.pointsize=m.length,h=r.datapoints.pointsize,l=r.datapoints.points;var b=r.lines.show&&r.lines.steps;for(r.xaxis.used=r.yaxis.used=!0,n=o=0;n<f.length;++n,o+=h){p=f[n];var k=null==p;if(!k)for(a=0;h>a;++a)c=p[a],u=m[a],u&&(u.number&&null!=c&&(c=+c,isNaN(c)?c=null:c==1/0?c=v:c==-(1/0)&&(c=-v)),null==c&&(u.required&&(k=!0),null!=u.defaultValue&&(c=u.defaultValue))),l[o+a]=c;if(k)for(a=0;h>a;++a)c=l[o+a],null!=c&&(u=m[a],u.autoscale!==!1&&(u.x&&t(r.xaxis,c,c),u.y&&t(r.yaxis,c,c))),l[o+a]=null;else if(b&&o>0&&null!=l[o-h]&&l[o-h]!=l[o]&&l[o-h+1]!=l[o+1]){for(a=0;h>a;++a)l[o+h+a]=l[o+a];l[o+1]=l[o-h+1],o+=h}}}}for(i=0;i<ne.length;++i)r=ne[i],s(me.processDatapoints,[r,r.datapoints]);for(i=0;i<ne.length;++i){r=ne[i],l=r.datapoints.points,h=r.datapoints.pointsize,m=r.datapoints.format;var w=g,F=g,_=x,M=x;for(n=0;n<l.length;n+=h)if(null!=l[n])for(a=0;h>a;++a)c=l[n+a],u=m[a],u&&u.autoscale!==!1&&c!=v&&c!=-v&&(u.x&&(w>c&&(w=c),c>_&&(_=c)),u.y&&(F>c&&(F=c),c>M&&(M=c)));if(r.bars.show){var T;switch(r.bars.align){case"left":T=0;break;case"right":T=-r.bars.barWidth;break;default:T=-r.bars.barWidth/2}r.bars.horizontal?(F+=T,M+=T+r.bars.barWidth):(w+=T,_+=T+r.bars.barWidth)}t(r.xaxis,w,_),t(r.yaxis,F,M)}e.each(d(),function(e,t){t.datamin==g&&(t.datamin=null),t.datamax==x&&(t.datamax=null)})}function y(){i.css("padding",0).children().filter(function(){return!e(this).hasClass("flot-overlay")&&!e(this).hasClass("flot-base")}).remove(),"static"==i.css("position")&&i.css("position","relative"),ae=new t("flot-base",i),re=new t("flot-overlay",i),le=ae.context,he=re.context,se=e(re.element).unbind();var n=i.data("plot");n&&(n.shutdown(),re.clear()),i.data("plot",ge)}function b(){oe.grid.hoverable&&(se.mousemove(X),se.bind("mouseleave",V)),oe.grid.clickable&&se.click(G),s(me.bindEvents,[se])}function k(){ve&&clearTimeout(ve),se.unbind("mousemove",X),se.unbind("mouseleave",V),se.unbind("click",G),s(me.shutdown,[se])}function w(e){function t(e){return e}var i,n,o=e.options.transform||t,a=e.options.inverseTransform;"x"==e.direction?(i=e.scale=de/Math.abs(o(e.max)-o(e.min)),n=Math.min(o(e.max),o(e.min))):(i=e.scale=fe/Math.abs(o(e.max)-o(e.min)),i=-i,n=Math.max(o(e.max),o(e.min))),o==t?e.p2c=function(e){return(e-n)*i}:e.p2c=function(e){return(o(e)-n)*i},a?e.c2p=function(e){return a(n+e/i)}:e.c2p=function(e){return n+e/i}}function F(e){for(var t=e.options,i=e.ticks||[],n=t.labelWidth||0,o=t.labelHeight||0,a=n||("x"==e.direction?Math.floor(ae.width/(i.length||1)):null),r=e.direction+"Axis "+e.direction+e.n+"Axis",s="flot-"+e.direction+"-axis flot-"+e.direction+e.n+"-axis "+r,l=t.font||"flot-tick-label tickLabel",h=0;h<i.length;++h){var c=i[h];if(c.label){var u=ae.getTextInfo(s,c.label,l,null,a);n=Math.max(n,u.width),o=Math.max(o,u.height)}}e.labelWidth=t.labelWidth||n,e.labelHeight=t.labelHeight||o}function _(t){var i=t.labelWidth,n=t.labelHeight,o=t.options.position,a="x"===t.direction,r=t.options.tickLength,s=oe.grid.axisMargin,l=oe.grid.labelMargin,h=!0,c=!0,u=!0,p=!1;e.each(a?ce:ue,function(e,i){i&&(i.show||i.reserveSpace)&&(i===t?p=!0:i.options.position===o&&(p?c=!1:h=!1),p||(u=!1))}),c&&(s=0),null==r&&(r=u?"full":5),isNaN(+r)||(l+=+r),a?(n+=l,"bottom"==o?(pe.bottom+=n+s,t.box={top:ae.height-pe.bottom,height:n}):(t.box={top:pe.top+s,height:n},pe.top+=n+s)):(i+=l,"left"==o?(t.box={left:pe.left+s,width:i},pe.left+=i+s):(pe.right+=i+s,t.box={left:ae.width-pe.right,width:i})),t.position=o,t.tickLength=r,t.box.padding=l,t.innermost=h}function M(e){"x"==e.direction?(e.box.left=pe.left-e.labelWidth/2,e.box.width=ae.width-pe.left-pe.right+e.labelWidth):(e.box.top=pe.top-e.labelHeight/2,e.box.height=ae.height-pe.bottom-pe.top+e.labelHeight)}function T(){var t,i=oe.grid.minBorderMargin;if(null==i)for(i=0,t=0;t<ne.length;++t)i=Math.max(i,2*(ne[t].points.radius+ne[t].points.lineWidth/2));var n={left:i,right:i,top:i,bottom:i};e.each(d(),function(e,t){t.reserveSpace&&t.ticks&&t.ticks.length&&("x"===t.direction?(n.left=Math.max(n.left,t.labelWidth/2),n.right=Math.max(n.right,t.labelWidth/2)):(n.bottom=Math.max(n.bottom,t.labelHeight/2),n.top=Math.max(n.top,t.labelHeight/2)))}),pe.left=Math.ceil(Math.max(n.left,pe.left)),pe.right=Math.ceil(Math.max(n.right,pe.right)),pe.top=Math.ceil(Math.max(n.top,pe.top)),pe.bottom=Math.ceil(Math.max(n.bottom,pe.bottom))}function A(){var t,i=d(),n=oe.grid.show;for(var o in pe){var a=oe.grid.margin||0;pe[o]="number"==typeof a?a:a[o]||0}s(me.processOffset,[pe]);for(var o in pe)"object"==typeof oe.grid.borderWidth?pe[o]+=n?oe.grid.borderWidth[o]:0:pe[o]+=n?oe.grid.borderWidth:0;if(e.each(i,function(e,t){var i=t.options;t.show=null==i.show?t.used:i.show,t.reserveSpace=null==i.reserveSpace?t.show:i.reserveSpace,S(t)}),n){var r=e.grep(i,function(e){return e.show||e.reserveSpace});for(e.each(r,function(e,t){C(t),E(t),D(t,t.ticks),F(t)}),t=r.length-1;t>=0;--t)_(r[t]);T(),e.each(r,function(e,t){M(t)})}de=ae.width-pe.left-pe.right,fe=ae.height-pe.bottom-pe.top,e.each(i,function(e,t){w(t)}),n&&R(),
-Y()}function S(e){var t=e.options,i=+(null!=t.min?t.min:e.datamin),n=+(null!=t.max?t.max:e.datamax),o=n-i;if(0==o){var a=0==n?1:.01;null==t.min&&(i-=a),null!=t.max&&null==t.min||(n+=a)}else{var r=t.autoscaleMargin;null!=r&&(null==t.min&&(i-=o*r,0>i&&null!=e.datamin&&e.datamin>=0&&(i=0)),null==t.max&&(n+=o*r,n>0&&null!=e.datamax&&e.datamax<=0&&(n=0)))}e.min=i,e.max=n}function C(t){var i,o=t.options;i="number"==typeof o.ticks&&o.ticks>0?o.ticks:.3*Math.sqrt("x"==t.direction?ae.width:ae.height);var a=(t.max-t.min)/i,r=-Math.floor(Math.log(a)/Math.LN10),s=o.tickDecimals;null!=s&&r>s&&(r=s);var l,h=Math.pow(10,-r),c=a/h;if(1.5>c?l=1:3>c?(l=2,c>2.25&&(null==s||s>=r+1)&&(l=2.5,++r)):l=7.5>c?5:10,l*=h,null!=o.minTickSize&&l<o.minTickSize&&(l=o.minTickSize),t.delta=a,t.tickDecimals=Math.max(0,null!=s?s:r),t.tickSize=o.tickSize||l,"time"==o.mode&&!t.tickGenerator)throw new Error("Time mode requires the flot.time plugin.");if(t.tickGenerator||(t.tickGenerator=function(e){var t,i=[],o=n(e.min,e.tickSize),a=0,r=Number.NaN;do t=r,r=o+a*e.tickSize,i.push(r),++a;while(r<e.max&&r!=t);return i},t.tickFormatter=function(e,t){var i=t.tickDecimals?Math.pow(10,t.tickDecimals):1,n=""+Math.round(e*i)/i;if(null!=t.tickDecimals){var o=n.indexOf("."),a=-1==o?0:n.length-o-1;if(a<t.tickDecimals)return(a?n:n+".")+(""+i).substr(1,t.tickDecimals-a)}return n}),e.isFunction(o.tickFormatter)&&(t.tickFormatter=function(e,t){return""+o.tickFormatter(e,t)}),null!=o.alignTicksWithAxis){var u=("x"==t.direction?ce:ue)[o.alignTicksWithAxis-1];if(u&&u.used&&u!=t){var p=t.tickGenerator(t);if(p.length>0&&(null==o.min&&(t.min=Math.min(t.min,p[0])),null==o.max&&p.length>1&&(t.max=Math.max(t.max,p[p.length-1]))),t.tickGenerator=function(e){var t,i,n=[];for(i=0;i<u.ticks.length;++i)t=(u.ticks[i].v-u.min)/(u.max-u.min),t=e.min+t*(e.max-e.min),n.push(t);return n},!t.mode&&null==o.tickDecimals){var d=Math.max(0,-Math.floor(Math.log(t.delta)/Math.LN10)+1),f=t.tickGenerator(t);f.length>1&&/\..*0$/.test((f[1]-f[0]).toFixed(d))||(t.tickDecimals=d)}}}}function E(t){var i=t.options.ticks,n=[];null==i||"number"==typeof i&&i>0?n=t.tickGenerator(t):i&&(n=e.isFunction(i)?i(t):i);var o,a;for(t.ticks=[],o=0;o<n.length;++o){var r=null,s=n[o];"object"==typeof s?(a=+s[0],s.length>1&&(r=s[1])):a=+s,null==r&&(r=t.tickFormatter(a,t)),isNaN(a)||t.ticks.push({v:a,label:r})}}function D(e,t){e.options.autoscaleMargin&&t.length>0&&(null==e.options.min&&(e.min=Math.min(e.min,t[0].v)),null==e.options.max&&t.length>1&&(e.max=Math.max(e.max,t[t.length-1].v)))}function z(){ae.clear(),s(me.drawBackground,[le]);var e=oe.grid;e.show&&e.backgroundColor&&O(),e.show&&!e.aboveData&&I();for(var t=0;t<ne.length;++t)s(me.drawSeries,[le,ne[t]]),W(ne[t]);s(me.draw,[le]),e.show&&e.aboveData&&I(),ae.render(),$()}function P(e,t){for(var i,n,o,a,r=d(),s=0;s<r.length;++s)if(i=r[s],i.direction==t&&(a=t+i.n+"axis",e[a]||1!=i.n||(a=t+"axis"),e[a])){n=e[a].from,o=e[a].to;break}if(e[a]||(i="x"==t?ce[0]:ue[0],n=e[t+"1"],o=e[t+"2"]),null!=n&&null!=o&&n>o){var l=n;n=o,o=l}return{from:n,to:o,axis:i}}function O(){le.save(),le.translate(pe.left,pe.top),le.fillStyle=ie(oe.grid.backgroundColor,fe,0,"rgba(255, 255, 255, 0)"),le.fillRect(0,0,de,fe),le.restore()}function I(){var t,i,n,o;le.save(),le.translate(pe.left,pe.top);var a=oe.grid.markings;if(a)for(e.isFunction(a)&&(i=ge.getAxes(),i.xmin=i.xaxis.min,i.xmax=i.xaxis.max,i.ymin=i.yaxis.min,i.ymax=i.yaxis.max,a=a(i)),t=0;t<a.length;++t){var r=a[t],s=P(r,"x"),l=P(r,"y");if(null==s.from&&(s.from=s.axis.min),null==s.to&&(s.to=s.axis.max),null==l.from&&(l.from=l.axis.min),null==l.to&&(l.to=l.axis.max),!(s.to<s.axis.min||s.from>s.axis.max||l.to<l.axis.min||l.from>l.axis.max)){s.from=Math.max(s.from,s.axis.min),s.to=Math.min(s.to,s.axis.max),l.from=Math.max(l.from,l.axis.min),l.to=Math.min(l.to,l.axis.max);var h=s.from===s.to,c=l.from===l.to;if(!h||!c)if(s.from=Math.floor(s.axis.p2c(s.from)),s.to=Math.floor(s.axis.p2c(s.to)),l.from=Math.floor(l.axis.p2c(l.from)),l.to=Math.floor(l.axis.p2c(l.to)),h||c){var u=r.lineWidth||oe.grid.markingsLineWidth,p=u%2?.5:0;le.beginPath(),le.strokeStyle=r.color||oe.grid.markingsColor,le.lineWidth=u,h?(le.moveTo(s.to+p,l.from),le.lineTo(s.to+p,l.to)):(le.moveTo(s.from,l.to+p),le.lineTo(s.to,l.to+p)),le.stroke()}else le.fillStyle=r.color||oe.grid.markingsColor,le.fillRect(s.from,l.to,s.to-s.from,l.from-l.to)}}i=d(),n=oe.grid.borderWidth;for(var f=0;f<i.length;++f){var m,g,x,v,y=i[f],b=y.box,k=y.tickLength;if(y.show&&0!=y.ticks.length){for(le.lineWidth=1,"x"==y.direction?(m=0,g="full"==k?"top"==y.position?0:fe:b.top-pe.top+("top"==y.position?b.height:0)):(g=0,m="full"==k?"left"==y.position?0:de:b.left-pe.left+("left"==y.position?b.width:0)),y.innermost||(le.strokeStyle=y.options.color,le.beginPath(),x=v=0,"x"==y.direction?x=de+1:v=fe+1,1==le.lineWidth&&("x"==y.direction?g=Math.floor(g)+.5:m=Math.floor(m)+.5),le.moveTo(m,g),le.lineTo(m+x,g+v),le.stroke()),le.strokeStyle=y.options.tickColor,le.beginPath(),t=0;t<y.ticks.length;++t){var w=y.ticks[t].v;x=v=0,isNaN(w)||w<y.min||w>y.max||"full"==k&&("object"==typeof n&&n[y.position]>0||n>0)&&(w==y.min||w==y.max)||("x"==y.direction?(m=y.p2c(w),v="full"==k?-fe:k,"top"==y.position&&(v=-v)):(g=y.p2c(w),x="full"==k?-de:k,"left"==y.position&&(x=-x)),1==le.lineWidth&&("x"==y.direction?m=Math.floor(m)+.5:g=Math.floor(g)+.5),le.moveTo(m,g),le.lineTo(m+x,g+v))}le.stroke()}}n&&(o=oe.grid.borderColor,"object"==typeof n||"object"==typeof o?("object"!=typeof n&&(n={top:n,right:n,bottom:n,left:n}),"object"!=typeof o&&(o={top:o,right:o,bottom:o,left:o}),n.top>0&&(le.strokeStyle=o.top,le.lineWidth=n.top,le.beginPath(),le.moveTo(0-n.left,0-n.top/2),le.lineTo(de,0-n.top/2),le.stroke()),n.right>0&&(le.strokeStyle=o.right,le.lineWidth=n.right,le.beginPath(),le.moveTo(de+n.right/2,0-n.top),le.lineTo(de+n.right/2,fe),le.stroke()),n.bottom>0&&(le.strokeStyle=o.bottom,le.lineWidth=n.bottom,le.beginPath(),le.moveTo(de+n.right,fe+n.bottom/2),le.lineTo(0,fe+n.bottom/2),le.stroke()),n.left>0&&(le.strokeStyle=o.left,le.lineWidth=n.left,le.beginPath(),le.moveTo(0-n.left/2,fe+n.bottom),le.lineTo(0-n.left/2,0),le.stroke())):(le.lineWidth=n,le.strokeStyle=oe.grid.borderColor,le.strokeRect(-n/2,-n/2,de+n,fe+n))),le.restore()}function R(){e.each(d(),function(e,t){var i,n,o,a,r,s=t.box,l=t.direction+"Axis "+t.direction+t.n+"Axis",h="flot-"+t.direction+"-axis flot-"+t.direction+t.n+"-axis "+l,c=t.options.font||"flot-tick-label tickLabel";if(ae.removeText(h),t.show&&0!=t.ticks.length)for(var u=0;u<t.ticks.length;++u)i=t.ticks[u],!i.label||i.v<t.min||i.v>t.max||("x"==t.direction?(a="center",n=pe.left+t.p2c(i.v),"bottom"==t.position?o=s.top+s.padding:(o=s.top+s.height-s.padding,r="bottom")):(r="middle",o=pe.top+t.p2c(i.v),"left"==t.position?(n=s.left+s.width-s.padding,a="right"):n=s.left+s.padding),ae.addText(h,n,o,i.label,c,null,null,a,r))})}function W(e){e.lines.show&&N(e),e.bars.show&&H(e),e.points.show&&B(e)}function N(e){function t(e,t,i,n,o){var a=e.points,r=e.pointsize,s=null,l=null;le.beginPath();for(var h=r;h<a.length;h+=r){var c=a[h-r],u=a[h-r+1],p=a[h],d=a[h+1];if(null!=c&&null!=p){if(d>=u&&u<o.min){if(d<o.min)continue;c=(o.min-u)/(d-u)*(p-c)+c,u=o.min}else if(u>=d&&d<o.min){if(u<o.min)continue;p=(o.min-u)/(d-u)*(p-c)+c,d=o.min}if(u>=d&&u>o.max){if(d>o.max)continue;c=(o.max-u)/(d-u)*(p-c)+c,u=o.max}else if(d>=u&&d>o.max){if(u>o.max)continue;p=(o.max-u)/(d-u)*(p-c)+c,d=o.max}if(p>=c&&c<n.min){if(p<n.min)continue;u=(n.min-c)/(p-c)*(d-u)+u,c=n.min}else if(c>=p&&p<n.min){if(c<n.min)continue;d=(n.min-c)/(p-c)*(d-u)+u,p=n.min}if(c>=p&&c>n.max){if(p>n.max)continue;u=(n.max-c)/(p-c)*(d-u)+u,c=n.max}else if(p>=c&&p>n.max){if(c>n.max)continue;d=(n.max-c)/(p-c)*(d-u)+u,p=n.max}c==s&&u==l||le.moveTo(n.p2c(c)+t,o.p2c(u)+i),s=p,l=d,le.lineTo(n.p2c(p)+t,o.p2c(d)+i)}}le.stroke()}function i(e,t,i){for(var n=e.points,o=e.pointsize,a=Math.min(Math.max(0,i.min),i.max),r=0,s=!1,l=1,h=0,c=0;;){if(o>0&&r>n.length+o)break;r+=o;var u=n[r-o],p=n[r-o+l],d=n[r],f=n[r+l];if(s){if(o>0&&null!=u&&null==d){c=r,o=-o,l=2;continue}if(0>o&&r==h+o){le.fill(),s=!1,o=-o,l=1,r=h=c+o;continue}}if(null!=u&&null!=d){if(d>=u&&u<t.min){if(d<t.min)continue;p=(t.min-u)/(d-u)*(f-p)+p,u=t.min}else if(u>=d&&d<t.min){if(u<t.min)continue;f=(t.min-u)/(d-u)*(f-p)+p,d=t.min}if(u>=d&&u>t.max){if(d>t.max)continue;p=(t.max-u)/(d-u)*(f-p)+p,u=t.max}else if(d>=u&&d>t.max){if(u>t.max)continue;f=(t.max-u)/(d-u)*(f-p)+p,d=t.max}if(s||(le.beginPath(),le.moveTo(t.p2c(u),i.p2c(a)),s=!0),p>=i.max&&f>=i.max)le.lineTo(t.p2c(u),i.p2c(i.max)),le.lineTo(t.p2c(d),i.p2c(i.max));else if(p<=i.min&&f<=i.min)le.lineTo(t.p2c(u),i.p2c(i.min)),le.lineTo(t.p2c(d),i.p2c(i.min));else{var m=u,g=d;f>=p&&p<i.min&&f>=i.min?(u=(i.min-p)/(f-p)*(d-u)+u,p=i.min):p>=f&&f<i.min&&p>=i.min&&(d=(i.min-p)/(f-p)*(d-u)+u,f=i.min),p>=f&&p>i.max&&f<=i.max?(u=(i.max-p)/(f-p)*(d-u)+u,p=i.max):f>=p&&f>i.max&&p<=i.max&&(d=(i.max-p)/(f-p)*(d-u)+u,f=i.max),u!=m&&le.lineTo(t.p2c(m),i.p2c(p)),le.lineTo(t.p2c(u),i.p2c(p)),le.lineTo(t.p2c(d),i.p2c(f)),d!=g&&(le.lineTo(t.p2c(d),i.p2c(f)),le.lineTo(t.p2c(g),i.p2c(f)))}}}}le.save(),le.translate(pe.left,pe.top),le.lineJoin="round";var n=e.lines.lineWidth,o=e.shadowSize;if(n>0&&o>0){le.lineWidth=o,le.strokeStyle="rgba(0,0,0,0.1)";var a=Math.PI/18;t(e.datapoints,Math.sin(a)*(n/2+o/2),Math.cos(a)*(n/2+o/2),e.xaxis,e.yaxis),le.lineWidth=o/2,t(e.datapoints,Math.sin(a)*(n/2+o/4),Math.cos(a)*(n/2+o/4),e.xaxis,e.yaxis)}le.lineWidth=n,le.strokeStyle=e.color;var r=q(e.lines,e.color,0,fe);r&&(le.fillStyle=r,i(e.datapoints,e.xaxis,e.yaxis)),n>0&&t(e.datapoints,0,0,e.xaxis,e.yaxis),le.restore()}function B(e){function t(e,t,i,n,o,a,r,s){for(var l=e.points,h=e.pointsize,c=0;c<l.length;c+=h){var u=l[c],p=l[c+1];null==u||u<a.min||u>a.max||p<r.min||p>r.max||(le.beginPath(),u=a.p2c(u),p=r.p2c(p)+n,"circle"==s?le.arc(u,p,t,0,o?Math.PI:2*Math.PI,!1):s(le,u,p,t,o),le.closePath(),i&&(le.fillStyle=i,le.fill()),le.stroke())}}le.save(),le.translate(pe.left,pe.top);var i=e.points.lineWidth,n=e.shadowSize,o=e.points.radius,a=e.points.symbol;if(0==i&&(i=1e-4),i>0&&n>0){var r=n/2;le.lineWidth=r,le.strokeStyle="rgba(0,0,0,0.1)",t(e.datapoints,o,null,r+r/2,!0,e.xaxis,e.yaxis,a),le.strokeStyle="rgba(0,0,0,0.2)",t(e.datapoints,o,null,r/2,!0,e.xaxis,e.yaxis,a)}le.lineWidth=i,le.strokeStyle=e.color,t(e.datapoints,o,q(e.points,e.color),0,!1,e.xaxis,e.yaxis,a),le.restore()}function L(e,t,i,n,o,a,r,s,l,h,c){var u,p,d,f,m,g,x,v,y;h?(v=g=x=!0,m=!1,u=i,p=e,f=t+n,d=t+o,u>p&&(y=p,p=u,u=y,m=!0,g=!1)):(m=g=x=!0,v=!1,u=e+n,p=e+o,d=i,f=t,d>f&&(y=f,f=d,d=y,v=!0,x=!1)),p<r.min||u>r.max||f<s.min||d>s.max||(u<r.min&&(u=r.min,m=!1),p>r.max&&(p=r.max,g=!1),d<s.min&&(d=s.min,v=!1),f>s.max&&(f=s.max,x=!1),u=r.p2c(u),d=s.p2c(d),p=r.p2c(p),f=s.p2c(f),a&&(l.fillStyle=a(d,f),l.fillRect(u,f,p-u,d-f)),c>0&&(m||g||x||v)&&(l.beginPath(),l.moveTo(u,d),m?l.lineTo(u,f):l.moveTo(u,f),x?l.lineTo(p,f):l.moveTo(p,f),g?l.lineTo(p,d):l.moveTo(p,d),v?l.lineTo(u,d):l.moveTo(u,d),l.stroke()))}function H(e){function t(t,i,n,o,a,r){for(var s=t.points,l=t.pointsize,h=0;h<s.length;h+=l)null!=s[h]&&L(s[h],s[h+1],s[h+2],i,n,o,a,r,le,e.bars.horizontal,e.bars.lineWidth)}le.save(),le.translate(pe.left,pe.top),le.lineWidth=e.bars.lineWidth,le.strokeStyle=e.color;var i;switch(e.bars.align){case"left":i=0;break;case"right":i=-e.bars.barWidth;break;default:i=-e.bars.barWidth/2}var n=e.bars.fill?function(t,i){return q(e.bars,e.color,t,i)}:null;t(e.datapoints,i,i+e.bars.barWidth,n,e.xaxis,e.yaxis),le.restore()}function q(t,i,n,o){var a=t.fill;if(!a)return null;if(t.fillColor)return ie(t.fillColor,n,o,i);var r=e.color.parse(i);return r.a="number"==typeof a?a:.4,r.normalize(),r.toString()}function Y(){if(null!=oe.legend.container?e(oe.legend.container).html(""):i.find(".legend").remove(),oe.legend.show){for(var t,n,o=[],a=[],r=!1,s=oe.legend.labelFormatter,l=0;l<ne.length;++l)t=ne[l],t.label&&(n=s?s(t.label,t):t.label,n&&a.push({label:n,color:t.color}));if(oe.legend.sorted)if(e.isFunction(oe.legend.sorted))a.sort(oe.legend.sorted);else if("reverse"==oe.legend.sorted)a.reverse();else{var h="descending"!=oe.legend.sorted;a.sort(function(e,t){return e.label==t.label?0:e.label<t.label!=h?1:-1})}for(var l=0;l<a.length;++l){var c=a[l];l%oe.legend.noColumns==0&&(r&&o.push("</tr>"),o.push("<tr>"),r=!0),o.push('<td class="legendColorBox"><div style="border:1px solid '+oe.legend.labelBoxBorderColor+';padding:1px"><div style="width:4px;height:0;border:5px solid '+c.color+';overflow:hidden"></div></div></td><td class="legendLabel">'+c.label+"</td>")}if(r&&o.push("</tr>"),0!=o.length){var u='<table style="font-size:smaller;color:'+oe.grid.color+'">'+o.join("")+"</table>";if(null!=oe.legend.container)e(oe.legend.container).html(u);else{var p="",d=oe.legend.position,f=oe.legend.margin;null==f[0]&&(f=[f,f]),"n"==d.charAt(0)?p+="top:"+(f[1]+pe.top)+"px;":"s"==d.charAt(0)&&(p+="bottom:"+(f[1]+pe.bottom)+"px;"),"e"==d.charAt(1)?p+="right:"+(f[0]+pe.right)+"px;":"w"==d.charAt(1)&&(p+="left:"+(f[0]+pe.left)+"px;");var m=e('<div class="legend">'+u.replace('style="','style="position:absolute;'+p+";")+"</div>").appendTo(i);if(0!=oe.legend.backgroundOpacity){var g=oe.legend.backgroundColor;null==g&&(g=oe.grid.backgroundColor,g=g&&"string"==typeof g?e.color.parse(g):e.color.extract(m,"background-color"),g.a=1,g=g.toString());var x=m.children();e('<div style="position:absolute;width:'+x.width()+"px;height:"+x.height()+"px;"+p+"background-color:"+g+';"> </div>').prependTo(m).css("opacity",oe.legend.backgroundOpacity)}}}}}function j(e,t,i){var n,o,a,r=oe.grid.mouseActiveRadius,s=r*r+1,l=null;for(n=ne.length-1;n>=0;--n)if(i(ne[n])){var h=ne[n],c=h.xaxis,u=h.yaxis,p=h.datapoints.points,d=c.c2p(e),f=u.c2p(t),m=r/c.scale,g=r/u.scale;if(a=h.datapoints.pointsize,c.options.inverseTransform&&(m=Number.MAX_VALUE),u.options.inverseTransform&&(g=Number.MAX_VALUE),h.lines.show||h.points.show)for(o=0;o<p.length;o+=a){var x=p[o],v=p[o+1];if(null!=x&&!(x-d>m||-m>x-d||v-f>g||-g>v-f)){var y=Math.abs(c.p2c(x)-e),b=Math.abs(u.p2c(v)-t),k=y*y+b*b;s>k&&(s=k,l=[n,o/a])}}if(h.bars.show&&!l){var w,F;switch(h.bars.align){case"left":w=0;break;case"right":w=-h.bars.barWidth;break;default:w=-h.bars.barWidth/2}for(F=w+h.bars.barWidth,o=0;o<p.length;o+=a){var x=p[o],v=p[o+1],_=p[o+2];null!=x&&(ne[n].bars.horizontal?d<=Math.max(_,x)&&d>=Math.min(_,x)&&f>=v+w&&v+F>=f:d>=x+w&&x+F>=d&&f>=Math.min(_,v)&&f<=Math.max(_,v))&&(l=[n,o/a])}}}return l?(n=l[0],o=l[1],a=ne[n].datapoints.pointsize,{datapoint:ne[n].datapoints.points.slice(o*a,(o+1)*a),dataIndex:o,series:ne[n],seriesIndex:n}):null}function X(e){oe.grid.hoverable&&J("plothover",e,function(e){return 0!=e.hoverable})}function V(e){oe.grid.hoverable&&J("plothover",e,function(e){return!1})}function G(e){J("plotclick",e,function(e){return 0!=e.clickable})}function J(e,t,n){var o=se.offset(),a=t.pageX-o.left-pe.left,r=t.pageY-o.top-pe.top,s=f({left:a,top:r});s.pageX=t.pageX,s.pageY=t.pageY;var l=j(a,r,n);if(l&&(l.pageX=parseInt(l.series.xaxis.p2c(l.datapoint[0])+o.left+pe.left,10),l.pageY=parseInt(l.series.yaxis.p2c(l.datapoint[1])+o.top+pe.top,10)),oe.grid.autoHighlight){for(var h=0;h<xe.length;++h){var c=xe[h];c.auto!=e||l&&c.series==l.series&&c.point[0]==l.datapoint[0]&&c.point[1]==l.datapoint[1]||Z(c.series,c.point)}l&&U(l.series,l.datapoint,e)}i.trigger(e,[s,l])}function $(){var e=oe.interaction.redrawOverlayInterval;return-1==e?void Q():void(ve||(ve=setTimeout(Q,e)))}function Q(){ve=null,he.save(),re.clear(),he.translate(pe.left,pe.top);var e,t;for(e=0;e<xe.length;++e)t=xe[e],t.series.bars.show?te(t.series,t.point):ee(t.series,t.point);he.restore(),s(me.drawOverlay,[he])}function U(e,t,i){if("number"==typeof e&&(e=ne[e]),"number"==typeof t){var n=e.datapoints.pointsize;t=e.datapoints.points.slice(n*t,n*(t+1))}var o=K(e,t);-1==o?(xe.push({series:e,point:t,auto:i}),$()):i||(xe[o].auto=!1)}function Z(e,t){if(null==e&&null==t)return xe=[],void $();if("number"==typeof e&&(e=ne[e]),"number"==typeof t){var i=e.datapoints.pointsize;t=e.datapoints.points.slice(i*t,i*(t+1))}var n=K(e,t);-1!=n&&(xe.splice(n,1),$())}function K(e,t){for(var i=0;i<xe.length;++i){var n=xe[i];if(n.series==e&&n.point[0]==t[0]&&n.point[1]==t[1])return i}return-1}function ee(t,i){var n=i[0],o=i[1],a=t.xaxis,r=t.yaxis,s="string"==typeof t.highlightColor?t.highlightColor:e.color.parse(t.color).scale("a",.5).toString();if(!(n<a.min||n>a.max||o<r.min||o>r.max)){var l=t.points.radius+t.points.lineWidth/2;he.lineWidth=l,he.strokeStyle=s;var h=1.5*l;n=a.p2c(n),o=r.p2c(o),he.beginPath(),"circle"==t.points.symbol?he.arc(n,o,h,0,2*Math.PI,!1):t.points.symbol(he,n,o,h,!1),he.closePath(),he.stroke()}}function te(t,i){var n,o="string"==typeof t.highlightColor?t.highlightColor:e.color.parse(t.color).scale("a",.5).toString(),a=o;switch(t.bars.align){case"left":n=0;break;case"right":n=-t.bars.barWidth;break;default:n=-t.bars.barWidth/2}he.lineWidth=t.bars.lineWidth,he.strokeStyle=o,L(i[0],i[1],i[2]||0,n,n+t.bars.barWidth,function(){return a},t.xaxis,t.yaxis,he,t.bars.horizontal,t.bars.lineWidth)}function ie(t,i,n,o){if("string"==typeof t)return t;for(var a=le.createLinearGradient(0,n,0,i),r=0,s=t.colors.length;s>r;++r){var l=t.colors[r];if("string"!=typeof l){var h=e.color.parse(o);null!=l.brightness&&(h=h.scale("rgb",l.brightness)),null!=l.opacity&&(h.a*=l.opacity),l=h.toString()}a.addColorStop(r/(s-1),l)}return a}var ne=[],oe={colors:["#edc240","#afd8f8","#cb4b4b","#4da74d","#9440ed"],legend:{show:!0,noColumns:1,labelFormatter:null,labelBoxBorderColor:"#ccc",container:null,position:"ne",margin:5,backgroundColor:null,backgroundOpacity:.85,sorted:null},xaxis:{show:null,position:"bottom",mode:null,font:null,color:null,tickColor:null,transform:null,inverseTransform:null,min:null,max:null,autoscaleMargin:null,ticks:null,tickFormatter:null,labelWidth:null,labelHeight:null,reserveSpace:null,tickLength:null,alignTicksWithAxis:null,tickDecimals:null,tickSize:null,minTickSize:null},yaxis:{autoscaleMargin:.02,position:"left"},xaxes:[],yaxes:[],series:{points:{show:!1,radius:3,lineWidth:2,fill:!0,fillColor:"#ffffff",symbol:"circle"},lines:{lineWidth:2,fill:!1,fillColor:null,steps:!1},bars:{show:!1,lineWidth:2,barWidth:1,fill:!0,fillColor:null,align:"left",horizontal:!1,zero:!0},shadowSize:3,highlightColor:null},grid:{show:!0,aboveData:!1,color:"#545454",backgroundColor:null,borderColor:null,tickColor:null,margin:0,labelMargin:5,axisMargin:8,borderWidth:2,minBorderMargin:null,markings:null,markingsColor:"#f4f4f4",markingsLineWidth:2,clickable:!1,hoverable:!1,autoHighlight:!0,mouseActiveRadius:10},interaction:{redrawOverlayInterval:1e3/60},hooks:{}},ae=null,re=null,se=null,le=null,he=null,ce=[],ue=[],pe={left:0,right:0,top:0,bottom:0},de=0,fe=0,me={processOptions:[],processRawData:[],processDatapoints:[],processOffset:[],drawBackground:[],drawSeries:[],draw:[],bindEvents:[],drawOverlay:[],shutdown:[]},ge=this;ge.setData=c,ge.setupGrid=A,ge.draw=z,ge.getPlaceholder=function(){return i},ge.getCanvas=function(){return ae.element},ge.getPlotOffset=function(){return pe},ge.width=function(){return de},ge.height=function(){return fe},ge.offset=function(){var e=se.offset();return e.left+=pe.left,e.top+=pe.top,e},ge.getData=function(){return ne},ge.getAxes=function(){var t={};return e.each(ce.concat(ue),function(e,i){i&&(t[i.direction+(1!=i.n?i.n:"")+"axis"]=i)}),t},ge.getXAxes=function(){return ce},ge.getYAxes=function(){return ue},ge.c2p=f,ge.p2c=m,ge.getOptions=function(){return oe},ge.highlight=U,ge.unhighlight=Z,ge.triggerRedrawOverlay=$,ge.pointOffset=function(e){return{left:parseInt(ce[p(e,"x")-1].p2c(+e.x)+pe.left,10),top:parseInt(ue[p(e,"y")-1].p2c(+e.y)+pe.top,10)}},ge.shutdown=k,ge.destroy=function(){k(),i.removeData("plot").empty(),ne=[],oe=null,ae=null,re=null,se=null,le=null,he=null,ce=[],ue=[],me=null,xe=[],ge=null},ge.resize=function(){var e=i.width(),t=i.height();ae.resize(e,t),re.resize(e,t)},ge.hooks=me,l(ge),h(a),y(),c(o),A(),z(),b();var xe=[],ve=null}function n(e,t){return t*Math.floor(e/t)}var o=Object.prototype.hasOwnProperty;e.fn.detach||(e.fn.detach=function(){return this.each(function(){this.parentNode&&this.parentNode.removeChild(this)})}),t.prototype.resize=function(e,t){if(0>=e||0>=t)throw new Error("Invalid dimensions for plot, width = "+e+", height = "+t);var i=this.element,n=this.context,o=this.pixelRatio;this.width!=e&&(i.width=e*o,i.style.width=e+"px",this.width=e),this.height!=t&&(i.height=t*o,i.style.height=t+"px",this.height=t),n.restore(),n.save(),n.scale(o,o)},t.prototype.clear=function(){this.context.clearRect(0,0,this.width,this.height)},t.prototype.render=function(){var e=this._textCache;for(var t in e)if(o.call(e,t)){var i=this.getTextLayer(t),n=e[t];i.hide();for(var a in n)if(o.call(n,a)){var r=n[a];for(var s in r)if(o.call(r,s)){for(var l,h=r[s].positions,c=0;l=h[c];c++)l.active?l.rendered||(i.append(l.element),l.rendered=!0):(h.splice(c--,1),l.rendered&&l.element.detach());0==h.length&&delete r[s]}}i.show()}},t.prototype.getTextLayer=function(t){var i=this.text[t];return null==i&&(null==this.textContainer&&(this.textContainer=e("<div class='flot-text'></div>").css({position:"absolute",top:0,left:0,bottom:0,right:0,"font-size":"smaller",color:"#545454"}).insertAfter(this.element)),i=this.text[t]=e("<div></div>").addClass(t).css({position:"absolute",top:0,left:0,bottom:0,right:0}).appendTo(this.textContainer)),i},t.prototype.getTextInfo=function(t,i,n,o,a){var r,s,l,h;if(i=""+i,r="object"==typeof n?n.style+" "+n.variant+" "+n.weight+" "+n.size+"px/"+n.lineHeight+"px "+n.family:n,s=this._textCache[t],null==s&&(s=this._textCache[t]={}),l=s[r],null==l&&(l=s[r]={}),h=l[i],null==h){var c=e("<div></div>").html(i).css({position:"absolute","max-width":a,top:-9999}).appendTo(this.getTextLayer(t));"object"==typeof n?c.css({font:r,color:n.color}):"string"==typeof n&&c.addClass(n),h=l[i]={width:c.outerWidth(!0),height:c.outerHeight(!0),element:c,positions:[]},c.detach()}return h},t.prototype.addText=function(e,t,i,n,o,a,r,s,l){var h=this.getTextInfo(e,n,o,a,r),c=h.positions;"center"==s?t-=h.width/2:"right"==s&&(t-=h.width),"middle"==l?i-=h.height/2:"bottom"==l&&(i-=h.height);for(var u,p=0;u=c[p];p++)if(u.x==t&&u.y==i)return void(u.active=!0);u={active:!0,rendered:!1,element:c.length?h.element.clone():h.element,x:t,y:i},c.push(u),u.element.css({top:Math.round(i),left:Math.round(t),"text-align":s})},t.prototype.removeText=function(e,t,i,n,a,r){if(null==n){var s=this._textCache[e];if(null!=s)for(var l in s)if(o.call(s,l)){var h=s[l];for(var c in h)if(o.call(h,c))for(var u,p=h[c].positions,d=0;u=p[d];d++)u.active=!1}}else for(var u,p=this.getTextInfo(e,n,a,r).positions,d=0;u=p[d];d++)u.x==t&&u.y==i&&(u.active=!1)},e.plot=function(t,n,o){var a=new i(e(t),n,o,e.plot.plugins);return a},e.plot.version="0.8.3",e.plot.plugins=[],e.fn.plot=function(t,i){return this.each(function(){e.plot(this,t,i)})}}(jQuery),function(e){function t(t){function o(t,i,n){F||(F=!0,x=t.getCanvas(),v=e(x).parent(),y=t.getOptions(),t.setData(a(t.getData())))}function a(t){for(var i=0,n=0,o=0,a=y.series.pie.combine.color,r=[],s=0;s<t.length;++s){var l=t[s].data;e.isArray(l)&&1==l.length&&(l=l[0]),e.isArray(l)?!isNaN(parseFloat(l[1]))&&isFinite(l[1])?l[1]=+l[1]:l[1]=0:l=!isNaN(parseFloat(l))&&isFinite(l)?[1,+l]:[1,0],t[s].data=[l]}for(var s=0;s<t.length;++s)i+=t[s].data[0][1];for(var s=0;s<t.length;++s){var l=t[s].data[0][1];l/i<=y.series.pie.combine.threshold&&(n+=l,o++,a||(a=t[s].color))}for(var s=0;s<t.length;++s){var l=t[s].data[0][1];(2>o||l/i>y.series.pie.combine.threshold)&&r.push(e.extend(t[s],{data:[[1,l]],color:t[s].color,label:t[s].label,angle:l*Math.PI*2/i,percent:l/(i/100)}))}return o>1&&r.push({data:[[1,n]],color:a,label:y.series.pie.combine.label,angle:n*Math.PI*2/i,percent:n/(i/100)}),r}function r(t,o){function a(){_.clearRect(0,0,h,c),v.children().filter(".pieLabel, .pieLabelBackground").remove()}function r(){var e=y.series.pie.shadow.left,t=y.series.pie.shadow.top,i=10,n=y.series.pie.shadow.alpha,o=y.series.pie.radius>1?y.series.pie.radius:b*y.series.pie.radius;if(!(o>=h/2-e||o*y.series.pie.tilt>=c/2-t||i>=o)){_.save(),_.translate(e,t),_.globalAlpha=n,_.fillStyle="#000",_.translate(k,w),_.scale(1,y.series.pie.tilt);for(var a=1;i>=a;a++)_.beginPath(),_.arc(0,0,o,0,2*Math.PI,!1),_.fill(),o-=a;_.restore()}}function l(){function t(e,t,i){0>=e||isNaN(e)||(i?_.fillStyle=t:(_.strokeStyle=t,_.lineJoin="round"),_.beginPath(),Math.abs(e-2*Math.PI)>1e-9&&_.moveTo(0,0),_.arc(0,0,o,a,a+e/2,!1),_.arc(0,0,o,a+e/2,a+e,!1),_.closePath(),a+=e,i?_.fill():_.stroke())}function i(){function t(t,i,n){if(0==t.data[0][1])return!0;var a,r=y.legend.labelFormatter,s=y.series.pie.label.formatter;a=r?r(t.label,t):t.label,s&&(a=s(a,t));var l=(i+t.angle+i)/2,u=k+Math.round(Math.cos(l)*o),p=w+Math.round(Math.sin(l)*o)*y.series.pie.tilt,d="<span class='pieLabel' id='pieLabel"+n+"' style='position:absolute;top:"+p+"px;left:"+u+"px;'>"+a+"</span>";v.append(d);var f=v.children("#pieLabel"+n),m=p-f.height()/2,g=u-f.width()/2;if(f.css("top",m),f.css("left",g),0-m>0||0-g>0||c-(m+f.height())<0||h-(g+f.width())<0)return!1;if(0!=y.series.pie.label.background.opacity){var x=y.series.pie.label.background.color;null==x&&(x=t.color);var b="top:"+m+"px;left:"+g+"px;";e("<div class='pieLabelBackground' style='position:absolute;width:"+f.width()+"px;height:"+f.height()+"px;"+b+"background-color:"+x+";'></div>").css("opacity",y.series.pie.label.background.opacity).insertBefore(f)}return!0}for(var i=n,o=y.series.pie.label.radius>1?y.series.pie.label.radius:b*y.series.pie.label.radius,a=0;a<p.length;++a){if(p[a].percent>=100*y.series.pie.label.threshold&&!t(p[a],i,a))return!1;i+=p[a].angle}return!0}var n=Math.PI*y.series.pie.startAngle,o=y.series.pie.radius>1?y.series.pie.radius:b*y.series.pie.radius;_.save(),_.translate(k,w),_.scale(1,y.series.pie.tilt),_.save();for(var a=n,r=0;r<p.length;++r)p[r].startAngle=a,t(p[r].angle,p[r].color,!0);if(_.restore(),y.series.pie.stroke.width>0){_.save(),_.lineWidth=y.series.pie.stroke.width,a=n;for(var r=0;r<p.length;++r)t(p[r].angle,y.series.pie.stroke.color,!1);_.restore()}return s(_),_.restore(),y.series.pie.label.show?i():!0}if(v){var h=t.getPlaceholder().width(),c=t.getPlaceholder().height(),u=v.children().filter(".legend").children().width()||0;_=o,F=!1,b=Math.min(h,c/y.series.pie.tilt)/2,w=c/2+y.series.pie.offset.top,k=h/2,"auto"==y.series.pie.offset.left?(y.legend.position.match("w")?k+=u/2:k-=u/2,b>k?k=b:k>h-b&&(k=h-b)):k+=y.series.pie.offset.left;var p=t.getData(),d=0;do d>0&&(b*=n),d+=1,a(),y.series.pie.tilt<=.8&&r();while(!l()&&i>d);d>=i&&(a(),v.prepend("<div class='error'>Could not draw pie with labels contained inside canvas</div>")),t.setSeries&&t.insertLegend&&(t.setSeries(p),t.insertLegend())}}function s(e){if(y.series.pie.innerRadius>0){e.save();var t=y.series.pie.innerRadius>1?y.series.pie.innerRadius:b*y.series.pie.innerRadius;e.globalCompositeOperation="destination-out",e.beginPath(),e.fillStyle=y.series.pie.stroke.color,e.arc(0,0,t,0,2*Math.PI,!1),e.fill(),e.closePath(),e.restore(),e.save(),e.beginPath(),e.strokeStyle=y.series.pie.stroke.color,e.arc(0,0,t,0,2*Math.PI,!1),e.stroke(),e.closePath(),e.restore()}}function l(e,t){for(var i=!1,n=-1,o=e.length,a=o-1;++n<o;a=n)(e[n][1]<=t[1]&&t[1]<e[a][1]||e[a][1]<=t[1]&&t[1]<e[n][1])&&t[0]<(e[a][0]-e[n][0])*(t[1]-e[n][1])/(e[a][1]-e[n][1])+e[n][0]&&(i=!i);return i}function h(e,i){for(var n,o,a=t.getData(),r=t.getOptions(),s=r.series.pie.radius>1?r.series.pie.radius:b*r.series.pie.radius,h=0;h<a.length;++h){var c=a[h];if(c.pie.show){if(_.save(),_.beginPath(),_.moveTo(0,0),_.arc(0,0,s,c.startAngle,c.startAngle+c.angle/2,!1),_.arc(0,0,s,c.startAngle+c.angle/2,c.startAngle+c.angle,!1),_.closePath(),n=e-k,o=i-w,_.isPointInPath){if(_.isPointInPath(e-k,i-w))return _.restore(),{datapoint:[c.percent,c.data],dataIndex:0,series:c,seriesIndex:h}}else{var u=s*Math.cos(c.startAngle),p=s*Math.sin(c.startAngle),d=s*Math.cos(c.startAngle+c.angle/4),f=s*Math.sin(c.startAngle+c.angle/4),m=s*Math.cos(c.startAngle+c.angle/2),g=s*Math.sin(c.startAngle+c.angle/2),x=s*Math.cos(c.startAngle+c.angle/1.5),v=s*Math.sin(c.startAngle+c.angle/1.5),y=s*Math.cos(c.startAngle+c.angle),F=s*Math.sin(c.startAngle+c.angle),M=[[0,0],[u,p],[d,f],[m,g],[x,v],[y,F]],T=[n,o];if(l(M,T))return _.restore(),{datapoint:[c.percent,c.data],dataIndex:0,series:c,seriesIndex:h}}_.restore()}}return null}function c(e){p("plothover",e)}function u(e){p("plotclick",e)}function p(e,i){var n=t.offset(),o=parseInt(i.pageX-n.left),a=parseInt(i.pageY-n.top),r=h(o,a);if(y.grid.autoHighlight)for(var s=0;s<M.length;++s){var l=M[s];l.auto!=e||r&&l.series==r.series||f(l.series)}r&&d(r.series,e);var c={pageX:i.pageX,pageY:i.pageY};v.trigger(e,[c,r])}function d(e,i){var n=m(e);-1==n?(M.push({series:e,auto:i}),t.triggerRedrawOverlay()):i||(M[n].auto=!1)}function f(e){null==e&&(M=[],t.triggerRedrawOverlay());var i=m(e);-1!=i&&(M.splice(i,1),t.triggerRedrawOverlay())}function m(e){for(var t=0;t<M.length;++t){var i=M[t];if(i.series==e)return t}return-1}function g(e,t){function i(e){e.angle<=0||isNaN(e.angle)||(t.fillStyle="rgba(255, 255, 255, "+n.series.pie.highlight.opacity+")",t.beginPath(),Math.abs(e.angle-2*Math.PI)>1e-9&&t.moveTo(0,0),t.arc(0,0,o,e.startAngle,e.startAngle+e.angle/2,!1),t.arc(0,0,o,e.startAngle+e.angle/2,e.startAngle+e.angle,!1),t.closePath(),t.fill())}var n=e.getOptions(),o=n.series.pie.radius>1?n.series.pie.radius:b*n.series.pie.radius;t.save(),t.translate(k,w),t.scale(1,n.series.pie.tilt);for(var a=0;a<M.length;++a)i(M[a].series);s(t),t.restore()}var x=null,v=null,y=null,b=null,k=null,w=null,F=!1,_=null,M=[];t.hooks.processOptions.push(function(e,t){t.series.pie.show&&(t.grid.show=!1,"auto"==t.series.pie.label.show&&(t.legend.show?t.series.pie.label.show=!1:t.series.pie.label.show=!0),"auto"==t.series.pie.radius&&(t.series.pie.label.show?t.series.pie.radius=.75:t.series.pie.radius=1),t.series.pie.tilt>1?t.series.pie.tilt=1:t.series.pie.tilt<0&&(t.series.pie.tilt=0))}),t.hooks.bindEvents.push(function(e,t){var i=e.getOptions();i.series.pie.show&&(i.grid.hoverable&&t.unbind("mousemove").mousemove(c),i.grid.clickable&&t.unbind("click").click(u))}),t.hooks.processDatapoints.push(function(e,t,i,n){var a=e.getOptions();a.series.pie.show&&o(e,t,i,n)}),t.hooks.drawOverlay.push(function(e,t){var i=e.getOptions();i.series.pie.show&&g(e,t)}),t.hooks.draw.push(function(e,t){var i=e.getOptions();i.series.pie.show&&r(e,t)})}var i=10,n=.95,o={series:{pie:{show:!1,radius:"auto",innerRadius:0,startAngle:1.5,tilt:1,shadow:{left:5,top:15,alpha:.02},offset:{top:0,left:"auto"},stroke:{color:"#fff",width:1},label:{show:"auto",formatter:function(e,t){return"<div style='font-size:x-small;text-align:center;padding:2px;color:"+t.color+";'>"+e+"<br/>"+Math.round(t.percent)+"%</div>"},radius:1,background:{color:null,opacity:0},threshold:0},combine:{threshold:-1,color:null,label:"Other"},highlight:{opacity:.5}}}};e.plot.plugins.push({init:t,options:o,name:"pie",version:"1.1"})}(jQuery),function(e,t,i){"$:nomunge";function n(i){s===!0&&(s=i||1);for(var l=a.length-1;l>=0;l--){var p=e(a[l]);if(p[0]==t||p.is(":visible")){var d=p.width(),f=p.height(),m=p.data(c);!m||d===m.w&&f===m.h||(p.trigger(h,[m.w=d,m.h=f]),s=i||!0)}else m=p.data(c),m.w=0,m.h=0}null!==o&&(s&&(null==i||1e3>i-s)?o=t.requestAnimationFrame(n):(o=setTimeout(n,r[u]),s=!1))}var o,a=[],r=e.resize=e.extend(e.resize,{}),s=!1,l="setTimeout",h="resize",c=h+"-special-event",u="pendingDelay",p="activeDelay",d="throttleWindow";r[u]=200,r[p]=20,r[d]=!0,e.event.special[h]={setup:function(){if(!r[d]&&this[l])return!1;var t=e(this);a.push(this),t.data(c,{w:t.width(),h:t.height()}),1===a.length&&(o=i,n())},teardown:function(){if(!r[d]&&this[l])return!1;for(var t=e(this),i=a.length-1;i>=0;i--)if(a[i]==this){a.splice(i,1);break}t.removeData(c),a.length||(s?cancelAnimationFrame(o):clearTimeout(o),o=null)},add:function(t){function n(t,n,a){var r=e(this),s=r.data(c)||{};s.w=n!==i?n:r.width(),s.h=a!==i?a:r.height(),o.apply(this,arguments)}if(!r[d]&&this[l])return!1;var o;return e.isFunction(t)?(o=t,n):(o=t.handler,
-void(t.handler=n))}},t.requestAnimationFrame||(t.requestAnimationFrame=function(){return t.webkitRequestAnimationFrame||t.mozRequestAnimationFrame||t.oRequestAnimationFrame||t.msRequestAnimationFrame||function(e,i){return t.setTimeout(function(){e((new Date).getTime())},r[p])}}()),t.cancelAnimationFrame||(t.cancelAnimationFrame=function(){return t.webkitCancelRequestAnimationFrame||t.mozCancelRequestAnimationFrame||t.oCancelRequestAnimationFrame||t.msCancelRequestAnimationFrame||clearTimeout}())}(jQuery,this),function(e){function t(e){function t(){var t=e.getPlaceholder();0!=t.width()&&0!=t.height()&&(e.resize(),e.setupGrid(),e.draw())}function i(e,i){e.getPlaceholder().resize(t)}function n(e,i){e.getPlaceholder().unbind("resize",t)}e.hooks.bindEvents.push(i),e.hooks.shutdown.push(n)}var i={};e.plot.plugins.push({init:t,options:i,name:"resize",version:"1.0"})}(jQuery),function(e){function t(e,t){return t*Math.floor(e/t)}function i(e,t,i,n){if("function"==typeof e.strftime)return e.strftime(t);var o=function(e,t){return e=""+e,t=""+(null==t?"0":t),1==e.length?t+e:e},a=[],r=!1,s=e.getHours(),l=12>s;null==i&&(i=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]),null==n&&(n=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]);var h;h=s>12?s-12:0==s?12:s;for(var c=0;c<t.length;++c){var u=t.charAt(c);if(r){switch(u){case"a":u=""+n[e.getDay()];break;case"b":u=""+i[e.getMonth()];break;case"d":u=o(e.getDate());break;case"e":u=o(e.getDate()," ");break;case"h":case"H":u=o(s);break;case"I":u=o(h);break;case"l":u=o(h," ");break;case"m":u=o(e.getMonth()+1);break;case"M":u=o(e.getMinutes());break;case"q":u=""+(Math.floor(e.getMonth()/3)+1);break;case"S":u=o(e.getSeconds());break;case"y":u=o(e.getFullYear()%100);break;case"Y":u=""+e.getFullYear();break;case"p":u=l?"am":"pm";break;case"P":u=l?"AM":"PM";break;case"w":u=""+e.getDay()}a.push(u),r=!1}else"%"==u?r=!0:a.push(u)}return a.join("")}function n(e){function t(e,t,i,n){e[t]=function(){return i[n].apply(i,arguments)}}var i={date:e};void 0!=e.strftime&&t(i,"strftime",e,"strftime"),t(i,"getTime",e,"getTime"),t(i,"setTime",e,"setTime");for(var n=["Date","Day","FullYear","Hours","Milliseconds","Minutes","Month","Seconds"],o=0;o<n.length;o++)t(i,"get"+n[o],e,"getUTC"+n[o]),t(i,"set"+n[o],e,"setUTC"+n[o]);return i}function o(e,t){if("browser"==t.timezone)return new Date(e);if(t.timezone&&"utc"!=t.timezone){if("undefined"!=typeof timezoneJS&&"undefined"!=typeof timezoneJS.Date){var i=new timezoneJS.Date;return i.setTimezone(t.timezone),i.setTime(e),i}return n(new Date(e))}return n(new Date(e))}function a(n){n.hooks.processOptions.push(function(n,a){e.each(n.getAxes(),function(e,n){var a=n.options;"time"==a.mode&&(n.tickGenerator=function(e){var i=[],n=o(e.min,a),r=0,l=a.tickSize&&"quarter"===a.tickSize[1]||a.minTickSize&&"quarter"===a.minTickSize[1]?c:h;null!=a.minTickSize&&(r="number"==typeof a.tickSize?a.tickSize:a.minTickSize[0]*s[a.minTickSize[1]]);for(var u=0;u<l.length-1&&!(e.delta<(l[u][0]*s[l[u][1]]+l[u+1][0]*s[l[u+1][1]])/2&&l[u][0]*s[l[u][1]]>=r);++u);var p=l[u][0],d=l[u][1];if("year"==d){if(null!=a.minTickSize&&"year"==a.minTickSize[1])p=Math.floor(a.minTickSize[0]);else{var f=Math.pow(10,Math.floor(Math.log(e.delta/s.year)/Math.LN10)),m=e.delta/s.year/f;p=1.5>m?1:3>m?2:7.5>m?5:10,p*=f}1>p&&(p=1)}e.tickSize=a.tickSize||[p,d];var g=e.tickSize[0];d=e.tickSize[1];var x=g*s[d];"second"==d?n.setSeconds(t(n.getSeconds(),g)):"minute"==d?n.setMinutes(t(n.getMinutes(),g)):"hour"==d?n.setHours(t(n.getHours(),g)):"month"==d?n.setMonth(t(n.getMonth(),g)):"quarter"==d?n.setMonth(3*t(n.getMonth()/3,g)):"year"==d&&n.setFullYear(t(n.getFullYear(),g)),n.setMilliseconds(0),x>=s.minute&&n.setSeconds(0),x>=s.hour&&n.setMinutes(0),x>=s.day&&n.setHours(0),x>=4*s.day&&n.setDate(1),x>=2*s.month&&n.setMonth(t(n.getMonth(),3)),x>=2*s.quarter&&n.setMonth(t(n.getMonth(),6)),x>=s.year&&n.setMonth(0);var v,y=0,b=Number.NaN;do if(v=b,b=n.getTime(),i.push(b),"month"==d||"quarter"==d)if(1>g){n.setDate(1);var k=n.getTime();n.setMonth(n.getMonth()+("quarter"==d?3:1));var w=n.getTime();n.setTime(b+y*s.hour+(w-k)*g),y=n.getHours(),n.setHours(0)}else n.setMonth(n.getMonth()+g*("quarter"==d?3:1));else"year"==d?n.setFullYear(n.getFullYear()+g):n.setTime(b+x);while(b<e.max&&b!=v);return i},n.tickFormatter=function(e,t){var n=o(e,t.options);if(null!=a.timeformat)return i(n,a.timeformat,a.monthNames,a.dayNames);var r,l=t.options.tickSize&&"quarter"==t.options.tickSize[1]||t.options.minTickSize&&"quarter"==t.options.minTickSize[1],h=t.tickSize[0]*s[t.tickSize[1]],c=t.max-t.min,u=a.twelveHourClock?" %p":"",p=a.twelveHourClock?"%I":"%H";r=h<s.minute?p+":%M:%S"+u:h<s.day?c<2*s.day?p+":%M"+u:"%b %d "+p+":%M"+u:h<s.month?"%b %d":l&&h<s.quarter||!l&&h<s.year?c<s.year?"%b":"%b %Y":l&&h<s.year?c<s.year?"Q%q":"Q%q %Y":"%Y";var d=i(n,r,a.monthNames,a.dayNames);return d})})})}var r={xaxis:{timezone:null,timeformat:null,twelveHourClock:!1,monthNames:null}},s={second:1e3,minute:6e4,hour:36e5,day:864e5,month:2592e6,quarter:7776e6,year:525949.2*60*1e3},l=[[1,"second"],[2,"second"],[5,"second"],[10,"second"],[30,"second"],[1,"minute"],[2,"minute"],[5,"minute"],[10,"minute"],[30,"minute"],[1,"hour"],[2,"hour"],[4,"hour"],[8,"hour"],[12,"hour"],[1,"day"],[2,"day"],[3,"day"],[.25,"month"],[.5,"month"],[1,"month"],[2,"month"]],h=l.concat([[3,"month"],[6,"month"],[1,"year"]]),c=l.concat([[1,"quarter"],[2,"quarter"],[1,"year"]]);e.plot.plugins.push({init:a,options:r,name:"time",version:"1.0"}),e.plot.formatDate=i,e.plot.dateGenerator=o}(jQuery),!function(e){var t={tooltip:{show:!1,cssClass:"flotTip",content:"%s | X: %x | Y: %y",xDateFormat:null,yDateFormat:null,monthNames:null,dayNames:null,shifts:{x:10,y:20},defaultTheme:!0,lines:!1,onHover:function(e,t){},$compat:!1}};t.tooltipOpts=t.tooltip;var i=function(e){this.tipPosition={x:0,y:0},this.init(e)};i.prototype.init=function(t){function i(e){var i={};i.x=e.pageX,i.y=e.pageY,t.setTooltipPosition(i)}function n(i,n,a){var r=function(e,t,i,n){return Math.sqrt((i-e)*(i-e)+(n-t)*(n-t))},s=function(e,t,i,n,o,a,s){if(!s||(s=function(e,t,i,n,o,a){if("undefined"!=typeof i)return{x:i,y:t};if("undefined"!=typeof n)return{x:e,y:n};var r,s=-1/((a-n)/(o-i));return{x:r=(o*(e*s-t+n)+i*(e*-s+t-a))/(s*(o-i)+n-a),y:s*r-s*e+t}}(e,t,i,n,o,a),s.x>=Math.min(i,o)&&s.x<=Math.max(i,o)&&s.y>=Math.min(n,a)&&s.y<=Math.max(n,a))){var l=n-a,h=o-i,c=i*a-n*o;return Math.abs(l*e+h*t+c)/Math.sqrt(l*l+h*h)}var u=r(e,t,i,n),p=r(e,t,o,a);return u>p?p:u};if(a)t.showTooltip(a,n);else if(o.plotOptions.series.lines.show&&o.tooltipOptions.lines===!0){var l=o.plotOptions.grid.mouseActiveRadius,h={distance:l+1};e.each(t.getData(),function(e,i){for(var o=0,a=-1,l=1;l<i.data.length;l++)i.data[l-1][0]<=n.x&&i.data[l][0]>=n.x&&(o=l-1,a=l);if(-1===a)return void t.hideTooltip();var c={x:i.data[o][0],y:i.data[o][1]},u={x:i.data[a][0],y:i.data[a][1]},p=s(i.xaxis.p2c(n.x),i.yaxis.p2c(n.y),i.xaxis.p2c(c.x),i.yaxis.p2c(c.y),i.xaxis.p2c(u.x),i.yaxis.p2c(u.y),!1);if(p<h.distance){var d=r(c.x,c.y,n.x,n.y)<r(n.x,n.y,u.x,u.y)?o:a,f=(i.datapoints.pointsize,[n.x,c.y+(u.y-c.y)*((n.x-c.x)/(u.x-c.x))]),m={datapoint:f,dataIndex:d,series:i,seriesIndex:e};h={distance:p,item:m}}}),h.distance<l+1?t.showTooltip(h.item,n):t.hideTooltip()}else t.hideTooltip()}var o=this,a=e.plot.plugins.length;if(this.plotPlugins=[],a)for(var r=0;a>r;r++)this.plotPlugins.push(e.plot.plugins[r].name);t.hooks.bindEvents.push(function(t,a){o.plotOptions=t.getOptions(),"boolean"==typeof o.plotOptions.tooltip&&(o.plotOptions.tooltipOpts.show=o.plotOptions.tooltip,o.plotOptions.tooltip=o.plotOptions.tooltipOpts,delete o.plotOptions.tooltipOpts),o.plotOptions.tooltip.show!==!1&&"undefined"!=typeof o.plotOptions.tooltip.show&&(o.tooltipOptions=o.plotOptions.tooltip,o.tooltipOptions.$compat?(o.wfunc="width",o.hfunc="height"):(o.wfunc="innerWidth",o.hfunc="innerHeight"),o.getDomElement(),e(t.getPlaceholder()).bind("plothover",n),e(a).bind("mousemove",i))}),t.hooks.shutdown.push(function(t,o){e(t.getPlaceholder()).unbind("plothover",n),e(o).unbind("mousemove",i)}),t.setTooltipPosition=function(t){var i=o.getDomElement(),n=i.outerWidth()+o.tooltipOptions.shifts.x,a=i.outerHeight()+o.tooltipOptions.shifts.y;t.x-e(window).scrollLeft()>e(window)[o.wfunc]()-n&&(t.x-=n),t.y-e(window).scrollTop()>e(window)[o.hfunc]()-a&&(t.y-=a),o.tipPosition.x=t.x,o.tipPosition.y=t.y},t.showTooltip=function(e,i){var n=o.getDomElement(),a=o.stringFormat(o.tooltipOptions.content,e);""!==a&&(n.html(a),t.setTooltipPosition({x:i.pageX,y:i.pageY}),n.css({left:o.tipPosition.x+o.tooltipOptions.shifts.x,top:o.tipPosition.y+o.tooltipOptions.shifts.y}).show(),"function"==typeof o.tooltipOptions.onHover&&o.tooltipOptions.onHover(e,n))},t.hideTooltip=function(){o.getDomElement().hide().html("")}},i.prototype.getDomElement=function(){var t=e("."+this.tooltipOptions.cssClass);return 0===t.length&&(t=e("<div />").addClass(this.tooltipOptions.cssClass),t.appendTo("body").hide().css({position:"absolute"}),this.tooltipOptions.defaultTheme&&t.css({background:"#fff","z-index":"1040",padding:"0.4em 0.6em","border-radius":"0.5em","font-size":"0.8em",border:"1px solid #111",display:"none","white-space":"nowrap"})),t},i.prototype.stringFormat=function(e,t){var i,n,o,a,r=/%p\.{0,1}(\d{0,})/,s=/%s/,l=/%c/,h=/%lx/,c=/%ly/,u=/%x\.{0,1}(\d{0,})/,p=/%y\.{0,1}(\d{0,})/,d="%x",f="%y",m="%ct";if("undefined"!=typeof t.series.threshold?(i=t.datapoint[0],n=t.datapoint[1],o=t.datapoint[2]):"undefined"!=typeof t.series.lines&&t.series.lines.steps?(i=t.series.datapoints.points[2*t.dataIndex],n=t.series.datapoints.points[2*t.dataIndex+1],o=""):(i=t.series.data[t.dataIndex][0],n=t.series.data[t.dataIndex][1],o=t.series.data[t.dataIndex][2]),null===t.series.label&&t.series.originSeries&&(t.series.label=t.series.originSeries.label),"function"==typeof e&&(e=e(t.series.label,i,n,t)),"boolean"==typeof e&&!e)return"";if("undefined"!=typeof t.series.percent?a=t.series.percent:"undefined"!=typeof t.series.percents&&(a=t.series.percents[t.dataIndex]),"number"==typeof a&&(e=this.adjustValPrecision(r,e,a)),e="undefined"!=typeof t.series.label?e.replace(s,t.series.label):e.replace(s,""),e="undefined"!=typeof t.series.color?e.replace(l,t.series.color):e.replace(l,""),e=this.hasAxisLabel("xaxis",t)?e.replace(h,t.series.xaxis.options.axisLabel):e.replace(h,""),e=this.hasAxisLabel("yaxis",t)?e.replace(c,t.series.yaxis.options.axisLabel):e.replace(c,""),this.isTimeMode("xaxis",t)&&this.isXDateFormat(t)&&(e=e.replace(u,this.timestampToDate(i,this.tooltipOptions.xDateFormat,t.series.xaxis.options))),this.isTimeMode("yaxis",t)&&this.isYDateFormat(t)&&(e=e.replace(p,this.timestampToDate(n,this.tooltipOptions.yDateFormat,t.series.yaxis.options))),"number"==typeof i&&(e=this.adjustValPrecision(u,e,i)),"number"==typeof n&&(e=this.adjustValPrecision(p,e,n)),"undefined"!=typeof t.series.xaxis.ticks){var g;g=this.hasRotatedXAxisTicks(t)?"rotatedTicks":"ticks";var x=t.dataIndex+t.seriesIndex;for(var v in t.series.xaxis[g])if(t.series.xaxis[g].hasOwnProperty(x)&&!this.isTimeMode("xaxis",t)){var y=this.isCategoriesMode("xaxis",t)?t.series.xaxis[g][x].label:t.series.xaxis[g][x].v;y===i&&(e=e.replace(u,t.series.xaxis[g][x].label))}}if("undefined"!=typeof t.series.yaxis.ticks)for(var v in t.series.yaxis.ticks)if(t.series.yaxis.ticks.hasOwnProperty(v)){var b=this.isCategoriesMode("yaxis",t)?t.series.yaxis.ticks[v].label:t.series.yaxis.ticks[v].v;b===n&&(e=e.replace(p,t.series.yaxis.ticks[v].label))}return"undefined"!=typeof t.series.xaxis.tickFormatter&&(e=e.replace(d,t.series.xaxis.tickFormatter(i,t.series.xaxis).replace(/\$/g,"$$"))),"undefined"!=typeof t.series.yaxis.tickFormatter&&(e=e.replace(f,t.series.yaxis.tickFormatter(n,t.series.yaxis).replace(/\$/g,"$$"))),o&&(e=e.replace(m,o)),e},i.prototype.isTimeMode=function(e,t){return"undefined"!=typeof t.series[e].options.mode&&"time"===t.series[e].options.mode},i.prototype.isXDateFormat=function(e){return"undefined"!=typeof this.tooltipOptions.xDateFormat&&null!==this.tooltipOptions.xDateFormat},i.prototype.isYDateFormat=function(e){return"undefined"!=typeof this.tooltipOptions.yDateFormat&&null!==this.tooltipOptions.yDateFormat},i.prototype.isCategoriesMode=function(e,t){return"undefined"!=typeof t.series[e].options.mode&&"categories"===t.series[e].options.mode},i.prototype.timestampToDate=function(t,i,n){var o=e.plot.dateGenerator(t,n);return e.plot.formatDate(o,i,this.tooltipOptions.monthNames,this.tooltipOptions.dayNames)},i.prototype.adjustValPrecision=function(e,t,i){var n,o=t.match(e);return null!==o&&""!==RegExp.$1&&(n=RegExp.$1,i=i.toFixed(n),t=t.replace(e,i)),t},i.prototype.hasAxisLabel=function(t,i){return-1!==e.inArray(this.plotPlugins,"axisLabels")&&"undefined"!=typeof i.series[t].options.axisLabel&&i.series[t].options.axisLabel.length>0},i.prototype.hasRotatedXAxisTicks=function(t){return-1!==e.inArray(this.plotPlugins,"tickRotor")&&"undefined"!=typeof t.series.xaxis.rotatedTicks};var n=function(e){new i(e)};e.plot.plugins.push({init:n,options:t,name:"tooltip",version:"0.8.5"})}(jQuery);
+if(!document.createElement("canvas").getContext){(function(){var ab=Math;var n=ab.round;var l=ab.sin;var A=ab.cos;var H=ab.abs;var N=ab.sqrt;var d=10;var f=d/2;var z=+navigator.userAgent.match(/MSIE ([\d.]+)?/)[1];function y(){return this.context_||(this.context_=new D(this))}var t=Array.prototype.slice;function g(j,m,p){var i=t.call(arguments,2);return function(){return j.apply(m,i.concat(t.call(arguments)))}}function af(i){return String(i).replace(/&/g,"&amp;").replace(/"/g,"&quot;")}function Y(m,j,i){if(!m.namespaces[j]){m.namespaces.add(j,i,"#default#VML")}}function R(j){Y(j,"g_vml_","urn:schemas-microsoft-com:vml");Y(j,"g_o_","urn:schemas-microsoft-com:office:office");if(!j.styleSheets.ex_canvas_){var i=j.createStyleSheet();i.owningElement.id="ex_canvas_";i.cssText="canvas{display:inline-block;overflow:hidden;text-align:left;width:300px;height:150px}"}}R(document);var e={init:function(i){var j=i||document;j.createElement("canvas");j.attachEvent("onreadystatechange",g(this.init_,this,j))},init_:function(p){var m=p.getElementsByTagName("canvas");for(var j=0;j<m.length;j++){this.initElement(m[j])}},initElement:function(j){if(!j.getContext){j.getContext=y;R(j.ownerDocument);j.innerHTML="";j.attachEvent("onpropertychange",x);j.attachEvent("onresize",W);var i=j.attributes;if(i.width&&i.width.specified){j.style.width=i.width.nodeValue+"px"}else{j.width=j.clientWidth}if(i.height&&i.height.specified){j.style.height=i.height.nodeValue+"px"}else{j.height=j.clientHeight}}return j}};function x(j){var i=j.srcElement;switch(j.propertyName){case"width":i.getContext().clearRect();i.style.width=i.attributes.width.nodeValue+"px";i.firstChild.style.width=i.clientWidth+"px";break;case"height":i.getContext().clearRect();i.style.height=i.attributes.height.nodeValue+"px";i.firstChild.style.height=i.clientHeight+"px";break}}function W(j){var i=j.srcElement;if(i.firstChild){i.firstChild.style.width=i.clientWidth+"px";i.firstChild.style.height=i.clientHeight+"px"}}e.init();var k=[];for(var ae=0;ae<16;ae++){for(var ad=0;ad<16;ad++){k[ae*16+ad]=ae.toString(16)+ad.toString(16)}}function B(){return[[1,0,0],[0,1,0],[0,0,1]]}function J(p,m){var j=B();for(var i=0;i<3;i++){for(var ah=0;ah<3;ah++){var Z=0;for(var ag=0;ag<3;ag++){Z+=p[i][ag]*m[ag][ah]}j[i][ah]=Z}}return j}function v(j,i){i.fillStyle=j.fillStyle;i.lineCap=j.lineCap;i.lineJoin=j.lineJoin;i.lineWidth=j.lineWidth;i.miterLimit=j.miterLimit;i.shadowBlur=j.shadowBlur;i.shadowColor=j.shadowColor;i.shadowOffsetX=j.shadowOffsetX;i.shadowOffsetY=j.shadowOffsetY;i.strokeStyle=j.strokeStyle;i.globalAlpha=j.globalAlpha;i.font=j.font;i.textAlign=j.textAlign;i.textBaseline=j.textBaseline;i.arcScaleX_=j.arcScaleX_;i.arcScaleY_=j.arcScaleY_;i.lineScale_=j.lineScale_}var b={aliceblue:"#F0F8FF",antiquewhite:"#FAEBD7",aquamarine:"#7FFFD4",azure:"#F0FFFF",beige:"#F5F5DC",bisque:"#FFE4C4",black:"#000000",blanchedalmond:"#FFEBCD",blueviolet:"#8A2BE2",brown:"#A52A2A",burlywood:"#DEB887",cadetblue:"#5F9EA0",chartreuse:"#7FFF00",chocolate:"#D2691E",coral:"#FF7F50",cornflowerblue:"#6495ED",cornsilk:"#FFF8DC",crimson:"#DC143C",cyan:"#00FFFF",darkblue:"#00008B",darkcyan:"#008B8B",darkgoldenrod:"#B8860B",darkgray:"#A9A9A9",darkgreen:"#006400",darkgrey:"#A9A9A9",darkkhaki:"#BDB76B",darkmagenta:"#8B008B",darkolivegreen:"#556B2F",darkorange:"#FF8C00",darkorchid:"#9932CC",darkred:"#8B0000",darksalmon:"#E9967A",darkseagreen:"#8FBC8F",darkslateblue:"#483D8B",darkslategray:"#2F4F4F",darkslategrey:"#2F4F4F",darkturquoise:"#00CED1",darkviolet:"#9400D3",deeppink:"#FF1493",deepskyblue:"#00BFFF",dimgray:"#696969",dimgrey:"#696969",dodgerblue:"#1E90FF",firebrick:"#B22222",floralwhite:"#FFFAF0",forestgreen:"#228B22",gainsboro:"#DCDCDC",ghostwhite:"#F8F8FF",gold:"#FFD700",goldenrod:"#DAA520",grey:"#808080",greenyellow:"#ADFF2F",honeydew:"#F0FFF0",hotpink:"#FF69B4",indianred:"#CD5C5C",indigo:"#4B0082",ivory:"#FFFFF0",khaki:"#F0E68C",lavender:"#E6E6FA",lavenderblush:"#FFF0F5",lawngreen:"#7CFC00",lemonchiffon:"#FFFACD",lightblue:"#ADD8E6",lightcoral:"#F08080",lightcyan:"#E0FFFF",lightgoldenrodyellow:"#FAFAD2",lightgreen:"#90EE90",lightgrey:"#D3D3D3",lightpink:"#FFB6C1",lightsalmon:"#FFA07A",lightseagreen:"#20B2AA",lightskyblue:"#87CEFA",lightslategray:"#778899",lightslategrey:"#778899",lightsteelblue:"#B0C4DE",lightyellow:"#FFFFE0",limegreen:"#32CD32",linen:"#FAF0E6",magenta:"#FF00FF",mediumaquamarine:"#66CDAA",mediumblue:"#0000CD",mediumorchid:"#BA55D3",mediumpurple:"#9370DB",mediumseagreen:"#3CB371",mediumslateblue:"#7B68EE",mediumspringgreen:"#00FA9A",mediumturquoise:"#48D1CC",mediumvioletred:"#C71585",midnightblue:"#191970",mintcream:"#F5FFFA",mistyrose:"#FFE4E1",moccasin:"#FFE4B5",navajowhite:"#FFDEAD",oldlace:"#FDF5E6",olivedrab:"#6B8E23",orange:"#FFA500",orangered:"#FF4500",orchid:"#DA70D6",palegoldenrod:"#EEE8AA",palegreen:"#98FB98",paleturquoise:"#AFEEEE",palevioletred:"#DB7093",papayawhip:"#FFEFD5",peachpuff:"#FFDAB9",peru:"#CD853F",pink:"#FFC0CB",plum:"#DDA0DD",powderblue:"#B0E0E6",rosybrown:"#BC8F8F",royalblue:"#4169E1",saddlebrown:"#8B4513",salmon:"#FA8072",sandybrown:"#F4A460",seagreen:"#2E8B57",seashell:"#FFF5EE",sienna:"#A0522D",skyblue:"#87CEEB",slateblue:"#6A5ACD",slategray:"#708090",slategrey:"#708090",snow:"#FFFAFA",springgreen:"#00FF7F",steelblue:"#4682B4",tan:"#D2B48C",thistle:"#D8BFD8",tomato:"#FF6347",turquoise:"#40E0D0",violet:"#EE82EE",wheat:"#F5DEB3",whitesmoke:"#F5F5F5",yellowgreen:"#9ACD32"};function M(j){var p=j.indexOf("(",3);var i=j.indexOf(")",p+1);var m=j.substring(p+1,i).split(",");if(m.length!=4||j.charAt(3)!="a"){m[3]=1}return m}function c(i){return parseFloat(i)/100}function r(j,m,i){return Math.min(i,Math.max(m,j))}function I(ag){var i,ai,aj,ah,ak,Z;ah=parseFloat(ag[0])/360%360;if(ah<0){ah++}ak=r(c(ag[1]),0,1);Z=r(c(ag[2]),0,1);if(ak==0){i=ai=aj=Z}else{var j=Z<0.5?Z*(1+ak):Z+ak-Z*ak;var m=2*Z-j;i=a(m,j,ah+1/3);ai=a(m,j,ah);aj=a(m,j,ah-1/3)}return"#"+k[Math.floor(i*255)]+k[Math.floor(ai*255)]+k[Math.floor(aj*255)]}function a(j,i,m){if(m<0){m++}if(m>1){m--}if(6*m<1){return j+(i-j)*6*m}else{if(2*m<1){return i}else{if(3*m<2){return j+(i-j)*(2/3-m)*6}else{return j}}}}var C={};function F(j){if(j in C){return C[j]}var ag,Z=1;j=String(j);if(j.charAt(0)=="#"){ag=j}else{if(/^rgb/.test(j)){var p=M(j);var ag="#",ah;for(var m=0;m<3;m++){if(p[m].indexOf("%")!=-1){ah=Math.floor(c(p[m])*255)}else{ah=+p[m]}ag+=k[r(ah,0,255)]}Z=+p[3]}else{if(/^hsl/.test(j)){var p=M(j);ag=I(p);Z=p[3]}else{ag=b[j]||j}}}return C[j]={color:ag,alpha:Z}}var o={style:"normal",variant:"normal",weight:"normal",size:10,family:"sans-serif"};var L={};function E(i){if(L[i]){return L[i]}var p=document.createElement("div");var m=p.style;try{m.font=i}catch(j){}return L[i]={style:m.fontStyle||o.style,variant:m.fontVariant||o.variant,weight:m.fontWeight||o.weight,size:m.fontSize||o.size,family:m.fontFamily||o.family}}function u(m,j){var i={};for(var ah in m){i[ah]=m[ah]}var ag=parseFloat(j.currentStyle.fontSize),Z=parseFloat(m.size);if(typeof m.size=="number"){i.size=m.size}else{if(m.size.indexOf("px")!=-1){i.size=Z}else{if(m.size.indexOf("em")!=-1){i.size=ag*Z}else{if(m.size.indexOf("%")!=-1){i.size=(ag/100)*Z}else{if(m.size.indexOf("pt")!=-1){i.size=Z/0.75}else{i.size=ag}}}}}i.size*=0.981;return i}function ac(i){return i.style+" "+i.variant+" "+i.weight+" "+i.size+"px "+i.family}var s={butt:"flat",round:"round"};function S(i){return s[i]||"square"}function D(i){this.m_=B();this.mStack_=[];this.aStack_=[];this.currentPath_=[];this.strokeStyle="#000";this.fillStyle="#000";this.lineWidth=1;this.lineJoin="miter";this.lineCap="butt";this.miterLimit=d*1;this.globalAlpha=1;this.font="10px sans-serif";this.textAlign="left";this.textBaseline="alphabetic";this.canvas=i;var m="width:"+i.clientWidth+"px;height:"+i.clientHeight+"px;overflow:hidden;position:absolute";var j=i.ownerDocument.createElement("div");j.style.cssText=m;i.appendChild(j);var p=j.cloneNode(false);p.style.backgroundColor="red";p.style.filter="alpha(opacity=0)";i.appendChild(p);this.element_=j;this.arcScaleX_=1;this.arcScaleY_=1;this.lineScale_=1}var q=D.prototype;q.clearRect=function(){if(this.textMeasureEl_){this.textMeasureEl_.removeNode(true);this.textMeasureEl_=null}this.element_.innerHTML=""};q.beginPath=function(){this.currentPath_=[]};q.moveTo=function(j,i){var m=V(this,j,i);this.currentPath_.push({type:"moveTo",x:m.x,y:m.y});this.currentX_=m.x;this.currentY_=m.y};q.lineTo=function(j,i){var m=V(this,j,i);this.currentPath_.push({type:"lineTo",x:m.x,y:m.y});this.currentX_=m.x;this.currentY_=m.y};q.bezierCurveTo=function(m,j,ak,aj,ai,ag){var i=V(this,ai,ag);var ah=V(this,m,j);var Z=V(this,ak,aj);K(this,ah,Z,i)};function K(i,Z,m,j){i.currentPath_.push({type:"bezierCurveTo",cp1x:Z.x,cp1y:Z.y,cp2x:m.x,cp2y:m.y,x:j.x,y:j.y});i.currentX_=j.x;i.currentY_=j.y}q.quadraticCurveTo=function(ai,m,j,i){var ah=V(this,ai,m);var ag=V(this,j,i);var aj={x:this.currentX_+2/3*(ah.x-this.currentX_),y:this.currentY_+2/3*(ah.y-this.currentY_)};var Z={x:aj.x+(ag.x-this.currentX_)/3,y:aj.y+(ag.y-this.currentY_)/3};K(this,aj,Z,ag)};q.arc=function(al,aj,ak,ag,j,m){ak*=d;var ap=m?"at":"wa";var am=al+A(ag)*ak-f;var ao=aj+l(ag)*ak-f;var i=al+A(j)*ak-f;var an=aj+l(j)*ak-f;if(am==i&&!m){am+=0.125}var Z=V(this,al,aj);var ai=V(this,am,ao);var ah=V(this,i,an);this.currentPath_.push({type:ap,x:Z.x,y:Z.y,radius:ak,xStart:ai.x,yStart:ai.y,xEnd:ah.x,yEnd:ah.y})};q.rect=function(m,j,i,p){this.moveTo(m,j);this.lineTo(m+i,j);this.lineTo(m+i,j+p);this.lineTo(m,j+p);this.closePath()};q.strokeRect=function(m,j,i,p){var Z=this.currentPath_;this.beginPath();this.moveTo(m,j);this.lineTo(m+i,j);this.lineTo(m+i,j+p);this.lineTo(m,j+p);this.closePath();this.stroke();this.currentPath_=Z};q.fillRect=function(m,j,i,p){var Z=this.currentPath_;this.beginPath();this.moveTo(m,j);this.lineTo(m+i,j);this.lineTo(m+i,j+p);this.lineTo(m,j+p);this.closePath();this.fill();this.currentPath_=Z};q.createLinearGradient=function(j,p,i,m){var Z=new U("gradient");Z.x0_=j;Z.y0_=p;Z.x1_=i;Z.y1_=m;return Z};q.createRadialGradient=function(p,ag,m,j,Z,i){var ah=new U("gradientradial");ah.x0_=p;ah.y0_=ag;ah.r0_=m;ah.x1_=j;ah.y1_=Z;ah.r1_=i;return ah};q.drawImage=function(aq,m){var aj,ah,al,ay,ao,am,at,aA;var ak=aq.runtimeStyle.width;var ap=aq.runtimeStyle.height;aq.runtimeStyle.width="auto";aq.runtimeStyle.height="auto";var ai=aq.width;var aw=aq.height;aq.runtimeStyle.width=ak;aq.runtimeStyle.height=ap;if(arguments.length==3){aj=arguments[1];ah=arguments[2];ao=am=0;at=al=ai;aA=ay=aw}else{if(arguments.length==5){aj=arguments[1];ah=arguments[2];al=arguments[3];ay=arguments[4];ao=am=0;at=ai;aA=aw}else{if(arguments.length==9){ao=arguments[1];am=arguments[2];at=arguments[3];aA=arguments[4];aj=arguments[5];ah=arguments[6];al=arguments[7];ay=arguments[8]}else{throw Error("Invalid number of arguments")}}}var az=V(this,aj,ah);var p=at/2;var j=aA/2;var ax=[];var i=10;var ag=10;ax.push(" <g_vml_:group",' coordsize="',d*i,",",d*ag,'"',' coordorigin="0,0"',' style="width:',i,"px;height:",ag,"px;position:absolute;");if(this.m_[0][0]!=1||this.m_[0][1]||this.m_[1][1]!=1||this.m_[1][0]){var Z=[];Z.push("M11=",this.m_[0][0],",","M12=",this.m_[1][0],",","M21=",this.m_[0][1],",","M22=",this.m_[1][1],",","Dx=",n(az.x/d),",","Dy=",n(az.y/d),"");var av=az;var au=V(this,aj+al,ah);var ar=V(this,aj,ah+ay);var an=V(this,aj+al,ah+ay);av.x=ab.max(av.x,au.x,ar.x,an.x);av.y=ab.max(av.y,au.y,ar.y,an.y);ax.push("padding:0 ",n(av.x/d),"px ",n(av.y/d),"px 0;filter:progid:DXImageTransform.Microsoft.Matrix(",Z.join(""),", sizingmethod='clip');")}else{ax.push("top:",n(az.y/d),"px;left:",n(az.x/d),"px;")}ax.push(' ">','<g_vml_:image src="',aq.src,'"',' style="width:',d*al,"px;"," height:",d*ay,'px"',' cropleft="',ao/ai,'"',' croptop="',am/aw,'"',' cropright="',(ai-ao-at)/ai,'"',' cropbottom="',(aw-am-aA)/aw,'"'," />","</g_vml_:group>");this.element_.insertAdjacentHTML("BeforeEnd",ax.join(""))};q.stroke=function(ao){var Z=10;var ap=10;var ag=5000;var ai={x:null,y:null};var an={x:null,y:null};for(var aj=0;aj<this.currentPath_.length;aj+=ag){var am=[];var ah=false;am.push("<g_vml_:shape",' filled="',!!ao,'"',' style="position:absolute;width:',Z,"px;height:",ap,'px;"',' coordorigin="0,0"',' coordsize="',d*Z,",",d*ap,'"',' stroked="',!ao,'"',' path="');var aq=false;for(var ak=aj;ak<Math.min(aj+ag,this.currentPath_.length);ak++){if(ak%ag==0&&ak>0){am.push(" m ",n(this.currentPath_[ak-1].x),",",n(this.currentPath_[ak-1].y))}var m=this.currentPath_[ak];var al;switch(m.type){case"moveTo":al=m;am.push(" m ",n(m.x),",",n(m.y));break;case"lineTo":am.push(" l ",n(m.x),",",n(m.y));break;case"close":am.push(" x ");m=null;break;case"bezierCurveTo":am.push(" c ",n(m.cp1x),",",n(m.cp1y),",",n(m.cp2x),",",n(m.cp2y),",",n(m.x),",",n(m.y));break;case"at":case"wa":am.push(" ",m.type," ",n(m.x-this.arcScaleX_*m.radius),",",n(m.y-this.arcScaleY_*m.radius)," ",n(m.x+this.arcScaleX_*m.radius),",",n(m.y+this.arcScaleY_*m.radius)," ",n(m.xStart),",",n(m.yStart)," ",n(m.xEnd),",",n(m.yEnd));break}if(m){if(ai.x==null||m.x<ai.x){ai.x=m.x}if(an.x==null||m.x>an.x){an.x=m.x}if(ai.y==null||m.y<ai.y){ai.y=m.y}if(an.y==null||m.y>an.y){an.y=m.y}}}am.push(' ">');if(!ao){w(this,am)}else{G(this,am,ai,an)}am.push("</g_vml_:shape>");this.element_.insertAdjacentHTML("beforeEnd",am.join(""))}};function w(m,ag){var j=F(m.strokeStyle);var p=j.color;var Z=j.alpha*m.globalAlpha;var i=m.lineScale_*m.lineWidth;if(i<1){Z*=i}ag.push("<g_vml_:stroke",' opacity="',Z,'"',' joinstyle="',m.lineJoin,'"',' miterlimit="',m.miterLimit,'"',' endcap="',S(m.lineCap),'"',' weight="',i,'px"',' color="',p,'" />')}function G(aq,ai,aK,ar){var aj=aq.fillStyle;var aB=aq.arcScaleX_;var aA=aq.arcScaleY_;var j=ar.x-aK.x;var p=ar.y-aK.y;if(aj instanceof U){var an=0;var aF={x:0,y:0};var ax=0;var am=1;if(aj.type_=="gradient"){var al=aj.x0_/aB;var m=aj.y0_/aA;var ak=aj.x1_/aB;var aM=aj.y1_/aA;var aJ=V(aq,al,m);var aI=V(aq,ak,aM);var ag=aI.x-aJ.x;var Z=aI.y-aJ.y;an=Math.atan2(ag,Z)*180/Math.PI;if(an<0){an+=360}if(an<0.000001){an=0}}else{var aJ=V(aq,aj.x0_,aj.y0_);aF={x:(aJ.x-aK.x)/j,y:(aJ.y-aK.y)/p};j/=aB*d;p/=aA*d;var aD=ab.max(j,p);ax=2*aj.r0_/aD;am=2*aj.r1_/aD-ax}var av=aj.colors_;av.sort(function(aN,i){return aN.offset-i.offset});var ap=av.length;var au=av[0].color;var at=av[ap-1].color;var az=av[0].alpha*aq.globalAlpha;var ay=av[ap-1].alpha*aq.globalAlpha;var aE=[];for(var aH=0;aH<ap;aH++){var ao=av[aH];aE.push(ao.offset*am+ax+" "+ao.color)}ai.push('<g_vml_:fill type="',aj.type_,'"',' method="none" focus="100%"',' color="',au,'"',' color2="',at,'"',' colors="',aE.join(","),'"',' opacity="',ay,'"',' g_o_:opacity2="',az,'"',' angle="',an,'"',' focusposition="',aF.x,",",aF.y,'" />')}else{if(aj instanceof T){if(j&&p){var ah=-aK.x;var aC=-aK.y;ai.push("<g_vml_:fill",' position="',ah/j*aB*aB,",",aC/p*aA*aA,'"',' type="tile"',' src="',aj.src_,'" />')}}else{var aL=F(aq.fillStyle);var aw=aL.color;var aG=aL.alpha*aq.globalAlpha;ai.push('<g_vml_:fill color="',aw,'" opacity="',aG,'" />')}}}q.fill=function(){this.stroke(true)};q.closePath=function(){this.currentPath_.push({type:"close"})};function V(j,Z,p){var i=j.m_;return{x:d*(Z*i[0][0]+p*i[1][0]+i[2][0])-f,y:d*(Z*i[0][1]+p*i[1][1]+i[2][1])-f}}q.save=function(){var i={};v(this,i);this.aStack_.push(i);this.mStack_.push(this.m_);this.m_=J(B(),this.m_)};q.restore=function(){if(this.aStack_.length){v(this.aStack_.pop(),this);this.m_=this.mStack_.pop()}};function h(i){return isFinite(i[0][0])&&isFinite(i[0][1])&&isFinite(i[1][0])&&isFinite(i[1][1])&&isFinite(i[2][0])&&isFinite(i[2][1])}function aa(j,i,p){if(!h(i)){return}j.m_=i;if(p){var Z=i[0][0]*i[1][1]-i[0][1]*i[1][0];j.lineScale_=N(H(Z))}}q.translate=function(m,j){var i=[[1,0,0],[0,1,0],[m,j,1]];aa(this,J(i,this.m_),false)};q.rotate=function(j){var p=A(j);var m=l(j);var i=[[p,m,0],[-m,p,0],[0,0,1]];aa(this,J(i,this.m_),false)};q.scale=function(m,j){this.arcScaleX_*=m;this.arcScaleY_*=j;var i=[[m,0,0],[0,j,0],[0,0,1]];aa(this,J(i,this.m_),true)};q.transform=function(Z,p,ah,ag,j,i){var m=[[Z,p,0],[ah,ag,0],[j,i,1]];aa(this,J(m,this.m_),true)};q.setTransform=function(ag,Z,ai,ah,p,j){var i=[[ag,Z,0],[ai,ah,0],[p,j,1]];aa(this,i,true)};q.drawText_=function(am,ak,aj,ap,ai){var ao=this.m_,at=1000,j=0,ar=at,ah={x:0,y:0},ag=[];var i=u(E(this.font),this.element_);var p=ac(i);var au=this.element_.currentStyle;var Z=this.textAlign.toLowerCase();switch(Z){case"left":case"center":case"right":break;case"end":Z=au.direction=="ltr"?"right":"left";break;case"start":Z=au.direction=="rtl"?"right":"left";break;default:Z="left"}switch(this.textBaseline){case"hanging":case"top":ah.y=i.size/1.75;break;case"middle":break;default:case null:case"alphabetic":case"ideographic":case"bottom":ah.y=-i.size/2.25;break}switch(Z){case"right":j=at;ar=0.05;break;case"center":j=ar=at/2;break}var aq=V(this,ak+ah.x,aj+ah.y);ag.push('<g_vml_:line from="',-j,' 0" to="',ar,' 0.05" ',' coordsize="100 100" coordorigin="0 0"',' filled="',!ai,'" stroked="',!!ai,'" style="position:absolute;width:1px;height:1px;">');if(ai){w(this,ag)}else{G(this,ag,{x:-j,y:0},{x:ar,y:i.size})}var an=ao[0][0].toFixed(3)+","+ao[1][0].toFixed(3)+","+ao[0][1].toFixed(3)+","+ao[1][1].toFixed(3)+",0,0";var al=n(aq.x/d)+","+n(aq.y/d);ag.push('<g_vml_:skew on="t" matrix="',an,'" ',' offset="',al,'" origin="',j,' 0" />','<g_vml_:path textpathok="true" />','<g_vml_:textpath on="true" string="',af(am),'" style="v-text-align:',Z,";font:",af(p),'" /></g_vml_:line>');this.element_.insertAdjacentHTML("beforeEnd",ag.join(""))};q.fillText=function(m,i,p,j){this.drawText_(m,i,p,j,false)};q.strokeText=function(m,i,p,j){this.drawText_(m,i,p,j,true)};q.measureText=function(m){if(!this.textMeasureEl_){var i='<span style="position:absolute;top:-20000px;left:0;padding:0;margin:0;border:none;white-space:pre;"></span>';this.element_.insertAdjacentHTML("beforeEnd",i);this.textMeasureEl_=this.element_.lastChild}var j=this.element_.ownerDocument;this.textMeasureEl_.innerHTML="";this.textMeasureEl_.style.font=this.font;this.textMeasureEl_.appendChild(j.createTextNode(m));return{width:this.textMeasureEl_.offsetWidth}};q.clip=function(){};q.arcTo=function(){};q.createPattern=function(j,i){return new T(j,i)};function U(i){this.type_=i;this.x0_=0;this.y0_=0;this.r0_=0;this.x1_=0;this.y1_=0;this.r1_=0;this.colors_=[]}U.prototype.addColorStop=function(j,i){i=F(i);this.colors_.push({offset:j,color:i.color,alpha:i.alpha})};function T(j,i){Q(j);switch(i){case"repeat":case null:case"":this.repetition_="repeat";break;case"repeat-x":case"repeat-y":case"no-repeat":this.repetition_=i;break;default:O("SYNTAX_ERR")}this.src_=j.src;this.width_=j.width;this.height_=j.height}function O(i){throw new P(i)}function Q(i){if(!i||i.nodeType!=1||i.tagName!="IMG"){O("TYPE_MISMATCH_ERR")}if(i.readyState!="complete"){O("INVALID_STATE_ERR")}}function P(i){this.code=this[i];this.message=i+": DOM Exception "+this.code}var X=P.prototype=new Error;X.INDEX_SIZE_ERR=1;X.DOMSTRING_SIZE_ERR=2;X.HIERARCHY_REQUEST_ERR=3;X.WRONG_DOCUMENT_ERR=4;X.INVALID_CHARACTER_ERR=5;X.NO_DATA_ALLOWED_ERR=6;X.NO_MODIFICATION_ALLOWED_ERR=7;X.NOT_FOUND_ERR=8;X.NOT_SUPPORTED_ERR=9;X.INUSE_ATTRIBUTE_ERR=10;X.INVALID_STATE_ERR=11;X.SYNTAX_ERR=12;X.INVALID_MODIFICATION_ERR=13;X.NAMESPACE_ERR=14;X.INVALID_ACCESS_ERR=15;X.VALIDATION_ERR=16;X.TYPE_MISMATCH_ERR=17;G_vmlCanvasManager=e;CanvasRenderingContext2D=D;CanvasGradient=U;CanvasPattern=T;DOMException=P})()};
+/* Javascript plotting library for jQuery, version 0.8.3.
+
+Copyright (c) 2007-2014 IOLA and Ole Laursen.
+Licensed under the MIT license.
+
+*/
+
+// first an inline dependency, jquery.colorhelpers.js, we inline it here
+// for convenience
+
+/* Plugin for jQuery for working with colors.
+ *
+ * Version 1.1.
+ *
+ * Inspiration from jQuery color animation plugin by John Resig.
+ *
+ * Released under the MIT license by Ole Laursen, October 2009.
+ *
+ * Examples:
+ *
+ *   $.color.parse("#fff").scale('rgb', 0.25).add('a', -0.5).toString()
+ *   var c = $.color.extract($("#mydiv"), 'background-color');
+ *   console.log(c.r, c.g, c.b, c.a);
+ *   $.color.make(100, 50, 25, 0.4).toString() // returns "rgba(100,50,25,0.4)"
+ *
+ * Note that .scale() and .add() return the same modified object
+ * instead of making a new one.
+ *
+ * V. 1.1: Fix error handling so e.g. parsing an empty string does
+ * produce a color rather than just crashing.
+ */
+(function($){$.color={};$.color.make=function(r,g,b,a){var o={};o.r=r||0;o.g=g||0;o.b=b||0;o.a=a!=null?a:1;o.add=function(c,d){for(var i=0;i<c.length;++i)o[c.charAt(i)]+=d;return o.normalize()};o.scale=function(c,f){for(var i=0;i<c.length;++i)o[c.charAt(i)]*=f;return o.normalize()};o.toString=function(){if(o.a>=1){return"rgb("+[o.r,o.g,o.b].join(",")+")"}else{return"rgba("+[o.r,o.g,o.b,o.a].join(",")+")"}};o.normalize=function(){function clamp(min,value,max){return value<min?min:value>max?max:value}o.r=clamp(0,parseInt(o.r),255);o.g=clamp(0,parseInt(o.g),255);o.b=clamp(0,parseInt(o.b),255);o.a=clamp(0,o.a,1);return o};o.clone=function(){return $.color.make(o.r,o.b,o.g,o.a)};return o.normalize()};$.color.extract=function(elem,css){var c;do{c=elem.css(css).toLowerCase();if(c!=""&&c!="transparent")break;elem=elem.parent()}while(elem.length&&!$.nodeName(elem.get(0),"body"));if(c=="rgba(0, 0, 0, 0)")c="transparent";return $.color.parse(c)};$.color.parse=function(str){var res,m=$.color.make;if(res=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(str))return m(parseInt(res[1],10),parseInt(res[2],10),parseInt(res[3],10));if(res=/rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(str))return m(parseInt(res[1],10),parseInt(res[2],10),parseInt(res[3],10),parseFloat(res[4]));if(res=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(str))return m(parseFloat(res[1])*2.55,parseFloat(res[2])*2.55,parseFloat(res[3])*2.55);if(res=/rgba\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\s*\)/.exec(str))return m(parseFloat(res[1])*2.55,parseFloat(res[2])*2.55,parseFloat(res[3])*2.55,parseFloat(res[4]));if(res=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(str))return m(parseInt(res[1],16),parseInt(res[2],16),parseInt(res[3],16));if(res=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(str))return m(parseInt(res[1]+res[1],16),parseInt(res[2]+res[2],16),parseInt(res[3]+res[3],16));var name=$.trim(str).toLowerCase();if(name=="transparent")return m(255,255,255,0);else{res=lookupColors[name]||[0,0,0];return m(res[0],res[1],res[2])}};var lookupColors={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0]}})(jQuery);
+
+// the actual Flot code
+(function($) {
+
+	// Cache the prototype hasOwnProperty for faster access
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+    // A shim to provide 'detach' to jQuery versions prior to 1.4.  Using a DOM
+    // operation produces the same effect as detach, i.e. removing the element
+    // without touching its jQuery data.
+
+    // Do not merge this into Flot 0.9, since it requires jQuery 1.4.4+.
+
+    if (!$.fn.detach) {
+        $.fn.detach = function() {
+            return this.each(function() {
+                if (this.parentNode) {
+                    this.parentNode.removeChild( this );
+                }
+            });
+        };
+    }
+
+	///////////////////////////////////////////////////////////////////////////
+	// The Canvas object is a wrapper around an HTML5 <canvas> tag.
+	//
+	// @constructor
+	// @param {string} cls List of classes to apply to the canvas.
+	// @param {element} container Element onto which to append the canvas.
+	//
+	// Requiring a container is a little iffy, but unfortunately canvas
+	// operations don't work unless the canvas is attached to the DOM.
+
+	function Canvas(cls, container) {
+
+		var element = container.children("." + cls)[0];
+
+		if (element == null) {
+
+			element = document.createElement("canvas");
+			element.className = cls;
+
+			$(element).css({ direction: "ltr", position: "absolute", left: 0, top: 0 })
+				.appendTo(container);
+
+			// If HTML5 Canvas isn't available, fall back to [Ex|Flash]canvas
+
+			if (!element.getContext) {
+				if (window.G_vmlCanvasManager) {
+					element = window.G_vmlCanvasManager.initElement(element);
+				} else {
+					throw new Error("Canvas is not available. If you're using IE with a fall-back such as Excanvas, then there's either a mistake in your conditional include, or the page has no DOCTYPE and is rendering in Quirks Mode.");
+				}
+			}
+		}
+
+		this.element = element;
+
+		var context = this.context = element.getContext("2d");
+
+		// Determine the screen's ratio of physical to device-independent
+		// pixels.  This is the ratio between the canvas width that the browser
+		// advertises and the number of pixels actually present in that space.
+
+		// The iPhone 4, for example, has a device-independent width of 320px,
+		// but its screen is actually 640px wide.  It therefore has a pixel
+		// ratio of 2, while most normal devices have a ratio of 1.
+
+		var devicePixelRatio = window.devicePixelRatio || 1,
+			backingStoreRatio =
+				context.webkitBackingStorePixelRatio ||
+				context.mozBackingStorePixelRatio ||
+				context.msBackingStorePixelRatio ||
+				context.oBackingStorePixelRatio ||
+				context.backingStorePixelRatio || 1;
+
+		this.pixelRatio = devicePixelRatio / backingStoreRatio;
+
+		// Size the canvas to match the internal dimensions of its container
+
+		this.resize(container.width(), container.height());
+
+		// Collection of HTML div layers for text overlaid onto the canvas
+
+		this.textContainer = null;
+		this.text = {};
+
+		// Cache of text fragments and metrics, so we can avoid expensively
+		// re-calculating them when the plot is re-rendered in a loop.
+
+		this._textCache = {};
+	}
+
+	// Resizes the canvas to the given dimensions.
+	//
+	// @param {number} width New width of the canvas, in pixels.
+	// @param {number} width New height of the canvas, in pixels.
+
+	Canvas.prototype.resize = function(width, height) {
+
+		if (width <= 0 || height <= 0) {
+			throw new Error("Invalid dimensions for plot, width = " + width + ", height = " + height);
+		}
+
+		var element = this.element,
+			context = this.context,
+			pixelRatio = this.pixelRatio;
+
+		// Resize the canvas, increasing its density based on the display's
+		// pixel ratio; basically giving it more pixels without increasing the
+		// size of its element, to take advantage of the fact that retina
+		// displays have that many more pixels in the same advertised space.
+
+		// Resizing should reset the state (excanvas seems to be buggy though)
+
+		if (this.width != width) {
+			element.width = width * pixelRatio;
+			element.style.width = width + "px";
+			this.width = width;
+		}
+
+		if (this.height != height) {
+			element.height = height * pixelRatio;
+			element.style.height = height + "px";
+			this.height = height;
+		}
+
+		// Save the context, so we can reset in case we get replotted.  The
+		// restore ensure that we're really back at the initial state, and
+		// should be safe even if we haven't saved the initial state yet.
+
+		context.restore();
+		context.save();
+
+		// Scale the coordinate space to match the display density; so even though we
+		// may have twice as many pixels, we still want lines and other drawing to
+		// appear at the same size; the extra pixels will just make them crisper.
+
+		context.scale(pixelRatio, pixelRatio);
+	};
+
+	// Clears the entire canvas area, not including any overlaid HTML text
+
+	Canvas.prototype.clear = function() {
+		this.context.clearRect(0, 0, this.width, this.height);
+	};
+
+	// Finishes rendering the canvas, including managing the text overlay.
+
+	Canvas.prototype.render = function() {
+
+		var cache = this._textCache;
+
+		// For each text layer, add elements marked as active that haven't
+		// already been rendered, and remove those that are no longer active.
+
+		for (var layerKey in cache) {
+			if (hasOwnProperty.call(cache, layerKey)) {
+
+				var layer = this.getTextLayer(layerKey),
+					layerCache = cache[layerKey];
+
+				layer.hide();
+
+				for (var styleKey in layerCache) {
+					if (hasOwnProperty.call(layerCache, styleKey)) {
+						var styleCache = layerCache[styleKey];
+						for (var key in styleCache) {
+							if (hasOwnProperty.call(styleCache, key)) {
+
+								var positions = styleCache[key].positions;
+
+								for (var i = 0, position; position = positions[i]; i++) {
+									if (position.active) {
+										if (!position.rendered) {
+											layer.append(position.element);
+											position.rendered = true;
+										}
+									} else {
+										positions.splice(i--, 1);
+										if (position.rendered) {
+											position.element.detach();
+										}
+									}
+								}
+
+								if (positions.length == 0) {
+									delete styleCache[key];
+								}
+							}
+						}
+					}
+				}
+
+				layer.show();
+			}
+		}
+	};
+
+	// Creates (if necessary) and returns the text overlay container.
+	//
+	// @param {string} classes String of space-separated CSS classes used to
+	//     uniquely identify the text layer.
+	// @return {object} The jQuery-wrapped text-layer div.
+
+	Canvas.prototype.getTextLayer = function(classes) {
+
+		var layer = this.text[classes];
+
+		// Create the text layer if it doesn't exist
+
+		if (layer == null) {
+
+			// Create the text layer container, if it doesn't exist
+
+			if (this.textContainer == null) {
+				this.textContainer = $("<div class='flot-text'></div>")
+					.css({
+						position: "absolute",
+						top: 0,
+						left: 0,
+						bottom: 0,
+						right: 0,
+						'font-size': "smaller",
+						color: "#545454"
+					})
+					.insertAfter(this.element);
+			}
+
+			layer = this.text[classes] = $("<div></div>")
+				.addClass(classes)
+				.css({
+					position: "absolute",
+					top: 0,
+					left: 0,
+					bottom: 0,
+					right: 0
+				})
+				.appendTo(this.textContainer);
+		}
+
+		return layer;
+	};
+
+	// Creates (if necessary) and returns a text info object.
+	//
+	// The object looks like this:
+	//
+	// {
+	//     width: Width of the text's wrapper div.
+	//     height: Height of the text's wrapper div.
+	//     element: The jQuery-wrapped HTML div containing the text.
+	//     positions: Array of positions at which this text is drawn.
+	// }
+	//
+	// The positions array contains objects that look like this:
+	//
+	// {
+	//     active: Flag indicating whether the text should be visible.
+	//     rendered: Flag indicating whether the text is currently visible.
+	//     element: The jQuery-wrapped HTML div containing the text.
+	//     x: X coordinate at which to draw the text.
+	//     y: Y coordinate at which to draw the text.
+	// }
+	//
+	// Each position after the first receives a clone of the original element.
+	//
+	// The idea is that that the width, height, and general 'identity' of the
+	// text is constant no matter where it is placed; the placements are a
+	// secondary property.
+	//
+	// Canvas maintains a cache of recently-used text info objects; getTextInfo
+	// either returns the cached element or creates a new entry.
+	//
+	// @param {string} layer A string of space-separated CSS classes uniquely
+	//     identifying the layer containing this text.
+	// @param {string} text Text string to retrieve info for.
+	// @param {(string|object)=} font Either a string of space-separated CSS
+	//     classes or a font-spec object, defining the text's font and style.
+	// @param {number=} angle Angle at which to rotate the text, in degrees.
+	//     Angle is currently unused, it will be implemented in the future.
+	// @param {number=} width Maximum width of the text before it wraps.
+	// @return {object} a text info object.
+
+	Canvas.prototype.getTextInfo = function(layer, text, font, angle, width) {
+
+		var textStyle, layerCache, styleCache, info;
+
+		// Cast the value to a string, in case we were given a number or such
+
+		text = "" + text;
+
+		// If the font is a font-spec object, generate a CSS font definition
+
+		if (typeof font === "object") {
+			textStyle = font.style + " " + font.variant + " " + font.weight + " " + font.size + "px/" + font.lineHeight + "px " + font.family;
+		} else {
+			textStyle = font;
+		}
+
+		// Retrieve (or create) the cache for the text's layer and styles
+
+		layerCache = this._textCache[layer];
+
+		if (layerCache == null) {
+			layerCache = this._textCache[layer] = {};
+		}
+
+		styleCache = layerCache[textStyle];
+
+		if (styleCache == null) {
+			styleCache = layerCache[textStyle] = {};
+		}
+
+		info = styleCache[text];
+
+		// If we can't find a matching element in our cache, create a new one
+
+		if (info == null) {
+
+			var element = $("<div></div>").html(text)
+				.css({
+					position: "absolute",
+					'max-width': width,
+					top: -9999
+				})
+				.appendTo(this.getTextLayer(layer));
+
+			if (typeof font === "object") {
+				element.css({
+					font: textStyle,
+					color: font.color
+				});
+			} else if (typeof font === "string") {
+				element.addClass(font);
+			}
+
+			info = styleCache[text] = {
+				width: element.outerWidth(true),
+				height: element.outerHeight(true),
+				element: element,
+				positions: []
+			};
+
+			element.detach();
+		}
+
+		return info;
+	};
+
+	// Adds a text string to the canvas text overlay.
+	//
+	// The text isn't drawn immediately; it is marked as rendering, which will
+	// result in its addition to the canvas on the next render pass.
+	//
+	// @param {string} layer A string of space-separated CSS classes uniquely
+	//     identifying the layer containing this text.
+	// @param {number} x X coordinate at which to draw the text.
+	// @param {number} y Y coordinate at which to draw the text.
+	// @param {string} text Text string to draw.
+	// @param {(string|object)=} font Either a string of space-separated CSS
+	//     classes or a font-spec object, defining the text's font and style.
+	// @param {number=} angle Angle at which to rotate the text, in degrees.
+	//     Angle is currently unused, it will be implemented in the future.
+	// @param {number=} width Maximum width of the text before it wraps.
+	// @param {string=} halign Horizontal alignment of the text; either "left",
+	//     "center" or "right".
+	// @param {string=} valign Vertical alignment of the text; either "top",
+	//     "middle" or "bottom".
+
+	Canvas.prototype.addText = function(layer, x, y, text, font, angle, width, halign, valign) {
+
+		var info = this.getTextInfo(layer, text, font, angle, width),
+			positions = info.positions;
+
+		// Tweak the div's position to match the text's alignment
+
+		if (halign == "center") {
+			x -= info.width / 2;
+		} else if (halign == "right") {
+			x -= info.width;
+		}
+
+		if (valign == "middle") {
+			y -= info.height / 2;
+		} else if (valign == "bottom") {
+			y -= info.height;
+		}
+
+		// Determine whether this text already exists at this position.
+		// If so, mark it for inclusion in the next render pass.
+
+		for (var i = 0, position; position = positions[i]; i++) {
+			if (position.x == x && position.y == y) {
+				position.active = true;
+				return;
+			}
+		}
+
+		// If the text doesn't exist at this position, create a new entry
+
+		// For the very first position we'll re-use the original element,
+		// while for subsequent ones we'll clone it.
+
+		position = {
+			active: true,
+			rendered: false,
+			element: positions.length ? info.element.clone() : info.element,
+			x: x,
+			y: y
+		};
+
+		positions.push(position);
+
+		// Move the element to its final position within the container
+
+		position.element.css({
+			top: Math.round(y),
+			left: Math.round(x),
+			'text-align': halign	// In case the text wraps
+		});
+	};
+
+	// Removes one or more text strings from the canvas text overlay.
+	//
+	// If no parameters are given, all text within the layer is removed.
+	//
+	// Note that the text is not immediately removed; it is simply marked as
+	// inactive, which will result in its removal on the next render pass.
+	// This avoids the performance penalty for 'clear and redraw' behavior,
+	// where we potentially get rid of all text on a layer, but will likely
+	// add back most or all of it later, as when redrawing axes, for example.
+	//
+	// @param {string} layer A string of space-separated CSS classes uniquely
+	//     identifying the layer containing this text.
+	// @param {number=} x X coordinate of the text.
+	// @param {number=} y Y coordinate of the text.
+	// @param {string=} text Text string to remove.
+	// @param {(string|object)=} font Either a string of space-separated CSS
+	//     classes or a font-spec object, defining the text's font and style.
+	// @param {number=} angle Angle at which the text is rotated, in degrees.
+	//     Angle is currently unused, it will be implemented in the future.
+
+	Canvas.prototype.removeText = function(layer, x, y, text, font, angle) {
+		if (text == null) {
+			var layerCache = this._textCache[layer];
+			if (layerCache != null) {
+				for (var styleKey in layerCache) {
+					if (hasOwnProperty.call(layerCache, styleKey)) {
+						var styleCache = layerCache[styleKey];
+						for (var key in styleCache) {
+							if (hasOwnProperty.call(styleCache, key)) {
+								var positions = styleCache[key].positions;
+								for (var i = 0, position; position = positions[i]; i++) {
+									position.active = false;
+								}
+							}
+						}
+					}
+				}
+			}
+		} else {
+			var positions = this.getTextInfo(layer, text, font, angle).positions;
+			for (var i = 0, position; position = positions[i]; i++) {
+				if (position.x == x && position.y == y) {
+					position.active = false;
+				}
+			}
+		}
+	};
+
+	///////////////////////////////////////////////////////////////////////////
+	// The top-level container for the entire plot.
+
+    function Plot(placeholder, data_, options_, plugins) {
+        // data is on the form:
+        //   [ series1, series2 ... ]
+        // where series is either just the data as [ [x1, y1], [x2, y2], ... ]
+        // or { data: [ [x1, y1], [x2, y2], ... ], label: "some label", ... }
+
+        var series = [],
+            options = {
+                // the color theme used for graphs
+                colors: ["#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"],
+                legend: {
+                    show: true,
+                    noColumns: 1, // number of colums in legend table
+                    labelFormatter: null, // fn: string -> string
+                    labelBoxBorderColor: "#ccc", // border color for the little label boxes
+                    container: null, // container (as jQuery object) to put legend in, null means default on top of graph
+                    position: "ne", // position of default legend container within plot
+                    margin: 5, // distance from grid edge to default legend container within plot
+                    backgroundColor: null, // null means auto-detect
+                    backgroundOpacity: 0.85, // set to 0 to avoid background
+                    sorted: null    // default to no legend sorting
+                },
+                xaxis: {
+                    show: null, // null = auto-detect, true = always, false = never
+                    position: "bottom", // or "top"
+                    mode: null, // null or "time"
+                    font: null, // null (derived from CSS in placeholder) or object like { size: 11, lineHeight: 13, style: "italic", weight: "bold", family: "sans-serif", variant: "small-caps" }
+                    color: null, // base color, labels, ticks
+                    tickColor: null, // possibly different color of ticks, e.g. "rgba(0,0,0,0.15)"
+                    transform: null, // null or f: number -> number to transform axis
+                    inverseTransform: null, // if transform is set, this should be the inverse function
+                    min: null, // min. value to show, null means set automatically
+                    max: null, // max. value to show, null means set automatically
+                    autoscaleMargin: null, // margin in % to add if auto-setting min/max
+                    ticks: null, // either [1, 3] or [[1, "a"], 3] or (fn: axis info -> ticks) or app. number of ticks for auto-ticks
+                    tickFormatter: null, // fn: number -> string
+                    labelWidth: null, // size of tick labels in pixels
+                    labelHeight: null,
+                    reserveSpace: null, // whether to reserve space even if axis isn't shown
+                    tickLength: null, // size in pixels of ticks, or "full" for whole line
+                    alignTicksWithAxis: null, // axis number or null for no sync
+                    tickDecimals: null, // no. of decimals, null means auto
+                    tickSize: null, // number or [number, "unit"]
+                    minTickSize: null // number or [number, "unit"]
+                },
+                yaxis: {
+                    autoscaleMargin: 0.02,
+                    position: "left" // or "right"
+                },
+                xaxes: [],
+                yaxes: [],
+                series: {
+                    points: {
+                        show: false,
+                        radius: 3,
+                        lineWidth: 2, // in pixels
+                        fill: true,
+                        fillColor: "#ffffff",
+                        symbol: "circle" // or callback
+                    },
+                    lines: {
+                        // we don't put in show: false so we can see
+                        // whether lines were actively disabled
+                        lineWidth: 2, // in pixels
+                        fill: false,
+                        fillColor: null,
+                        steps: false
+                        // Omit 'zero', so we can later default its value to
+                        // match that of the 'fill' option.
+                    },
+                    bars: {
+                        show: false,
+                        lineWidth: 2, // in pixels
+                        barWidth: 1, // in units of the x axis
+                        fill: true,
+                        fillColor: null,
+                        align: "left", // "left", "right", or "center"
+                        horizontal: false,
+                        zero: true
+                    },
+                    shadowSize: 3,
+                    highlightColor: null
+                },
+                grid: {
+                    show: true,
+                    aboveData: false,
+                    color: "#545454", // primary color used for outline and labels
+                    backgroundColor: null, // null for transparent, else color
+                    borderColor: null, // set if different from the grid color
+                    tickColor: null, // color for the ticks, e.g. "rgba(0,0,0,0.15)"
+                    margin: 0, // distance from the canvas edge to the grid
+                    labelMargin: 5, // in pixels
+                    axisMargin: 8, // in pixels
+                    borderWidth: 2, // in pixels
+                    minBorderMargin: null, // in pixels, null means taken from points radius
+                    markings: null, // array of ranges or fn: axes -> array of ranges
+                    markingsColor: "#f4f4f4",
+                    markingsLineWidth: 2,
+                    // interactive stuff
+                    clickable: false,
+                    hoverable: false,
+                    autoHighlight: true, // highlight in case mouse is near
+                    mouseActiveRadius: 10 // how far the mouse can be away to activate an item
+                },
+                interaction: {
+                    redrawOverlayInterval: 1000/60 // time between updates, -1 means in same flow
+                },
+                hooks: {}
+            },
+        surface = null,     // the canvas for the plot itself
+        overlay = null,     // canvas for interactive stuff on top of plot
+        eventHolder = null, // jQuery object that events should be bound to
+        ctx = null, octx = null,
+        xaxes = [], yaxes = [],
+        plotOffset = { left: 0, right: 0, top: 0, bottom: 0},
+        plotWidth = 0, plotHeight = 0,
+        hooks = {
+            processOptions: [],
+            processRawData: [],
+            processDatapoints: [],
+            processOffset: [],
+            drawBackground: [],
+            drawSeries: [],
+            draw: [],
+            bindEvents: [],
+            drawOverlay: [],
+            shutdown: []
+        },
+        plot = this;
+
+        // public functions
+        plot.setData = setData;
+        plot.setupGrid = setupGrid;
+        plot.draw = draw;
+        plot.getPlaceholder = function() { return placeholder; };
+        plot.getCanvas = function() { return surface.element; };
+        plot.getPlotOffset = function() { return plotOffset; };
+        plot.width = function () { return plotWidth; };
+        plot.height = function () { return plotHeight; };
+        plot.offset = function () {
+            var o = eventHolder.offset();
+            o.left += plotOffset.left;
+            o.top += plotOffset.top;
+            return o;
+        };
+        plot.getData = function () { return series; };
+        plot.getAxes = function () {
+            var res = {}, i;
+            $.each(xaxes.concat(yaxes), function (_, axis) {
+                if (axis)
+                    res[axis.direction + (axis.n != 1 ? axis.n : "") + "axis"] = axis;
+            });
+            return res;
+        };
+        plot.getXAxes = function () { return xaxes; };
+        plot.getYAxes = function () { return yaxes; };
+        plot.c2p = canvasToAxisCoords;
+        plot.p2c = axisToCanvasCoords;
+        plot.getOptions = function () { return options; };
+        plot.highlight = highlight;
+        plot.unhighlight = unhighlight;
+        plot.triggerRedrawOverlay = triggerRedrawOverlay;
+        plot.pointOffset = function(point) {
+            return {
+                left: parseInt(xaxes[axisNumber(point, "x") - 1].p2c(+point.x) + plotOffset.left, 10),
+                top: parseInt(yaxes[axisNumber(point, "y") - 1].p2c(+point.y) + plotOffset.top, 10)
+            };
+        };
+        plot.shutdown = shutdown;
+        plot.destroy = function () {
+            shutdown();
+            placeholder.removeData("plot").empty();
+
+            series = [];
+            options = null;
+            surface = null;
+            overlay = null;
+            eventHolder = null;
+            ctx = null;
+            octx = null;
+            xaxes = [];
+            yaxes = [];
+            hooks = null;
+            highlights = [];
+            plot = null;
+        };
+        plot.resize = function () {
+        	var width = placeholder.width(),
+        		height = placeholder.height();
+            surface.resize(width, height);
+            overlay.resize(width, height);
+        };
+
+        // public attributes
+        plot.hooks = hooks;
+
+        // initialize
+        initPlugins(plot);
+        parseOptions(options_);
+        setupCanvases();
+        setData(data_);
+        setupGrid();
+        draw();
+        bindEvents();
+
+
+        function executeHooks(hook, args) {
+            args = [plot].concat(args);
+            for (var i = 0; i < hook.length; ++i)
+                hook[i].apply(this, args);
+        }
+
+        function initPlugins() {
+
+            // References to key classes, allowing plugins to modify them
+
+            var classes = {
+                Canvas: Canvas
+            };
+
+            for (var i = 0; i < plugins.length; ++i) {
+                var p = plugins[i];
+                p.init(plot, classes);
+                if (p.options)
+                    $.extend(true, options, p.options);
+            }
+        }
+
+        function parseOptions(opts) {
+
+            $.extend(true, options, opts);
+
+            // $.extend merges arrays, rather than replacing them.  When less
+            // colors are provided than the size of the default palette, we
+            // end up with those colors plus the remaining defaults, which is
+            // not expected behavior; avoid it by replacing them here.
+
+            if (opts && opts.colors) {
+            	options.colors = opts.colors;
+            }
+
+            if (options.xaxis.color == null)
+                options.xaxis.color = $.color.parse(options.grid.color).scale('a', 0.22).toString();
+            if (options.yaxis.color == null)
+                options.yaxis.color = $.color.parse(options.grid.color).scale('a', 0.22).toString();
+
+            if (options.xaxis.tickColor == null) // grid.tickColor for back-compatibility
+                options.xaxis.tickColor = options.grid.tickColor || options.xaxis.color;
+            if (options.yaxis.tickColor == null) // grid.tickColor for back-compatibility
+                options.yaxis.tickColor = options.grid.tickColor || options.yaxis.color;
+
+            if (options.grid.borderColor == null)
+                options.grid.borderColor = options.grid.color;
+            if (options.grid.tickColor == null)
+                options.grid.tickColor = $.color.parse(options.grid.color).scale('a', 0.22).toString();
+
+            // Fill in defaults for axis options, including any unspecified
+            // font-spec fields, if a font-spec was provided.
+
+            // If no x/y axis options were provided, create one of each anyway,
+            // since the rest of the code assumes that they exist.
+
+            var i, axisOptions, axisCount,
+                fontSize = placeholder.css("font-size"),
+                fontSizeDefault = fontSize ? +fontSize.replace("px", "") : 13,
+                fontDefaults = {
+                    style: placeholder.css("font-style"),
+                    size: Math.round(0.8 * fontSizeDefault),
+                    variant: placeholder.css("font-variant"),
+                    weight: placeholder.css("font-weight"),
+                    family: placeholder.css("font-family")
+                };
+
+            axisCount = options.xaxes.length || 1;
+            for (i = 0; i < axisCount; ++i) {
+
+                axisOptions = options.xaxes[i];
+                if (axisOptions && !axisOptions.tickColor) {
+                    axisOptions.tickColor = axisOptions.color;
+                }
+
+                axisOptions = $.extend(true, {}, options.xaxis, axisOptions);
+                options.xaxes[i] = axisOptions;
+
+                if (axisOptions.font) {
+                    axisOptions.font = $.extend({}, fontDefaults, axisOptions.font);
+                    if (!axisOptions.font.color) {
+                        axisOptions.font.color = axisOptions.color;
+                    }
+                    if (!axisOptions.font.lineHeight) {
+                        axisOptions.font.lineHeight = Math.round(axisOptions.font.size * 1.15);
+                    }
+                }
+            }
+
+            axisCount = options.yaxes.length || 1;
+            for (i = 0; i < axisCount; ++i) {
+
+                axisOptions = options.yaxes[i];
+                if (axisOptions && !axisOptions.tickColor) {
+                    axisOptions.tickColor = axisOptions.color;
+                }
+
+                axisOptions = $.extend(true, {}, options.yaxis, axisOptions);
+                options.yaxes[i] = axisOptions;
+
+                if (axisOptions.font) {
+                    axisOptions.font = $.extend({}, fontDefaults, axisOptions.font);
+                    if (!axisOptions.font.color) {
+                        axisOptions.font.color = axisOptions.color;
+                    }
+                    if (!axisOptions.font.lineHeight) {
+                        axisOptions.font.lineHeight = Math.round(axisOptions.font.size * 1.15);
+                    }
+                }
+            }
+
+            // backwards compatibility, to be removed in future
+            if (options.xaxis.noTicks && options.xaxis.ticks == null)
+                options.xaxis.ticks = options.xaxis.noTicks;
+            if (options.yaxis.noTicks && options.yaxis.ticks == null)
+                options.yaxis.ticks = options.yaxis.noTicks;
+            if (options.x2axis) {
+                options.xaxes[1] = $.extend(true, {}, options.xaxis, options.x2axis);
+                options.xaxes[1].position = "top";
+                // Override the inherit to allow the axis to auto-scale
+                if (options.x2axis.min == null) {
+                    options.xaxes[1].min = null;
+                }
+                if (options.x2axis.max == null) {
+                    options.xaxes[1].max = null;
+                }
+            }
+            if (options.y2axis) {
+                options.yaxes[1] = $.extend(true, {}, options.yaxis, options.y2axis);
+                options.yaxes[1].position = "right";
+                // Override the inherit to allow the axis to auto-scale
+                if (options.y2axis.min == null) {
+                    options.yaxes[1].min = null;
+                }
+                if (options.y2axis.max == null) {
+                    options.yaxes[1].max = null;
+                }
+            }
+            if (options.grid.coloredAreas)
+                options.grid.markings = options.grid.coloredAreas;
+            if (options.grid.coloredAreasColor)
+                options.grid.markingsColor = options.grid.coloredAreasColor;
+            if (options.lines)
+                $.extend(true, options.series.lines, options.lines);
+            if (options.points)
+                $.extend(true, options.series.points, options.points);
+            if (options.bars)
+                $.extend(true, options.series.bars, options.bars);
+            if (options.shadowSize != null)
+                options.series.shadowSize = options.shadowSize;
+            if (options.highlightColor != null)
+                options.series.highlightColor = options.highlightColor;
+
+            // save options on axes for future reference
+            for (i = 0; i < options.xaxes.length; ++i)
+                getOrCreateAxis(xaxes, i + 1).options = options.xaxes[i];
+            for (i = 0; i < options.yaxes.length; ++i)
+                getOrCreateAxis(yaxes, i + 1).options = options.yaxes[i];
+
+            // add hooks from options
+            for (var n in hooks)
+                if (options.hooks[n] && options.hooks[n].length)
+                    hooks[n] = hooks[n].concat(options.hooks[n]);
+
+            executeHooks(hooks.processOptions, [options]);
+        }
+
+        function setData(d) {
+            series = parseData(d);
+            fillInSeriesOptions();
+            processData();
+        }
+
+        function parseData(d) {
+            var res = [];
+            for (var i = 0; i < d.length; ++i) {
+                var s = $.extend(true, {}, options.series);
+
+                if (d[i].data != null) {
+                    s.data = d[i].data; // move the data instead of deep-copy
+                    delete d[i].data;
+
+                    $.extend(true, s, d[i]);
+
+                    d[i].data = s.data;
+                }
+                else
+                    s.data = d[i];
+                res.push(s);
+            }
+
+            return res;
+        }
+
+        function axisNumber(obj, coord) {
+            var a = obj[coord + "axis"];
+            if (typeof a == "object") // if we got a real axis, extract number
+                a = a.n;
+            if (typeof a != "number")
+                a = 1; // default to first axis
+            return a;
+        }
+
+        function allAxes() {
+            // return flat array without annoying null entries
+            return $.grep(xaxes.concat(yaxes), function (a) { return a; });
+        }
+
+        function canvasToAxisCoords(pos) {
+            // return an object with x/y corresponding to all used axes
+            var res = {}, i, axis;
+            for (i = 0; i < xaxes.length; ++i) {
+                axis = xaxes[i];
+                if (axis && axis.used)
+                    res["x" + axis.n] = axis.c2p(pos.left);
+            }
+
+            for (i = 0; i < yaxes.length; ++i) {
+                axis = yaxes[i];
+                if (axis && axis.used)
+                    res["y" + axis.n] = axis.c2p(pos.top);
+            }
+
+            if (res.x1 !== undefined)
+                res.x = res.x1;
+            if (res.y1 !== undefined)
+                res.y = res.y1;
+
+            return res;
+        }
+
+        function axisToCanvasCoords(pos) {
+            // get canvas coords from the first pair of x/y found in pos
+            var res = {}, i, axis, key;
+
+            for (i = 0; i < xaxes.length; ++i) {
+                axis = xaxes[i];
+                if (axis && axis.used) {
+                    key = "x" + axis.n;
+                    if (pos[key] == null && axis.n == 1)
+                        key = "x";
+
+                    if (pos[key] != null) {
+                        res.left = axis.p2c(pos[key]);
+                        break;
+                    }
+                }
+            }
+
+            for (i = 0; i < yaxes.length; ++i) {
+                axis = yaxes[i];
+                if (axis && axis.used) {
+                    key = "y" + axis.n;
+                    if (pos[key] == null && axis.n == 1)
+                        key = "y";
+
+                    if (pos[key] != null) {
+                        res.top = axis.p2c(pos[key]);
+                        break;
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        function getOrCreateAxis(axes, number) {
+            if (!axes[number - 1])
+                axes[number - 1] = {
+                    n: number, // save the number for future reference
+                    direction: axes == xaxes ? "x" : "y",
+                    options: $.extend(true, {}, axes == xaxes ? options.xaxis : options.yaxis)
+                };
+
+            return axes[number - 1];
+        }
+
+        function fillInSeriesOptions() {
+
+            var neededColors = series.length, maxIndex = -1, i;
+
+            // Subtract the number of series that already have fixed colors or
+            // color indexes from the number that we still need to generate.
+
+            for (i = 0; i < series.length; ++i) {
+                var sc = series[i].color;
+                if (sc != null) {
+                    neededColors--;
+                    if (typeof sc == "number" && sc > maxIndex) {
+                        maxIndex = sc;
+                    }
+                }
+            }
+
+            // If any of the series have fixed color indexes, then we need to
+            // generate at least as many colors as the highest index.
+
+            if (neededColors <= maxIndex) {
+                neededColors = maxIndex + 1;
+            }
+
+            // Generate all the colors, using first the option colors and then
+            // variations on those colors once they're exhausted.
+
+            var c, colors = [], colorPool = options.colors,
+                colorPoolSize = colorPool.length, variation = 0;
+
+            for (i = 0; i < neededColors; i++) {
+
+                c = $.color.parse(colorPool[i % colorPoolSize] || "#666");
+
+                // Each time we exhaust the colors in the pool we adjust
+                // a scaling factor used to produce more variations on
+                // those colors. The factor alternates negative/positive
+                // to produce lighter/darker colors.
+
+                // Reset the variation after every few cycles, or else
+                // it will end up producing only white or black colors.
+
+                if (i % colorPoolSize == 0 && i) {
+                    if (variation >= 0) {
+                        if (variation < 0.5) {
+                            variation = -variation - 0.2;
+                        } else variation = 0;
+                    } else variation = -variation;
+                }
+
+                colors[i] = c.scale('rgb', 1 + variation);
+            }
+
+            // Finalize the series options, filling in their colors
+
+            var colori = 0, s;
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+
+                // assign colors
+                if (s.color == null) {
+                    s.color = colors[colori].toString();
+                    ++colori;
+                }
+                else if (typeof s.color == "number")
+                    s.color = colors[s.color].toString();
+
+                // turn on lines automatically in case nothing is set
+                if (s.lines.show == null) {
+                    var v, show = true;
+                    for (v in s)
+                        if (s[v] && s[v].show) {
+                            show = false;
+                            break;
+                        }
+                    if (show)
+                        s.lines.show = true;
+                }
+
+                // If nothing was provided for lines.zero, default it to match
+                // lines.fill, since areas by default should extend to zero.
+
+                if (s.lines.zero == null) {
+                    s.lines.zero = !!s.lines.fill;
+                }
+
+                // setup axes
+                s.xaxis = getOrCreateAxis(xaxes, axisNumber(s, "x"));
+                s.yaxis = getOrCreateAxis(yaxes, axisNumber(s, "y"));
+            }
+        }
+
+        function processData() {
+            var topSentry = Number.POSITIVE_INFINITY,
+                bottomSentry = Number.NEGATIVE_INFINITY,
+                fakeInfinity = Number.MAX_VALUE,
+                i, j, k, m, length,
+                s, points, ps, x, y, axis, val, f, p,
+                data, format;
+
+            function updateAxis(axis, min, max) {
+                if (min < axis.datamin && min != -fakeInfinity)
+                    axis.datamin = min;
+                if (max > axis.datamax && max != fakeInfinity)
+                    axis.datamax = max;
+            }
+
+            $.each(allAxes(), function (_, axis) {
+                // init axis
+                axis.datamin = topSentry;
+                axis.datamax = bottomSentry;
+                axis.used = false;
+            });
+
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+                s.datapoints = { points: [] };
+
+                executeHooks(hooks.processRawData, [ s, s.data, s.datapoints ]);
+            }
+
+            // first pass: clean and copy data
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+
+                data = s.data;
+                format = s.datapoints.format;
+
+                if (!format) {
+                    format = [];
+                    // find out how to copy
+                    format.push({ x: true, number: true, required: true });
+                    format.push({ y: true, number: true, required: true });
+
+                    if (s.bars.show || (s.lines.show && s.lines.fill)) {
+                        var autoscale = !!((s.bars.show && s.bars.zero) || (s.lines.show && s.lines.zero));
+                        format.push({ y: true, number: true, required: false, defaultValue: 0, autoscale: autoscale });
+                        if (s.bars.horizontal) {
+                            delete format[format.length - 1].y;
+                            format[format.length - 1].x = true;
+                        }
+                    }
+
+                    s.datapoints.format = format;
+                }
+
+                if (s.datapoints.pointsize != null)
+                    continue; // already filled in
+
+                s.datapoints.pointsize = format.length;
+
+                ps = s.datapoints.pointsize;
+                points = s.datapoints.points;
+
+                var insertSteps = s.lines.show && s.lines.steps;
+                s.xaxis.used = s.yaxis.used = true;
+
+                for (j = k = 0; j < data.length; ++j, k += ps) {
+                    p = data[j];
+
+                    var nullify = p == null;
+                    if (!nullify) {
+                        for (m = 0; m < ps; ++m) {
+                            val = p[m];
+                            f = format[m];
+
+                            if (f) {
+                                if (f.number && val != null) {
+                                    val = +val; // convert to number
+                                    if (isNaN(val))
+                                        val = null;
+                                    else if (val == Infinity)
+                                        val = fakeInfinity;
+                                    else if (val == -Infinity)
+                                        val = -fakeInfinity;
+                                }
+
+                                if (val == null) {
+                                    if (f.required)
+                                        nullify = true;
+
+                                    if (f.defaultValue != null)
+                                        val = f.defaultValue;
+                                }
+                            }
+
+                            points[k + m] = val;
+                        }
+                    }
+
+                    if (nullify) {
+                        for (m = 0; m < ps; ++m) {
+                            val = points[k + m];
+                            if (val != null) {
+                                f = format[m];
+                                // extract min/max info
+                                if (f.autoscale !== false) {
+                                    if (f.x) {
+                                        updateAxis(s.xaxis, val, val);
+                                    }
+                                    if (f.y) {
+                                        updateAxis(s.yaxis, val, val);
+                                    }
+                                }
+                            }
+                            points[k + m] = null;
+                        }
+                    }
+                    else {
+                        // a little bit of line specific stuff that
+                        // perhaps shouldn't be here, but lacking
+                        // better means...
+                        if (insertSteps && k > 0
+                            && points[k - ps] != null
+                            && points[k - ps] != points[k]
+                            && points[k - ps + 1] != points[k + 1]) {
+                            // copy the point to make room for a middle point
+                            for (m = 0; m < ps; ++m)
+                                points[k + ps + m] = points[k + m];
+
+                            // middle point has same y
+                            points[k + 1] = points[k - ps + 1];
+
+                            // we've added a point, better reflect that
+                            k += ps;
+                        }
+                    }
+                }
+            }
+
+            // give the hooks a chance to run
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+
+                executeHooks(hooks.processDatapoints, [ s, s.datapoints]);
+            }
+
+            // second pass: find datamax/datamin for auto-scaling
+            for (i = 0; i < series.length; ++i) {
+                s = series[i];
+                points = s.datapoints.points;
+                ps = s.datapoints.pointsize;
+                format = s.datapoints.format;
+
+                var xmin = topSentry, ymin = topSentry,
+                    xmax = bottomSentry, ymax = bottomSentry;
+
+                for (j = 0; j < points.length; j += ps) {
+                    if (points[j] == null)
+                        continue;
+
+                    for (m = 0; m < ps; ++m) {
+                        val = points[j + m];
+                        f = format[m];
+                        if (!f || f.autoscale === false || val == fakeInfinity || val == -fakeInfinity)
+                            continue;
+
+                        if (f.x) {
+                            if (val < xmin)
+                                xmin = val;
+                            if (val > xmax)
+                                xmax = val;
+                        }
+                        if (f.y) {
+                            if (val < ymin)
+                                ymin = val;
+                            if (val > ymax)
+                                ymax = val;
+                        }
+                    }
+                }
+
+                if (s.bars.show) {
+                    // make sure we got room for the bar on the dancing floor
+                    var delta;
+
+                    switch (s.bars.align) {
+                        case "left":
+                            delta = 0;
+                            break;
+                        case "right":
+                            delta = -s.bars.barWidth;
+                            break;
+                        default:
+                            delta = -s.bars.barWidth / 2;
+                    }
+
+                    if (s.bars.horizontal) {
+                        ymin += delta;
+                        ymax += delta + s.bars.barWidth;
+                    }
+                    else {
+                        xmin += delta;
+                        xmax += delta + s.bars.barWidth;
+                    }
+                }
+
+                updateAxis(s.xaxis, xmin, xmax);
+                updateAxis(s.yaxis, ymin, ymax);
+            }
+
+            $.each(allAxes(), function (_, axis) {
+                if (axis.datamin == topSentry)
+                    axis.datamin = null;
+                if (axis.datamax == bottomSentry)
+                    axis.datamax = null;
+            });
+        }
+
+        function setupCanvases() {
+
+            // Make sure the placeholder is clear of everything except canvases
+            // from a previous plot in this container that we'll try to re-use.
+
+            placeholder.css("padding", 0) // padding messes up the positioning
+                .children().filter(function(){
+                    return !$(this).hasClass("flot-overlay") && !$(this).hasClass('flot-base');
+                }).remove();
+
+            if (placeholder.css("position") == 'static')
+                placeholder.css("position", "relative"); // for positioning labels and overlay
+
+            surface = new Canvas("flot-base", placeholder);
+            overlay = new Canvas("flot-overlay", placeholder); // overlay canvas for interactive features
+
+            ctx = surface.context;
+            octx = overlay.context;
+
+            // define which element we're listening for events on
+            eventHolder = $(overlay.element).unbind();
+
+            // If we're re-using a plot object, shut down the old one
+
+            var existing = placeholder.data("plot");
+
+            if (existing) {
+                existing.shutdown();
+                overlay.clear();
+            }
+
+            // save in case we get replotted
+            placeholder.data("plot", plot);
+        }
+
+        function bindEvents() {
+            // bind events
+            if (options.grid.hoverable) {
+                eventHolder.mousemove(onMouseMove);
+
+                // Use bind, rather than .mouseleave, because we officially
+                // still support jQuery 1.2.6, which doesn't define a shortcut
+                // for mouseenter or mouseleave.  This was a bug/oversight that
+                // was fixed somewhere around 1.3.x.  We can return to using
+                // .mouseleave when we drop support for 1.2.6.
+
+                eventHolder.bind("mouseleave", onMouseLeave);
+            }
+
+            if (options.grid.clickable)
+                eventHolder.click(onClick);
+
+            executeHooks(hooks.bindEvents, [eventHolder]);
+        }
+
+        function shutdown() {
+            if (redrawTimeout)
+                clearTimeout(redrawTimeout);
+
+            eventHolder.unbind("mousemove", onMouseMove);
+            eventHolder.unbind("mouseleave", onMouseLeave);
+            eventHolder.unbind("click", onClick);
+
+            executeHooks(hooks.shutdown, [eventHolder]);
+        }
+
+        function setTransformationHelpers(axis) {
+            // set helper functions on the axis, assumes plot area
+            // has been computed already
+
+            function identity(x) { return x; }
+
+            var s, m, t = axis.options.transform || identity,
+                it = axis.options.inverseTransform;
+
+            // precompute how much the axis is scaling a point
+            // in canvas space
+            if (axis.direction == "x") {
+                s = axis.scale = plotWidth / Math.abs(t(axis.max) - t(axis.min));
+                m = Math.min(t(axis.max), t(axis.min));
+            }
+            else {
+                s = axis.scale = plotHeight / Math.abs(t(axis.max) - t(axis.min));
+                s = -s;
+                m = Math.max(t(axis.max), t(axis.min));
+            }
+
+            // data point to canvas coordinate
+            if (t == identity) // slight optimization
+                axis.p2c = function (p) { return (p - m) * s; };
+            else
+                axis.p2c = function (p) { return (t(p) - m) * s; };
+            // canvas coordinate to data point
+            if (!it)
+                axis.c2p = function (c) { return m + c / s; };
+            else
+                axis.c2p = function (c) { return it(m + c / s); };
+        }
+
+        function measureTickLabels(axis) {
+
+            var opts = axis.options,
+                ticks = axis.ticks || [],
+                labelWidth = opts.labelWidth || 0,
+                labelHeight = opts.labelHeight || 0,
+                maxWidth = labelWidth || (axis.direction == "x" ? Math.floor(surface.width / (ticks.length || 1)) : null),
+                legacyStyles = axis.direction + "Axis " + axis.direction + axis.n + "Axis",
+                layer = "flot-" + axis.direction + "-axis flot-" + axis.direction + axis.n + "-axis " + legacyStyles,
+                font = opts.font || "flot-tick-label tickLabel";
+
+            for (var i = 0; i < ticks.length; ++i) {
+
+                var t = ticks[i];
+
+                if (!t.label)
+                    continue;
+
+                var info = surface.getTextInfo(layer, t.label, font, null, maxWidth);
+
+                labelWidth = Math.max(labelWidth, info.width);
+                labelHeight = Math.max(labelHeight, info.height);
+            }
+
+            axis.labelWidth = opts.labelWidth || labelWidth;
+            axis.labelHeight = opts.labelHeight || labelHeight;
+        }
+
+        function allocateAxisBoxFirstPhase(axis) {
+            // find the bounding box of the axis by looking at label
+            // widths/heights and ticks, make room by diminishing the
+            // plotOffset; this first phase only looks at one
+            // dimension per axis, the other dimension depends on the
+            // other axes so will have to wait
+
+            var lw = axis.labelWidth,
+                lh = axis.labelHeight,
+                pos = axis.options.position,
+                isXAxis = axis.direction === "x",
+                tickLength = axis.options.tickLength,
+                axisMargin = options.grid.axisMargin,
+                padding = options.grid.labelMargin,
+                innermost = true,
+                outermost = true,
+                first = true,
+                found = false;
+
+            // Determine the axis's position in its direction and on its side
+
+            $.each(isXAxis ? xaxes : yaxes, function(i, a) {
+                if (a && (a.show || a.reserveSpace)) {
+                    if (a === axis) {
+                        found = true;
+                    } else if (a.options.position === pos) {
+                        if (found) {
+                            outermost = false;
+                        } else {
+                            innermost = false;
+                        }
+                    }
+                    if (!found) {
+                        first = false;
+                    }
+                }
+            });
+
+            // The outermost axis on each side has no margin
+
+            if (outermost) {
+                axisMargin = 0;
+            }
+
+            // The ticks for the first axis in each direction stretch across
+
+            if (tickLength == null) {
+                tickLength = first ? "full" : 5;
+            }
+
+            if (!isNaN(+tickLength))
+                padding += +tickLength;
+
+            if (isXAxis) {
+                lh += padding;
+
+                if (pos == "bottom") {
+                    plotOffset.bottom += lh + axisMargin;
+                    axis.box = { top: surface.height - plotOffset.bottom, height: lh };
+                }
+                else {
+                    axis.box = { top: plotOffset.top + axisMargin, height: lh };
+                    plotOffset.top += lh + axisMargin;
+                }
+            }
+            else {
+                lw += padding;
+
+                if (pos == "left") {
+                    axis.box = { left: plotOffset.left + axisMargin, width: lw };
+                    plotOffset.left += lw + axisMargin;
+                }
+                else {
+                    plotOffset.right += lw + axisMargin;
+                    axis.box = { left: surface.width - plotOffset.right, width: lw };
+                }
+            }
+
+             // save for future reference
+            axis.position = pos;
+            axis.tickLength = tickLength;
+            axis.box.padding = padding;
+            axis.innermost = innermost;
+        }
+
+        function allocateAxisBoxSecondPhase(axis) {
+            // now that all axis boxes have been placed in one
+            // dimension, we can set the remaining dimension coordinates
+            if (axis.direction == "x") {
+                axis.box.left = plotOffset.left - axis.labelWidth / 2;
+                axis.box.width = surface.width - plotOffset.left - plotOffset.right + axis.labelWidth;
+            }
+            else {
+                axis.box.top = plotOffset.top - axis.labelHeight / 2;
+                axis.box.height = surface.height - plotOffset.bottom - plotOffset.top + axis.labelHeight;
+            }
+        }
+
+        function adjustLayoutForThingsStickingOut() {
+            // possibly adjust plot offset to ensure everything stays
+            // inside the canvas and isn't clipped off
+
+            var minMargin = options.grid.minBorderMargin,
+                axis, i;
+
+            // check stuff from the plot (FIXME: this should just read
+            // a value from the series, otherwise it's impossible to
+            // customize)
+            if (minMargin == null) {
+                minMargin = 0;
+                for (i = 0; i < series.length; ++i)
+                    minMargin = Math.max(minMargin, 2 * (series[i].points.radius + series[i].points.lineWidth/2));
+            }
+
+            var margins = {
+                left: minMargin,
+                right: minMargin,
+                top: minMargin,
+                bottom: minMargin
+            };
+
+            // check axis labels, note we don't check the actual
+            // labels but instead use the overall width/height to not
+            // jump as much around with replots
+            $.each(allAxes(), function (_, axis) {
+                if (axis.reserveSpace && axis.ticks && axis.ticks.length) {
+                    if (axis.direction === "x") {
+                        margins.left = Math.max(margins.left, axis.labelWidth / 2);
+                        margins.right = Math.max(margins.right, axis.labelWidth / 2);
+                    } else {
+                        margins.bottom = Math.max(margins.bottom, axis.labelHeight / 2);
+                        margins.top = Math.max(margins.top, axis.labelHeight / 2);
+                    }
+                }
+            });
+
+            plotOffset.left = Math.ceil(Math.max(margins.left, plotOffset.left));
+            plotOffset.right = Math.ceil(Math.max(margins.right, plotOffset.right));
+            plotOffset.top = Math.ceil(Math.max(margins.top, plotOffset.top));
+            plotOffset.bottom = Math.ceil(Math.max(margins.bottom, plotOffset.bottom));
+        }
+
+        function setupGrid() {
+            var i, axes = allAxes(), showGrid = options.grid.show;
+
+            // Initialize the plot's offset from the edge of the canvas
+
+            for (var a in plotOffset) {
+                var margin = options.grid.margin || 0;
+                plotOffset[a] = typeof margin == "number" ? margin : margin[a] || 0;
+            }
+
+            executeHooks(hooks.processOffset, [plotOffset]);
+
+            // If the grid is visible, add its border width to the offset
+
+            for (var a in plotOffset) {
+                if(typeof(options.grid.borderWidth) == "object") {
+                    plotOffset[a] += showGrid ? options.grid.borderWidth[a] : 0;
+                }
+                else {
+                    plotOffset[a] += showGrid ? options.grid.borderWidth : 0;
+                }
+            }
+
+            $.each(axes, function (_, axis) {
+                var axisOpts = axis.options;
+                axis.show = axisOpts.show == null ? axis.used : axisOpts.show;
+                axis.reserveSpace = axisOpts.reserveSpace == null ? axis.show : axisOpts.reserveSpace;
+                setRange(axis);
+            });
+
+            if (showGrid) {
+
+                var allocatedAxes = $.grep(axes, function (axis) {
+                    return axis.show || axis.reserveSpace;
+                });
+
+                $.each(allocatedAxes, function (_, axis) {
+                    // make the ticks
+                    setupTickGeneration(axis);
+                    setTicks(axis);
+                    snapRangeToTicks(axis, axis.ticks);
+                    // find labelWidth/Height for axis
+                    measureTickLabels(axis);
+                });
+
+                // with all dimensions calculated, we can compute the
+                // axis bounding boxes, start from the outside
+                // (reverse order)
+                for (i = allocatedAxes.length - 1; i >= 0; --i)
+                    allocateAxisBoxFirstPhase(allocatedAxes[i]);
+
+                // make sure we've got enough space for things that
+                // might stick out
+                adjustLayoutForThingsStickingOut();
+
+                $.each(allocatedAxes, function (_, axis) {
+                    allocateAxisBoxSecondPhase(axis);
+                });
+            }
+
+            plotWidth = surface.width - plotOffset.left - plotOffset.right;
+            plotHeight = surface.height - plotOffset.bottom - plotOffset.top;
+
+            // now we got the proper plot dimensions, we can compute the scaling
+            $.each(axes, function (_, axis) {
+                setTransformationHelpers(axis);
+            });
+
+            if (showGrid) {
+                drawAxisLabels();
+            }
+
+            insertLegend();
+        }
+
+        function setRange(axis) {
+            var opts = axis.options,
+                min = +(opts.min != null ? opts.min : axis.datamin),
+                max = +(opts.max != null ? opts.max : axis.datamax),
+                delta = max - min;
+
+            if (delta == 0.0) {
+                // degenerate case
+                var widen = max == 0 ? 1 : 0.01;
+
+                if (opts.min == null)
+                    min -= widen;
+                // always widen max if we couldn't widen min to ensure we
+                // don't fall into min == max which doesn't work
+                if (opts.max == null || opts.min != null)
+                    max += widen;
+            }
+            else {
+                // consider autoscaling
+                var margin = opts.autoscaleMargin;
+                if (margin != null) {
+                    if (opts.min == null) {
+                        min -= delta * margin;
+                        // make sure we don't go below zero if all values
+                        // are positive
+                        if (min < 0 && axis.datamin != null && axis.datamin >= 0)
+                            min = 0;
+                    }
+                    if (opts.max == null) {
+                        max += delta * margin;
+                        if (max > 0 && axis.datamax != null && axis.datamax <= 0)
+                            max = 0;
+                    }
+                }
+            }
+            axis.min = min;
+            axis.max = max;
+        }
+
+        function setupTickGeneration(axis) {
+            var opts = axis.options;
+
+            // estimate number of ticks
+            var noTicks;
+            if (typeof opts.ticks == "number" && opts.ticks > 0)
+                noTicks = opts.ticks;
+            else
+                // heuristic based on the model a*sqrt(x) fitted to
+                // some data points that seemed reasonable
+                noTicks = 0.3 * Math.sqrt(axis.direction == "x" ? surface.width : surface.height);
+
+            var delta = (axis.max - axis.min) / noTicks,
+                dec = -Math.floor(Math.log(delta) / Math.LN10),
+                maxDec = opts.tickDecimals;
+
+            if (maxDec != null && dec > maxDec) {
+                dec = maxDec;
+            }
+
+            var magn = Math.pow(10, -dec),
+                norm = delta / magn, // norm is between 1.0 and 10.0
+                size;
+
+            if (norm < 1.5) {
+                size = 1;
+            } else if (norm < 3) {
+                size = 2;
+                // special case for 2.5, requires an extra decimal
+                if (norm > 2.25 && (maxDec == null || dec + 1 <= maxDec)) {
+                    size = 2.5;
+                    ++dec;
+                }
+            } else if (norm < 7.5) {
+                size = 5;
+            } else {
+                size = 10;
+            }
+
+            size *= magn;
+
+            if (opts.minTickSize != null && size < opts.minTickSize) {
+                size = opts.minTickSize;
+            }
+
+            axis.delta = delta;
+            axis.tickDecimals = Math.max(0, maxDec != null ? maxDec : dec);
+            axis.tickSize = opts.tickSize || size;
+
+            // Time mode was moved to a plug-in in 0.8, and since so many people use it
+            // we'll add an especially friendly reminder to make sure they included it.
+
+            if (opts.mode == "time" && !axis.tickGenerator) {
+                throw new Error("Time mode requires the flot.time plugin.");
+            }
+
+            // Flot supports base-10 axes; any other mode else is handled by a plug-in,
+            // like flot.time.js.
+
+            if (!axis.tickGenerator) {
+
+                axis.tickGenerator = function (axis) {
+
+                    var ticks = [],
+                        start = floorInBase(axis.min, axis.tickSize),
+                        i = 0,
+                        v = Number.NaN,
+                        prev;
+
+                    do {
+                        prev = v;
+                        v = start + i * axis.tickSize;
+                        ticks.push(v);
+                        ++i;
+                    } while (v < axis.max && v != prev);
+                    return ticks;
+                };
+
+				axis.tickFormatter = function (value, axis) {
+
+					var factor = axis.tickDecimals ? Math.pow(10, axis.tickDecimals) : 1;
+					var formatted = "" + Math.round(value * factor) / factor;
+
+					// If tickDecimals was specified, ensure that we have exactly that
+					// much precision; otherwise default to the value's own precision.
+
+					if (axis.tickDecimals != null) {
+						var decimal = formatted.indexOf(".");
+						var precision = decimal == -1 ? 0 : formatted.length - decimal - 1;
+						if (precision < axis.tickDecimals) {
+							return (precision ? formatted : formatted + ".") + ("" + factor).substr(1, axis.tickDecimals - precision);
+						}
+					}
+
+                    return formatted;
+                };
+            }
+
+            if ($.isFunction(opts.tickFormatter))
+                axis.tickFormatter = function (v, axis) { return "" + opts.tickFormatter(v, axis); };
+
+            if (opts.alignTicksWithAxis != null) {
+                var otherAxis = (axis.direction == "x" ? xaxes : yaxes)[opts.alignTicksWithAxis - 1];
+                if (otherAxis && otherAxis.used && otherAxis != axis) {
+                    // consider snapping min/max to outermost nice ticks
+                    var niceTicks = axis.tickGenerator(axis);
+                    if (niceTicks.length > 0) {
+                        if (opts.min == null)
+                            axis.min = Math.min(axis.min, niceTicks[0]);
+                        if (opts.max == null && niceTicks.length > 1)
+                            axis.max = Math.max(axis.max, niceTicks[niceTicks.length - 1]);
+                    }
+
+                    axis.tickGenerator = function (axis) {
+                        // copy ticks, scaled to this axis
+                        var ticks = [], v, i;
+                        for (i = 0; i < otherAxis.ticks.length; ++i) {
+                            v = (otherAxis.ticks[i].v - otherAxis.min) / (otherAxis.max - otherAxis.min);
+                            v = axis.min + v * (axis.max - axis.min);
+                            ticks.push(v);
+                        }
+                        return ticks;
+                    };
+
+                    // we might need an extra decimal since forced
+                    // ticks don't necessarily fit naturally
+                    if (!axis.mode && opts.tickDecimals == null) {
+                        var extraDec = Math.max(0, -Math.floor(Math.log(axis.delta) / Math.LN10) + 1),
+                            ts = axis.tickGenerator(axis);
+
+                        // only proceed if the tick interval rounded
+                        // with an extra decimal doesn't give us a
+                        // zero at end
+                        if (!(ts.length > 1 && /\..*0$/.test((ts[1] - ts[0]).toFixed(extraDec))))
+                            axis.tickDecimals = extraDec;
+                    }
+                }
+            }
+        }
+
+        function setTicks(axis) {
+            var oticks = axis.options.ticks, ticks = [];
+            if (oticks == null || (typeof oticks == "number" && oticks > 0))
+                ticks = axis.tickGenerator(axis);
+            else if (oticks) {
+                if ($.isFunction(oticks))
+                    // generate the ticks
+                    ticks = oticks(axis);
+                else
+                    ticks = oticks;
+            }
+
+            // clean up/labelify the supplied ticks, copy them over
+            var i, v;
+            axis.ticks = [];
+            for (i = 0; i < ticks.length; ++i) {
+                var label = null;
+                var t = ticks[i];
+                if (typeof t == "object") {
+                    v = +t[0];
+                    if (t.length > 1)
+                        label = t[1];
+                }
+                else
+                    v = +t;
+                if (label == null)
+                    label = axis.tickFormatter(v, axis);
+                if (!isNaN(v))
+                    axis.ticks.push({ v: v, label: label });
+            }
+        }
+
+        function snapRangeToTicks(axis, ticks) {
+            if (axis.options.autoscaleMargin && ticks.length > 0) {
+                // snap to ticks
+                if (axis.options.min == null)
+                    axis.min = Math.min(axis.min, ticks[0].v);
+                if (axis.options.max == null && ticks.length > 1)
+                    axis.max = Math.max(axis.max, ticks[ticks.length - 1].v);
+            }
+        }
+
+        function draw() {
+
+            surface.clear();
+
+            executeHooks(hooks.drawBackground, [ctx]);
+
+            var grid = options.grid;
+
+            // draw background, if any
+            if (grid.show && grid.backgroundColor)
+                drawBackground();
+
+            if (grid.show && !grid.aboveData) {
+                drawGrid();
+            }
+
+            for (var i = 0; i < series.length; ++i) {
+                executeHooks(hooks.drawSeries, [ctx, series[i]]);
+                drawSeries(series[i]);
+            }
+
+            executeHooks(hooks.draw, [ctx]);
+
+            if (grid.show && grid.aboveData) {
+                drawGrid();
+            }
+
+            surface.render();
+
+            // A draw implies that either the axes or data have changed, so we
+            // should probably update the overlay highlights as well.
+
+            triggerRedrawOverlay();
+        }
+
+        function extractRange(ranges, coord) {
+            var axis, from, to, key, axes = allAxes();
+
+            for (var i = 0; i < axes.length; ++i) {
+                axis = axes[i];
+                if (axis.direction == coord) {
+                    key = coord + axis.n + "axis";
+                    if (!ranges[key] && axis.n == 1)
+                        key = coord + "axis"; // support x1axis as xaxis
+                    if (ranges[key]) {
+                        from = ranges[key].from;
+                        to = ranges[key].to;
+                        break;
+                    }
+                }
+            }
+
+            // backwards-compat stuff - to be removed in future
+            if (!ranges[key]) {
+                axis = coord == "x" ? xaxes[0] : yaxes[0];
+                from = ranges[coord + "1"];
+                to = ranges[coord + "2"];
+            }
+
+            // auto-reverse as an added bonus
+            if (from != null && to != null && from > to) {
+                var tmp = from;
+                from = to;
+                to = tmp;
+            }
+
+            return { from: from, to: to, axis: axis };
+        }
+
+        function drawBackground() {
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            ctx.fillStyle = getColorOrGradient(options.grid.backgroundColor, plotHeight, 0, "rgba(255, 255, 255, 0)");
+            ctx.fillRect(0, 0, plotWidth, plotHeight);
+            ctx.restore();
+        }
+
+        function drawGrid() {
+            var i, axes, bw, bc;
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            // draw markings
+            var markings = options.grid.markings;
+            if (markings) {
+                if ($.isFunction(markings)) {
+                    axes = plot.getAxes();
+                    // xmin etc. is backwards compatibility, to be
+                    // removed in the future
+                    axes.xmin = axes.xaxis.min;
+                    axes.xmax = axes.xaxis.max;
+                    axes.ymin = axes.yaxis.min;
+                    axes.ymax = axes.yaxis.max;
+
+                    markings = markings(axes);
+                }
+
+                for (i = 0; i < markings.length; ++i) {
+                    var m = markings[i],
+                        xrange = extractRange(m, "x"),
+                        yrange = extractRange(m, "y");
+
+                    // fill in missing
+                    if (xrange.from == null)
+                        xrange.from = xrange.axis.min;
+                    if (xrange.to == null)
+                        xrange.to = xrange.axis.max;
+                    if (yrange.from == null)
+                        yrange.from = yrange.axis.min;
+                    if (yrange.to == null)
+                        yrange.to = yrange.axis.max;
+
+                    // clip
+                    if (xrange.to < xrange.axis.min || xrange.from > xrange.axis.max ||
+                        yrange.to < yrange.axis.min || yrange.from > yrange.axis.max)
+                        continue;
+
+                    xrange.from = Math.max(xrange.from, xrange.axis.min);
+                    xrange.to = Math.min(xrange.to, xrange.axis.max);
+                    yrange.from = Math.max(yrange.from, yrange.axis.min);
+                    yrange.to = Math.min(yrange.to, yrange.axis.max);
+
+                    var xequal = xrange.from === xrange.to,
+                        yequal = yrange.from === yrange.to;
+
+                    if (xequal && yequal) {
+                        continue;
+                    }
+
+                    // then draw
+                    xrange.from = Math.floor(xrange.axis.p2c(xrange.from));
+                    xrange.to = Math.floor(xrange.axis.p2c(xrange.to));
+                    yrange.from = Math.floor(yrange.axis.p2c(yrange.from));
+                    yrange.to = Math.floor(yrange.axis.p2c(yrange.to));
+
+                    if (xequal || yequal) {
+                        var lineWidth = m.lineWidth || options.grid.markingsLineWidth,
+                            subPixel = lineWidth % 2 ? 0.5 : 0;
+                        ctx.beginPath();
+                        ctx.strokeStyle = m.color || options.grid.markingsColor;
+                        ctx.lineWidth = lineWidth;
+                        if (xequal) {
+                            ctx.moveTo(xrange.to + subPixel, yrange.from);
+                            ctx.lineTo(xrange.to + subPixel, yrange.to);
+                        } else {
+                            ctx.moveTo(xrange.from, yrange.to + subPixel);
+                            ctx.lineTo(xrange.to, yrange.to + subPixel);                            
+                        }
+                        ctx.stroke();
+                    } else {
+                        ctx.fillStyle = m.color || options.grid.markingsColor;
+                        ctx.fillRect(xrange.from, yrange.to,
+                                     xrange.to - xrange.from,
+                                     yrange.from - yrange.to);
+                    }
+                }
+            }
+
+            // draw the ticks
+            axes = allAxes();
+            bw = options.grid.borderWidth;
+
+            for (var j = 0; j < axes.length; ++j) {
+                var axis = axes[j], box = axis.box,
+                    t = axis.tickLength, x, y, xoff, yoff;
+                if (!axis.show || axis.ticks.length == 0)
+                    continue;
+
+                ctx.lineWidth = 1;
+
+                // find the edges
+                if (axis.direction == "x") {
+                    x = 0;
+                    if (t == "full")
+                        y = (axis.position == "top" ? 0 : plotHeight);
+                    else
+                        y = box.top - plotOffset.top + (axis.position == "top" ? box.height : 0);
+                }
+                else {
+                    y = 0;
+                    if (t == "full")
+                        x = (axis.position == "left" ? 0 : plotWidth);
+                    else
+                        x = box.left - plotOffset.left + (axis.position == "left" ? box.width : 0);
+                }
+
+                // draw tick bar
+                if (!axis.innermost) {
+                    ctx.strokeStyle = axis.options.color;
+                    ctx.beginPath();
+                    xoff = yoff = 0;
+                    if (axis.direction == "x")
+                        xoff = plotWidth + 1;
+                    else
+                        yoff = plotHeight + 1;
+
+                    if (ctx.lineWidth == 1) {
+                        if (axis.direction == "x") {
+                            y = Math.floor(y) + 0.5;
+                        } else {
+                            x = Math.floor(x) + 0.5;
+                        }
+                    }
+
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + xoff, y + yoff);
+                    ctx.stroke();
+                }
+
+                // draw ticks
+
+                ctx.strokeStyle = axis.options.tickColor;
+
+                ctx.beginPath();
+                for (i = 0; i < axis.ticks.length; ++i) {
+                    var v = axis.ticks[i].v;
+
+                    xoff = yoff = 0;
+
+                    if (isNaN(v) || v < axis.min || v > axis.max
+                        // skip those lying on the axes if we got a border
+                        || (t == "full"
+                            && ((typeof bw == "object" && bw[axis.position] > 0) || bw > 0)
+                            && (v == axis.min || v == axis.max)))
+                        continue;
+
+                    if (axis.direction == "x") {
+                        x = axis.p2c(v);
+                        yoff = t == "full" ? -plotHeight : t;
+
+                        if (axis.position == "top")
+                            yoff = -yoff;
+                    }
+                    else {
+                        y = axis.p2c(v);
+                        xoff = t == "full" ? -plotWidth : t;
+
+                        if (axis.position == "left")
+                            xoff = -xoff;
+                    }
+
+                    if (ctx.lineWidth == 1) {
+                        if (axis.direction == "x")
+                            x = Math.floor(x) + 0.5;
+                        else
+                            y = Math.floor(y) + 0.5;
+                    }
+
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + xoff, y + yoff);
+                }
+
+                ctx.stroke();
+            }
+
+
+            // draw border
+            if (bw) {
+                // If either borderWidth or borderColor is an object, then draw the border
+                // line by line instead of as one rectangle
+                bc = options.grid.borderColor;
+                if(typeof bw == "object" || typeof bc == "object") {
+                    if (typeof bw !== "object") {
+                        bw = {top: bw, right: bw, bottom: bw, left: bw};
+                    }
+                    if (typeof bc !== "object") {
+                        bc = {top: bc, right: bc, bottom: bc, left: bc};
+                    }
+
+                    if (bw.top > 0) {
+                        ctx.strokeStyle = bc.top;
+                        ctx.lineWidth = bw.top;
+                        ctx.beginPath();
+                        ctx.moveTo(0 - bw.left, 0 - bw.top/2);
+                        ctx.lineTo(plotWidth, 0 - bw.top/2);
+                        ctx.stroke();
+                    }
+
+                    if (bw.right > 0) {
+                        ctx.strokeStyle = bc.right;
+                        ctx.lineWidth = bw.right;
+                        ctx.beginPath();
+                        ctx.moveTo(plotWidth + bw.right / 2, 0 - bw.top);
+                        ctx.lineTo(plotWidth + bw.right / 2, plotHeight);
+                        ctx.stroke();
+                    }
+
+                    if (bw.bottom > 0) {
+                        ctx.strokeStyle = bc.bottom;
+                        ctx.lineWidth = bw.bottom;
+                        ctx.beginPath();
+                        ctx.moveTo(plotWidth + bw.right, plotHeight + bw.bottom / 2);
+                        ctx.lineTo(0, plotHeight + bw.bottom / 2);
+                        ctx.stroke();
+                    }
+
+                    if (bw.left > 0) {
+                        ctx.strokeStyle = bc.left;
+                        ctx.lineWidth = bw.left;
+                        ctx.beginPath();
+                        ctx.moveTo(0 - bw.left/2, plotHeight + bw.bottom);
+                        ctx.lineTo(0- bw.left/2, 0);
+                        ctx.stroke();
+                    }
+                }
+                else {
+                    ctx.lineWidth = bw;
+                    ctx.strokeStyle = options.grid.borderColor;
+                    ctx.strokeRect(-bw/2, -bw/2, plotWidth + bw, plotHeight + bw);
+                }
+            }
+
+            ctx.restore();
+        }
+
+        function drawAxisLabels() {
+
+            $.each(allAxes(), function (_, axis) {
+                var box = axis.box,
+                    legacyStyles = axis.direction + "Axis " + axis.direction + axis.n + "Axis",
+                    layer = "flot-" + axis.direction + "-axis flot-" + axis.direction + axis.n + "-axis " + legacyStyles,
+                    font = axis.options.font || "flot-tick-label tickLabel",
+                    tick, x, y, halign, valign;
+
+                // Remove text before checking for axis.show and ticks.length;
+                // otherwise plugins, like flot-tickrotor, that draw their own
+                // tick labels will end up with both theirs and the defaults.
+
+                surface.removeText(layer);
+
+                if (!axis.show || axis.ticks.length == 0)
+                    return;
+
+                for (var i = 0; i < axis.ticks.length; ++i) {
+
+                    tick = axis.ticks[i];
+                    if (!tick.label || tick.v < axis.min || tick.v > axis.max)
+                        continue;
+
+                    if (axis.direction == "x") {
+                        halign = "center";
+                        x = plotOffset.left + axis.p2c(tick.v);
+                        if (axis.position == "bottom") {
+                            y = box.top + box.padding;
+                        } else {
+                            y = box.top + box.height - box.padding;
+                            valign = "bottom";
+                        }
+                    } else {
+                        valign = "middle";
+                        y = plotOffset.top + axis.p2c(tick.v);
+                        if (axis.position == "left") {
+                            x = box.left + box.width - box.padding;
+                            halign = "right";
+                        } else {
+                            x = box.left + box.padding;
+                        }
+                    }
+
+                    surface.addText(layer, x, y, tick.label, font, null, null, halign, valign);
+                }
+            });
+        }
+
+        function drawSeries(series) {
+            if (series.lines.show)
+                drawSeriesLines(series);
+            if (series.bars.show)
+                drawSeriesBars(series);
+            if (series.points.show)
+                drawSeriesPoints(series);
+        }
+
+        function drawSeriesLines(series) {
+            function plotLine(datapoints, xoffset, yoffset, axisx, axisy) {
+                var points = datapoints.points,
+                    ps = datapoints.pointsize,
+                    prevx = null, prevy = null;
+
+                ctx.beginPath();
+                for (var i = ps; i < points.length; i += ps) {
+                    var x1 = points[i - ps], y1 = points[i - ps + 1],
+                        x2 = points[i], y2 = points[i + 1];
+
+                    if (x1 == null || x2 == null)
+                        continue;
+
+                    // clip with ymin
+                    if (y1 <= y2 && y1 < axisy.min) {
+                        if (y2 < axisy.min)
+                            continue;   // line segment is outside
+                        // compute new intersection point
+                        x1 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.min;
+                    }
+                    else if (y2 <= y1 && y2 < axisy.min) {
+                        if (y1 < axisy.min)
+                            continue;
+                        x2 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.min;
+                    }
+
+                    // clip with ymax
+                    if (y1 >= y2 && y1 > axisy.max) {
+                        if (y2 > axisy.max)
+                            continue;
+                        x1 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.max;
+                    }
+                    else if (y2 >= y1 && y2 > axisy.max) {
+                        if (y1 > axisy.max)
+                            continue;
+                        x2 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.max;
+                    }
+
+                    // clip with xmin
+                    if (x1 <= x2 && x1 < axisx.min) {
+                        if (x2 < axisx.min)
+                            continue;
+                        y1 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.min;
+                    }
+                    else if (x2 <= x1 && x2 < axisx.min) {
+                        if (x1 < axisx.min)
+                            continue;
+                        y2 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.min;
+                    }
+
+                    // clip with xmax
+                    if (x1 >= x2 && x1 > axisx.max) {
+                        if (x2 > axisx.max)
+                            continue;
+                        y1 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.max;
+                    }
+                    else if (x2 >= x1 && x2 > axisx.max) {
+                        if (x1 > axisx.max)
+                            continue;
+                        y2 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.max;
+                    }
+
+                    if (x1 != prevx || y1 != prevy)
+                        ctx.moveTo(axisx.p2c(x1) + xoffset, axisy.p2c(y1) + yoffset);
+
+                    prevx = x2;
+                    prevy = y2;
+                    ctx.lineTo(axisx.p2c(x2) + xoffset, axisy.p2c(y2) + yoffset);
+                }
+                ctx.stroke();
+            }
+
+            function plotLineArea(datapoints, axisx, axisy) {
+                var points = datapoints.points,
+                    ps = datapoints.pointsize,
+                    bottom = Math.min(Math.max(0, axisy.min), axisy.max),
+                    i = 0, top, areaOpen = false,
+                    ypos = 1, segmentStart = 0, segmentEnd = 0;
+
+                // we process each segment in two turns, first forward
+                // direction to sketch out top, then once we hit the
+                // end we go backwards to sketch the bottom
+                while (true) {
+                    if (ps > 0 && i > points.length + ps)
+                        break;
+
+                    i += ps; // ps is negative if going backwards
+
+                    var x1 = points[i - ps],
+                        y1 = points[i - ps + ypos],
+                        x2 = points[i], y2 = points[i + ypos];
+
+                    if (areaOpen) {
+                        if (ps > 0 && x1 != null && x2 == null) {
+                            // at turning point
+                            segmentEnd = i;
+                            ps = -ps;
+                            ypos = 2;
+                            continue;
+                        }
+
+                        if (ps < 0 && i == segmentStart + ps) {
+                            // done with the reverse sweep
+                            ctx.fill();
+                            areaOpen = false;
+                            ps = -ps;
+                            ypos = 1;
+                            i = segmentStart = segmentEnd + ps;
+                            continue;
+                        }
+                    }
+
+                    if (x1 == null || x2 == null)
+                        continue;
+
+                    // clip x values
+
+                    // clip with xmin
+                    if (x1 <= x2 && x1 < axisx.min) {
+                        if (x2 < axisx.min)
+                            continue;
+                        y1 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.min;
+                    }
+                    else if (x2 <= x1 && x2 < axisx.min) {
+                        if (x1 < axisx.min)
+                            continue;
+                        y2 = (axisx.min - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.min;
+                    }
+
+                    // clip with xmax
+                    if (x1 >= x2 && x1 > axisx.max) {
+                        if (x2 > axisx.max)
+                            continue;
+                        y1 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x1 = axisx.max;
+                    }
+                    else if (x2 >= x1 && x2 > axisx.max) {
+                        if (x1 > axisx.max)
+                            continue;
+                        y2 = (axisx.max - x1) / (x2 - x1) * (y2 - y1) + y1;
+                        x2 = axisx.max;
+                    }
+
+                    if (!areaOpen) {
+                        // open area
+                        ctx.beginPath();
+                        ctx.moveTo(axisx.p2c(x1), axisy.p2c(bottom));
+                        areaOpen = true;
+                    }
+
+                    // now first check the case where both is outside
+                    if (y1 >= axisy.max && y2 >= axisy.max) {
+                        ctx.lineTo(axisx.p2c(x1), axisy.p2c(axisy.max));
+                        ctx.lineTo(axisx.p2c(x2), axisy.p2c(axisy.max));
+                        continue;
+                    }
+                    else if (y1 <= axisy.min && y2 <= axisy.min) {
+                        ctx.lineTo(axisx.p2c(x1), axisy.p2c(axisy.min));
+                        ctx.lineTo(axisx.p2c(x2), axisy.p2c(axisy.min));
+                        continue;
+                    }
+
+                    // else it's a bit more complicated, there might
+                    // be a flat maxed out rectangle first, then a
+                    // triangular cutout or reverse; to find these
+                    // keep track of the current x values
+                    var x1old = x1, x2old = x2;
+
+                    // clip the y values, without shortcutting, we
+                    // go through all cases in turn
+
+                    // clip with ymin
+                    if (y1 <= y2 && y1 < axisy.min && y2 >= axisy.min) {
+                        x1 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.min;
+                    }
+                    else if (y2 <= y1 && y2 < axisy.min && y1 >= axisy.min) {
+                        x2 = (axisy.min - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.min;
+                    }
+
+                    // clip with ymax
+                    if (y1 >= y2 && y1 > axisy.max && y2 <= axisy.max) {
+                        x1 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y1 = axisy.max;
+                    }
+                    else if (y2 >= y1 && y2 > axisy.max && y1 <= axisy.max) {
+                        x2 = (axisy.max - y1) / (y2 - y1) * (x2 - x1) + x1;
+                        y2 = axisy.max;
+                    }
+
+                    // if the x value was changed we got a rectangle
+                    // to fill
+                    if (x1 != x1old) {
+                        ctx.lineTo(axisx.p2c(x1old), axisy.p2c(y1));
+                        // it goes to (x1, y1), but we fill that below
+                    }
+
+                    // fill triangular section, this sometimes result
+                    // in redundant points if (x1, y1) hasn't changed
+                    // from previous line to, but we just ignore that
+                    ctx.lineTo(axisx.p2c(x1), axisy.p2c(y1));
+                    ctx.lineTo(axisx.p2c(x2), axisy.p2c(y2));
+
+                    // fill the other rectangle if it's there
+                    if (x2 != x2old) {
+                        ctx.lineTo(axisx.p2c(x2), axisy.p2c(y2));
+                        ctx.lineTo(axisx.p2c(x2old), axisy.p2c(y2));
+                    }
+                }
+            }
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+            ctx.lineJoin = "round";
+
+            var lw = series.lines.lineWidth,
+                sw = series.shadowSize;
+            // FIXME: consider another form of shadow when filling is turned on
+            if (lw > 0 && sw > 0) {
+                // draw shadow as a thick and thin line with transparency
+                ctx.lineWidth = sw;
+                ctx.strokeStyle = "rgba(0,0,0,0.1)";
+                // position shadow at angle from the mid of line
+                var angle = Math.PI/18;
+                plotLine(series.datapoints, Math.sin(angle) * (lw/2 + sw/2), Math.cos(angle) * (lw/2 + sw/2), series.xaxis, series.yaxis);
+                ctx.lineWidth = sw/2;
+                plotLine(series.datapoints, Math.sin(angle) * (lw/2 + sw/4), Math.cos(angle) * (lw/2 + sw/4), series.xaxis, series.yaxis);
+            }
+
+            ctx.lineWidth = lw;
+            ctx.strokeStyle = series.color;
+            var fillStyle = getFillStyle(series.lines, series.color, 0, plotHeight);
+            if (fillStyle) {
+                ctx.fillStyle = fillStyle;
+                plotLineArea(series.datapoints, series.xaxis, series.yaxis);
+            }
+
+            if (lw > 0)
+                plotLine(series.datapoints, 0, 0, series.xaxis, series.yaxis);
+            ctx.restore();
+        }
+
+        function drawSeriesPoints(series) {
+            function plotPoints(datapoints, radius, fillStyle, offset, shadow, axisx, axisy, symbol) {
+                var points = datapoints.points, ps = datapoints.pointsize;
+
+                for (var i = 0; i < points.length; i += ps) {
+                    var x = points[i], y = points[i + 1];
+                    if (x == null || x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
+                        continue;
+
+                    ctx.beginPath();
+                    x = axisx.p2c(x);
+                    y = axisy.p2c(y) + offset;
+                    if (symbol == "circle")
+                        ctx.arc(x, y, radius, 0, shadow ? Math.PI : Math.PI * 2, false);
+                    else
+                        symbol(ctx, x, y, radius, shadow);
+                    ctx.closePath();
+
+                    if (fillStyle) {
+                        ctx.fillStyle = fillStyle;
+                        ctx.fill();
+                    }
+                    ctx.stroke();
+                }
+            }
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            var lw = series.points.lineWidth,
+                sw = series.shadowSize,
+                radius = series.points.radius,
+                symbol = series.points.symbol;
+
+            // If the user sets the line width to 0, we change it to a very 
+            // small value. A line width of 0 seems to force the default of 1.
+            // Doing the conditional here allows the shadow setting to still be 
+            // optional even with a lineWidth of 0.
+
+            if( lw == 0 )
+                lw = 0.0001;
+
+            if (lw > 0 && sw > 0) {
+                // draw shadow in two steps
+                var w = sw / 2;
+                ctx.lineWidth = w;
+                ctx.strokeStyle = "rgba(0,0,0,0.1)";
+                plotPoints(series.datapoints, radius, null, w + w/2, true,
+                           series.xaxis, series.yaxis, symbol);
+
+                ctx.strokeStyle = "rgba(0,0,0,0.2)";
+                plotPoints(series.datapoints, radius, null, w/2, true,
+                           series.xaxis, series.yaxis, symbol);
+            }
+
+            ctx.lineWidth = lw;
+            ctx.strokeStyle = series.color;
+            plotPoints(series.datapoints, radius,
+                       getFillStyle(series.points, series.color), 0, false,
+                       series.xaxis, series.yaxis, symbol);
+            ctx.restore();
+        }
+
+        function drawBar(x, y, b, barLeft, barRight, fillStyleCallback, axisx, axisy, c, horizontal, lineWidth) {
+            var left, right, bottom, top,
+                drawLeft, drawRight, drawTop, drawBottom,
+                tmp;
+
+            // in horizontal mode, we start the bar from the left
+            // instead of from the bottom so it appears to be
+            // horizontal rather than vertical
+            if (horizontal) {
+                drawBottom = drawRight = drawTop = true;
+                drawLeft = false;
+                left = b;
+                right = x;
+                top = y + barLeft;
+                bottom = y + barRight;
+
+                // account for negative bars
+                if (right < left) {
+                    tmp = right;
+                    right = left;
+                    left = tmp;
+                    drawLeft = true;
+                    drawRight = false;
+                }
+            }
+            else {
+                drawLeft = drawRight = drawTop = true;
+                drawBottom = false;
+                left = x + barLeft;
+                right = x + barRight;
+                bottom = b;
+                top = y;
+
+                // account for negative bars
+                if (top < bottom) {
+                    tmp = top;
+                    top = bottom;
+                    bottom = tmp;
+                    drawBottom = true;
+                    drawTop = false;
+                }
+            }
+
+            // clip
+            if (right < axisx.min || left > axisx.max ||
+                top < axisy.min || bottom > axisy.max)
+                return;
+
+            if (left < axisx.min) {
+                left = axisx.min;
+                drawLeft = false;
+            }
+
+            if (right > axisx.max) {
+                right = axisx.max;
+                drawRight = false;
+            }
+
+            if (bottom < axisy.min) {
+                bottom = axisy.min;
+                drawBottom = false;
+            }
+
+            if (top > axisy.max) {
+                top = axisy.max;
+                drawTop = false;
+            }
+
+            left = axisx.p2c(left);
+            bottom = axisy.p2c(bottom);
+            right = axisx.p2c(right);
+            top = axisy.p2c(top);
+
+            // fill the bar
+            if (fillStyleCallback) {
+                c.fillStyle = fillStyleCallback(bottom, top);
+                c.fillRect(left, top, right - left, bottom - top)
+            }
+
+            // draw outline
+            if (lineWidth > 0 && (drawLeft || drawRight || drawTop || drawBottom)) {
+                c.beginPath();
+
+                // FIXME: inline moveTo is buggy with excanvas
+                c.moveTo(left, bottom);
+                if (drawLeft)
+                    c.lineTo(left, top);
+                else
+                    c.moveTo(left, top);
+                if (drawTop)
+                    c.lineTo(right, top);
+                else
+                    c.moveTo(right, top);
+                if (drawRight)
+                    c.lineTo(right, bottom);
+                else
+                    c.moveTo(right, bottom);
+                if (drawBottom)
+                    c.lineTo(left, bottom);
+                else
+                    c.moveTo(left, bottom);
+                c.stroke();
+            }
+        }
+
+        function drawSeriesBars(series) {
+            function plotBars(datapoints, barLeft, barRight, fillStyleCallback, axisx, axisy) {
+                var points = datapoints.points, ps = datapoints.pointsize;
+
+                for (var i = 0; i < points.length; i += ps) {
+                    if (points[i] == null)
+                        continue;
+                    drawBar(points[i], points[i + 1], points[i + 2], barLeft, barRight, fillStyleCallback, axisx, axisy, ctx, series.bars.horizontal, series.bars.lineWidth);
+                }
+            }
+
+            ctx.save();
+            ctx.translate(plotOffset.left, plotOffset.top);
+
+            // FIXME: figure out a way to add shadows (for instance along the right edge)
+            ctx.lineWidth = series.bars.lineWidth;
+            ctx.strokeStyle = series.color;
+
+            var barLeft;
+
+            switch (series.bars.align) {
+                case "left":
+                    barLeft = 0;
+                    break;
+                case "right":
+                    barLeft = -series.bars.barWidth;
+                    break;
+                default:
+                    barLeft = -series.bars.barWidth / 2;
+            }
+
+            var fillStyleCallback = series.bars.fill ? function (bottom, top) { return getFillStyle(series.bars, series.color, bottom, top); } : null;
+            plotBars(series.datapoints, barLeft, barLeft + series.bars.barWidth, fillStyleCallback, series.xaxis, series.yaxis);
+            ctx.restore();
+        }
+
+        function getFillStyle(filloptions, seriesColor, bottom, top) {
+            var fill = filloptions.fill;
+            if (!fill)
+                return null;
+
+            if (filloptions.fillColor)
+                return getColorOrGradient(filloptions.fillColor, bottom, top, seriesColor);
+
+            var c = $.color.parse(seriesColor);
+            c.a = typeof fill == "number" ? fill : 0.4;
+            c.normalize();
+            return c.toString();
+        }
+
+        function insertLegend() {
+
+            if (options.legend.container != null) {
+                $(options.legend.container).html("");
+            } else {
+                placeholder.find(".legend").remove();
+            }
+
+            if (!options.legend.show) {
+                return;
+            }
+
+            var fragments = [], entries = [], rowStarted = false,
+                lf = options.legend.labelFormatter, s, label;
+
+            // Build a list of legend entries, with each having a label and a color
+
+            for (var i = 0; i < series.length; ++i) {
+                s = series[i];
+                if (s.label) {
+                    label = lf ? lf(s.label, s) : s.label;
+                    if (label) {
+                        entries.push({
+                            label: label,
+                            color: s.color
+                        });
+                    }
+                }
+            }
+
+            // Sort the legend using either the default or a custom comparator
+
+            if (options.legend.sorted) {
+                if ($.isFunction(options.legend.sorted)) {
+                    entries.sort(options.legend.sorted);
+                } else if (options.legend.sorted == "reverse") {
+                	entries.reverse();
+                } else {
+                    var ascending = options.legend.sorted != "descending";
+                    entries.sort(function(a, b) {
+                        return a.label == b.label ? 0 : (
+                            (a.label < b.label) != ascending ? 1 : -1   // Logical XOR
+                        );
+                    });
+                }
+            }
+
+            // Generate markup for the list of entries, in their final order
+
+            for (var i = 0; i < entries.length; ++i) {
+
+                var entry = entries[i];
+
+                if (i % options.legend.noColumns == 0) {
+                    if (rowStarted)
+                        fragments.push('</tr>');
+                    fragments.push('<tr>');
+                    rowStarted = true;
+                }
+
+                fragments.push(
+                    '<td class="legendColorBox"><div style="border:1px solid ' + options.legend.labelBoxBorderColor + ';padding:1px"><div style="width:4px;height:0;border:5px solid ' + entry.color + ';overflow:hidden"></div></div></td>' +
+                    '<td class="legendLabel">' + entry.label + '</td>'
+                );
+            }
+
+            if (rowStarted)
+                fragments.push('</tr>');
+
+            if (fragments.length == 0)
+                return;
+
+            var table = '<table style="font-size:smaller;color:' + options.grid.color + '">' + fragments.join("") + '</table>';
+            if (options.legend.container != null)
+                $(options.legend.container).html(table);
+            else {
+                var pos = "",
+                    p = options.legend.position,
+                    m = options.legend.margin;
+                if (m[0] == null)
+                    m = [m, m];
+                if (p.charAt(0) == "n")
+                    pos += 'top:' + (m[1] + plotOffset.top) + 'px;';
+                else if (p.charAt(0) == "s")
+                    pos += 'bottom:' + (m[1] + plotOffset.bottom) + 'px;';
+                if (p.charAt(1) == "e")
+                    pos += 'right:' + (m[0] + plotOffset.right) + 'px;';
+                else if (p.charAt(1) == "w")
+                    pos += 'left:' + (m[0] + plotOffset.left) + 'px;';
+                var legend = $('<div class="legend">' + table.replace('style="', 'style="position:absolute;' + pos +';') + '</div>').appendTo(placeholder);
+                if (options.legend.backgroundOpacity != 0.0) {
+                    // put in the transparent background
+                    // separately to avoid blended labels and
+                    // label boxes
+                    var c = options.legend.backgroundColor;
+                    if (c == null) {
+                        c = options.grid.backgroundColor;
+                        if (c && typeof c == "string")
+                            c = $.color.parse(c);
+                        else
+                            c = $.color.extract(legend, 'background-color');
+                        c.a = 1;
+                        c = c.toString();
+                    }
+                    var div = legend.children();
+                    $('<div style="position:absolute;width:' + div.width() + 'px;height:' + div.height() + 'px;' + pos +'background-color:' + c + ';"> </div>').prependTo(legend).css('opacity', options.legend.backgroundOpacity);
+                }
+            }
+        }
+
+
+        // interactive features
+
+        var highlights = [],
+            redrawTimeout = null;
+
+        // returns the data item the mouse is over, or null if none is found
+        function findNearbyItem(mouseX, mouseY, seriesFilter) {
+            var maxDistance = options.grid.mouseActiveRadius,
+                smallestDistance = maxDistance * maxDistance + 1,
+                item = null, foundPoint = false, i, j, ps;
+
+            for (i = series.length - 1; i >= 0; --i) {
+                if (!seriesFilter(series[i]))
+                    continue;
+
+                var s = series[i],
+                    axisx = s.xaxis,
+                    axisy = s.yaxis,
+                    points = s.datapoints.points,
+                    mx = axisx.c2p(mouseX), // precompute some stuff to make the loop faster
+                    my = axisy.c2p(mouseY),
+                    maxx = maxDistance / axisx.scale,
+                    maxy = maxDistance / axisy.scale;
+
+                ps = s.datapoints.pointsize;
+                // with inverse transforms, we can't use the maxx/maxy
+                // optimization, sadly
+                if (axisx.options.inverseTransform)
+                    maxx = Number.MAX_VALUE;
+                if (axisy.options.inverseTransform)
+                    maxy = Number.MAX_VALUE;
+
+                if (s.lines.show || s.points.show) {
+                    for (j = 0; j < points.length; j += ps) {
+                        var x = points[j], y = points[j + 1];
+                        if (x == null)
+                            continue;
+
+                        // For points and lines, the cursor must be within a
+                        // certain distance to the data point
+                        if (x - mx > maxx || x - mx < -maxx ||
+                            y - my > maxy || y - my < -maxy)
+                            continue;
+
+                        // We have to calculate distances in pixels, not in
+                        // data units, because the scales of the axes may be different
+                        var dx = Math.abs(axisx.p2c(x) - mouseX),
+                            dy = Math.abs(axisy.p2c(y) - mouseY),
+                            dist = dx * dx + dy * dy; // we save the sqrt
+
+                        // use <= to ensure last point takes precedence
+                        // (last generally means on top of)
+                        if (dist < smallestDistance) {
+                            smallestDistance = dist;
+                            item = [i, j / ps];
+                        }
+                    }
+                }
+
+                if (s.bars.show && !item) { // no other point can be nearby
+
+                    var barLeft, barRight;
+
+                    switch (s.bars.align) {
+                        case "left":
+                            barLeft = 0;
+                            break;
+                        case "right":
+                            barLeft = -s.bars.barWidth;
+                            break;
+                        default:
+                            barLeft = -s.bars.barWidth / 2;
+                    }
+
+                    barRight = barLeft + s.bars.barWidth;
+
+                    for (j = 0; j < points.length; j += ps) {
+                        var x = points[j], y = points[j + 1], b = points[j + 2];
+                        if (x == null)
+                            continue;
+
+                        // for a bar graph, the cursor must be inside the bar
+                        if (series[i].bars.horizontal ?
+                            (mx <= Math.max(b, x) && mx >= Math.min(b, x) &&
+                             my >= y + barLeft && my <= y + barRight) :
+                            (mx >= x + barLeft && mx <= x + barRight &&
+                             my >= Math.min(b, y) && my <= Math.max(b, y)))
+                                item = [i, j / ps];
+                    }
+                }
+            }
+
+            if (item) {
+                i = item[0];
+                j = item[1];
+                ps = series[i].datapoints.pointsize;
+
+                return { datapoint: series[i].datapoints.points.slice(j * ps, (j + 1) * ps),
+                         dataIndex: j,
+                         series: series[i],
+                         seriesIndex: i };
+            }
+
+            return null;
+        }
+
+        function onMouseMove(e) {
+            if (options.grid.hoverable)
+                triggerClickHoverEvent("plothover", e,
+                                       function (s) { return s["hoverable"] != false; });
+        }
+
+        function onMouseLeave(e) {
+            if (options.grid.hoverable)
+                triggerClickHoverEvent("plothover", e,
+                                       function (s) { return false; });
+        }
+
+        function onClick(e) {
+            triggerClickHoverEvent("plotclick", e,
+                                   function (s) { return s["clickable"] != false; });
+        }
+
+        // trigger click or hover event (they send the same parameters
+        // so we share their code)
+        function triggerClickHoverEvent(eventname, event, seriesFilter) {
+            var offset = eventHolder.offset(),
+                canvasX = event.pageX - offset.left - plotOffset.left,
+                canvasY = event.pageY - offset.top - plotOffset.top,
+            pos = canvasToAxisCoords({ left: canvasX, top: canvasY });
+
+            pos.pageX = event.pageX;
+            pos.pageY = event.pageY;
+
+            var item = findNearbyItem(canvasX, canvasY, seriesFilter);
+
+            if (item) {
+                // fill in mouse pos for any listeners out there
+                item.pageX = parseInt(item.series.xaxis.p2c(item.datapoint[0]) + offset.left + plotOffset.left, 10);
+                item.pageY = parseInt(item.series.yaxis.p2c(item.datapoint[1]) + offset.top + plotOffset.top, 10);
+            }
+
+            if (options.grid.autoHighlight) {
+                // clear auto-highlights
+                for (var i = 0; i < highlights.length; ++i) {
+                    var h = highlights[i];
+                    if (h.auto == eventname &&
+                        !(item && h.series == item.series &&
+                          h.point[0] == item.datapoint[0] &&
+                          h.point[1] == item.datapoint[1]))
+                        unhighlight(h.series, h.point);
+                }
+
+                if (item)
+                    highlight(item.series, item.datapoint, eventname);
+            }
+
+            placeholder.trigger(eventname, [ pos, item ]);
+        }
+
+        function triggerRedrawOverlay() {
+            var t = options.interaction.redrawOverlayInterval;
+            if (t == -1) {      // skip event queue
+                drawOverlay();
+                return;
+            }
+
+            if (!redrawTimeout)
+                redrawTimeout = setTimeout(drawOverlay, t);
+        }
+
+        function drawOverlay() {
+            redrawTimeout = null;
+
+            // draw highlights
+            octx.save();
+            overlay.clear();
+            octx.translate(plotOffset.left, plotOffset.top);
+
+            var i, hi;
+            for (i = 0; i < highlights.length; ++i) {
+                hi = highlights[i];
+
+                if (hi.series.bars.show)
+                    drawBarHighlight(hi.series, hi.point);
+                else
+                    drawPointHighlight(hi.series, hi.point);
+            }
+            octx.restore();
+
+            executeHooks(hooks.drawOverlay, [octx]);
+        }
+
+        function highlight(s, point, auto) {
+            if (typeof s == "number")
+                s = series[s];
+
+            if (typeof point == "number") {
+                var ps = s.datapoints.pointsize;
+                point = s.datapoints.points.slice(ps * point, ps * (point + 1));
+            }
+
+            var i = indexOfHighlight(s, point);
+            if (i == -1) {
+                highlights.push({ series: s, point: point, auto: auto });
+
+                triggerRedrawOverlay();
+            }
+            else if (!auto)
+                highlights[i].auto = false;
+        }
+
+        function unhighlight(s, point) {
+            if (s == null && point == null) {
+                highlights = [];
+                triggerRedrawOverlay();
+                return;
+            }
+
+            if (typeof s == "number")
+                s = series[s];
+
+            if (typeof point == "number") {
+                var ps = s.datapoints.pointsize;
+                point = s.datapoints.points.slice(ps * point, ps * (point + 1));
+            }
+
+            var i = indexOfHighlight(s, point);
+            if (i != -1) {
+                highlights.splice(i, 1);
+
+                triggerRedrawOverlay();
+            }
+        }
+
+        function indexOfHighlight(s, p) {
+            for (var i = 0; i < highlights.length; ++i) {
+                var h = highlights[i];
+                if (h.series == s && h.point[0] == p[0]
+                    && h.point[1] == p[1])
+                    return i;
+            }
+            return -1;
+        }
+
+        function drawPointHighlight(series, point) {
+            var x = point[0], y = point[1],
+                axisx = series.xaxis, axisy = series.yaxis,
+                highlightColor = (typeof series.highlightColor === "string") ? series.highlightColor : $.color.parse(series.color).scale('a', 0.5).toString();
+
+            if (x < axisx.min || x > axisx.max || y < axisy.min || y > axisy.max)
+                return;
+
+            var pointRadius = series.points.radius + series.points.lineWidth / 2;
+            octx.lineWidth = pointRadius;
+            octx.strokeStyle = highlightColor;
+            var radius = 1.5 * pointRadius;
+            x = axisx.p2c(x);
+            y = axisy.p2c(y);
+
+            octx.beginPath();
+            if (series.points.symbol == "circle")
+                octx.arc(x, y, radius, 0, 2 * Math.PI, false);
+            else
+                series.points.symbol(octx, x, y, radius, false);
+            octx.closePath();
+            octx.stroke();
+        }
+
+        function drawBarHighlight(series, point) {
+            var highlightColor = (typeof series.highlightColor === "string") ? series.highlightColor : $.color.parse(series.color).scale('a', 0.5).toString(),
+                fillStyle = highlightColor,
+                barLeft;
+
+            switch (series.bars.align) {
+                case "left":
+                    barLeft = 0;
+                    break;
+                case "right":
+                    barLeft = -series.bars.barWidth;
+                    break;
+                default:
+                    barLeft = -series.bars.barWidth / 2;
+            }
+
+            octx.lineWidth = series.bars.lineWidth;
+            octx.strokeStyle = highlightColor;
+
+            drawBar(point[0], point[1], point[2] || 0, barLeft, barLeft + series.bars.barWidth,
+                    function () { return fillStyle; }, series.xaxis, series.yaxis, octx, series.bars.horizontal, series.bars.lineWidth);
+        }
+
+        function getColorOrGradient(spec, bottom, top, defaultColor) {
+            if (typeof spec == "string")
+                return spec;
+            else {
+                // assume this is a gradient spec; IE currently only
+                // supports a simple vertical gradient properly, so that's
+                // what we support too
+                var gradient = ctx.createLinearGradient(0, top, 0, bottom);
+
+                for (var i = 0, l = spec.colors.length; i < l; ++i) {
+                    var c = spec.colors[i];
+                    if (typeof c != "string") {
+                        var co = $.color.parse(defaultColor);
+                        if (c.brightness != null)
+                            co = co.scale('rgb', c.brightness);
+                        if (c.opacity != null)
+                            co.a *= c.opacity;
+                        c = co.toString();
+                    }
+                    gradient.addColorStop(i / (l - 1), c);
+                }
+
+                return gradient;
+            }
+        }
+    }
+
+    // Add the plot function to the top level of the jQuery object
+
+    $.plot = function(placeholder, data, options) {
+        //var t0 = new Date();
+        var plot = new Plot($(placeholder), data, options, $.plot.plugins);
+        //(window.console ? console.log : alert)("time used (msecs): " + ((new Date()).getTime() - t0.getTime()));
+        return plot;
+    };
+
+    $.plot.version = "0.8.3";
+
+    $.plot.plugins = [];
+
+    // Also add the plot function as a chainable property
+
+    $.fn.plot = function(data, options) {
+        return this.each(function() {
+            $.plot(this, data, options);
+        });
+    };
+
+    // round to nearby lower multiple of base
+    function floorInBase(n, base) {
+        return base * Math.floor(n / base);
+    }
+
+})(jQuery);
+
+/* Flot plugin for rendering pie charts.
+
+Copyright (c) 2007-2014 IOLA and Ole Laursen.
+Licensed under the MIT license.
+
+The plugin assumes that each series has a single data value, and that each
+value is a positive integer or zero.  Negative numbers don't make sense for a
+pie chart, and have unpredictable results.  The values do NOT need to be
+passed in as percentages; the plugin will calculate the total and per-slice
+percentages internally.
+
+* Created by Brian Medendorp
+
+* Updated with contributions from btburnett3, Anthony Aragues and Xavi Ivars
+
+The plugin supports these options:
+
+	series: {
+		pie: {
+			show: true/false
+			radius: 0-1 for percentage of fullsize, or a specified pixel length, or 'auto'
+			innerRadius: 0-1 for percentage of fullsize or a specified pixel length, for creating a donut effect
+			startAngle: 0-2 factor of PI used for starting angle (in radians) i.e 3/2 starts at the top, 0 and 2 have the same result
+			tilt: 0-1 for percentage to tilt the pie, where 1 is no tilt, and 0 is completely flat (nothing will show)
+			offset: {
+				top: integer value to move the pie up or down
+				left: integer value to move the pie left or right, or 'auto'
+			},
+			stroke: {
+				color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#FFF')
+				width: integer pixel width of the stroke
+			},
+			label: {
+				show: true/false, or 'auto'
+				formatter:  a user-defined function that modifies the text/style of the label text
+				radius: 0-1 for percentage of fullsize, or a specified pixel length
+				background: {
+					color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#000')
+					opacity: 0-1
+				},
+				threshold: 0-1 for the percentage value at which to hide labels (if they're too small)
+			},
+			combine: {
+				threshold: 0-1 for the percentage value at which to combine slices (if they're too small)
+				color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#CCC'), if null, the plugin will automatically use the color of the first slice to be combined
+				label: any text value of what the combined slice should be labeled
+			}
+			highlight: {
+				opacity: 0-1
+			}
+		}
+	}
+
+More detail and specific examples can be found in the included HTML file.
+
+*/
+
+(function($) {
+
+	// Maximum redraw attempts when fitting labels within the plot
+
+	var REDRAW_ATTEMPTS = 10;
+
+	// Factor by which to shrink the pie when fitting labels within the plot
+
+	var REDRAW_SHRINK = 0.95;
+
+	function init(plot) {
+
+		var canvas = null,
+			target = null,
+			options = null,
+			maxRadius = null,
+			centerLeft = null,
+			centerTop = null,
+			processed = false,
+			ctx = null;
+
+		// interactive variables
+
+		var highlights = [];
+
+		// add hook to determine if pie plugin in enabled, and then perform necessary operations
+
+		plot.hooks.processOptions.push(function(plot, options) {
+			if (options.series.pie.show) {
+
+				options.grid.show = false;
+
+				// set labels.show
+
+				if (options.series.pie.label.show == "auto") {
+					if (options.legend.show) {
+						options.series.pie.label.show = false;
+					} else {
+						options.series.pie.label.show = true;
+					}
+				}
+
+				// set radius
+
+				if (options.series.pie.radius == "auto") {
+					if (options.series.pie.label.show) {
+						options.series.pie.radius = 3/4;
+					} else {
+						options.series.pie.radius = 1;
+					}
+				}
+
+				// ensure sane tilt
+
+				if (options.series.pie.tilt > 1) {
+					options.series.pie.tilt = 1;
+				} else if (options.series.pie.tilt < 0) {
+					options.series.pie.tilt = 0;
+				}
+			}
+		});
+
+		plot.hooks.bindEvents.push(function(plot, eventHolder) {
+			var options = plot.getOptions();
+			if (options.series.pie.show) {
+				if (options.grid.hoverable) {
+					eventHolder.unbind("mousemove").mousemove(onMouseMove);
+				}
+				if (options.grid.clickable) {
+					eventHolder.unbind("click").click(onClick);
+				}
+			}
+		});
+
+		plot.hooks.processDatapoints.push(function(plot, series, data, datapoints) {
+			var options = plot.getOptions();
+			if (options.series.pie.show) {
+				processDatapoints(plot, series, data, datapoints);
+			}
+		});
+
+		plot.hooks.drawOverlay.push(function(plot, octx) {
+			var options = plot.getOptions();
+			if (options.series.pie.show) {
+				drawOverlay(plot, octx);
+			}
+		});
+
+		plot.hooks.draw.push(function(plot, newCtx) {
+			var options = plot.getOptions();
+			if (options.series.pie.show) {
+				draw(plot, newCtx);
+			}
+		});
+
+		function processDatapoints(plot, series, datapoints) {
+			if (!processed)	{
+				processed = true;
+				canvas = plot.getCanvas();
+				target = $(canvas).parent();
+				options = plot.getOptions();
+				plot.setData(combine(plot.getData()));
+			}
+		}
+
+		function combine(data) {
+
+			var total = 0,
+				combined = 0,
+				numCombined = 0,
+				color = options.series.pie.combine.color,
+				newdata = [];
+
+			// Fix up the raw data from Flot, ensuring the data is numeric
+
+			for (var i = 0; i < data.length; ++i) {
+
+				var value = data[i].data;
+
+				// If the data is an array, we'll assume that it's a standard
+				// Flot x-y pair, and are concerned only with the second value.
+
+				// Note how we use the original array, rather than creating a
+				// new one; this is more efficient and preserves any extra data
+				// that the user may have stored in higher indexes.
+
+				if ($.isArray(value) && value.length == 1) {
+    				value = value[0];
+				}
+
+				if ($.isArray(value)) {
+					// Equivalent to $.isNumeric() but compatible with jQuery < 1.7
+					if (!isNaN(parseFloat(value[1])) && isFinite(value[1])) {
+						value[1] = +value[1];
+					} else {
+						value[1] = 0;
+					}
+				} else if (!isNaN(parseFloat(value)) && isFinite(value)) {
+					value = [1, +value];
+				} else {
+					value = [1, 0];
+				}
+
+				data[i].data = [value];
+			}
+
+			// Sum up all the slices, so we can calculate percentages for each
+
+			for (var i = 0; i < data.length; ++i) {
+				total += data[i].data[0][1];
+			}
+
+			// Count the number of slices with percentages below the combine
+			// threshold; if it turns out to be just one, we won't combine.
+
+			for (var i = 0; i < data.length; ++i) {
+				var value = data[i].data[0][1];
+				if (value / total <= options.series.pie.combine.threshold) {
+					combined += value;
+					numCombined++;
+					if (!color) {
+						color = data[i].color;
+					}
+				}
+			}
+
+			for (var i = 0; i < data.length; ++i) {
+				var value = data[i].data[0][1];
+				if (numCombined < 2 || value / total > options.series.pie.combine.threshold) {
+					newdata.push(
+						$.extend(data[i], {     /* extend to allow keeping all other original data values
+						                           and using them e.g. in labelFormatter. */
+							data: [[1, value]],
+							color: data[i].color,
+							label: data[i].label,
+							angle: value * Math.PI * 2 / total,
+							percent: value / (total / 100)
+						})
+					);
+				}
+			}
+
+			if (numCombined > 1) {
+				newdata.push({
+					data: [[1, combined]],
+					color: color,
+					label: options.series.pie.combine.label,
+					angle: combined * Math.PI * 2 / total,
+					percent: combined / (total / 100)
+				});
+			}
+
+			return newdata;
+		}
+
+		function draw(plot, newCtx) {
+
+			if (!target) {
+				return; // if no series were passed
+			}
+
+			var canvasWidth = plot.getPlaceholder().width(),
+				canvasHeight = plot.getPlaceholder().height(),
+				legendWidth = target.children().filter(".legend").children().width() || 0;
+
+			ctx = newCtx;
+
+			// WARNING: HACK! REWRITE THIS CODE AS SOON AS POSSIBLE!
+
+			// When combining smaller slices into an 'other' slice, we need to
+			// add a new series.  Since Flot gives plugins no way to modify the
+			// list of series, the pie plugin uses a hack where the first call
+			// to processDatapoints results in a call to setData with the new
+			// list of series, then subsequent processDatapoints do nothing.
+
+			// The plugin-global 'processed' flag is used to control this hack;
+			// it starts out false, and is set to true after the first call to
+			// processDatapoints.
+
+			// Unfortunately this turns future setData calls into no-ops; they
+			// call processDatapoints, the flag is true, and nothing happens.
+
+			// To fix this we'll set the flag back to false here in draw, when
+			// all series have been processed, so the next sequence of calls to
+			// processDatapoints once again starts out with a slice-combine.
+			// This is really a hack; in 0.9 we need to give plugins a proper
+			// way to modify series before any processing begins.
+
+			processed = false;
+
+			// calculate maximum radius and center point
+
+			maxRadius =  Math.min(canvasWidth, canvasHeight / options.series.pie.tilt) / 2;
+			centerTop = canvasHeight / 2 + options.series.pie.offset.top;
+			centerLeft = canvasWidth / 2;
+
+			if (options.series.pie.offset.left == "auto") {
+				if (options.legend.position.match("w")) {
+					centerLeft += legendWidth / 2;
+				} else {
+					centerLeft -= legendWidth / 2;
+				}
+				if (centerLeft < maxRadius) {
+					centerLeft = maxRadius;
+				} else if (centerLeft > canvasWidth - maxRadius) {
+					centerLeft = canvasWidth - maxRadius;
+				}
+			} else {
+				centerLeft += options.series.pie.offset.left;
+			}
+
+			var slices = plot.getData(),
+				attempts = 0;
+
+			// Keep shrinking the pie's radius until drawPie returns true,
+			// indicating that all the labels fit, or we try too many times.
+
+			do {
+				if (attempts > 0) {
+					maxRadius *= REDRAW_SHRINK;
+				}
+				attempts += 1;
+				clear();
+				if (options.series.pie.tilt <= 0.8) {
+					drawShadow();
+				}
+			} while (!drawPie() && attempts < REDRAW_ATTEMPTS)
+
+			if (attempts >= REDRAW_ATTEMPTS) {
+				clear();
+				target.prepend("<div class='error'>Could not draw pie with labels contained inside canvas</div>");
+			}
+
+			if (plot.setSeries && plot.insertLegend) {
+				plot.setSeries(slices);
+				plot.insertLegend();
+			}
+
+			// we're actually done at this point, just defining internal functions at this point
+
+			function clear() {
+				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+				target.children().filter(".pieLabel, .pieLabelBackground").remove();
+			}
+
+			function drawShadow() {
+
+				var shadowLeft = options.series.pie.shadow.left;
+				var shadowTop = options.series.pie.shadow.top;
+				var edge = 10;
+				var alpha = options.series.pie.shadow.alpha;
+				var radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
+
+				if (radius >= canvasWidth / 2 - shadowLeft || radius * options.series.pie.tilt >= canvasHeight / 2 - shadowTop || radius <= edge) {
+					return;	// shadow would be outside canvas, so don't draw it
+				}
+
+				ctx.save();
+				ctx.translate(shadowLeft,shadowTop);
+				ctx.globalAlpha = alpha;
+				ctx.fillStyle = "#000";
+
+				// center and rotate to starting position
+
+				ctx.translate(centerLeft,centerTop);
+				ctx.scale(1, options.series.pie.tilt);
+
+				//radius -= edge;
+
+				for (var i = 1; i <= edge; i++) {
+					ctx.beginPath();
+					ctx.arc(0, 0, radius, 0, Math.PI * 2, false);
+					ctx.fill();
+					radius -= i;
+				}
+
+				ctx.restore();
+			}
+
+			function drawPie() {
+
+				var startAngle = Math.PI * options.series.pie.startAngle;
+				var radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
+
+				// center and rotate to starting position
+
+				ctx.save();
+				ctx.translate(centerLeft,centerTop);
+				ctx.scale(1, options.series.pie.tilt);
+				//ctx.rotate(startAngle); // start at top; -- This doesn't work properly in Opera
+
+				// draw slices
+
+				ctx.save();
+				var currentAngle = startAngle;
+				for (var i = 0; i < slices.length; ++i) {
+					slices[i].startAngle = currentAngle;
+					drawSlice(slices[i].angle, slices[i].color, true);
+				}
+				ctx.restore();
+
+				// draw slice outlines
+
+				if (options.series.pie.stroke.width > 0) {
+					ctx.save();
+					ctx.lineWidth = options.series.pie.stroke.width;
+					currentAngle = startAngle;
+					for (var i = 0; i < slices.length; ++i) {
+						drawSlice(slices[i].angle, options.series.pie.stroke.color, false);
+					}
+					ctx.restore();
+				}
+
+				// draw donut hole
+
+				drawDonutHole(ctx);
+
+				ctx.restore();
+
+				// Draw the labels, returning true if they fit within the plot
+
+				if (options.series.pie.label.show) {
+					return drawLabels();
+				} else return true;
+
+				function drawSlice(angle, color, fill) {
+
+					if (angle <= 0 || isNaN(angle)) {
+						return;
+					}
+
+					if (fill) {
+						ctx.fillStyle = color;
+					} else {
+						ctx.strokeStyle = color;
+						ctx.lineJoin = "round";
+					}
+
+					ctx.beginPath();
+					if (Math.abs(angle - Math.PI * 2) > 0.000000001) {
+						ctx.moveTo(0, 0); // Center of the pie
+					}
+
+					//ctx.arc(0, 0, radius, 0, angle, false); // This doesn't work properly in Opera
+					ctx.arc(0, 0, radius,currentAngle, currentAngle + angle / 2, false);
+					ctx.arc(0, 0, radius,currentAngle + angle / 2, currentAngle + angle, false);
+					ctx.closePath();
+					//ctx.rotate(angle); // This doesn't work properly in Opera
+					currentAngle += angle;
+
+					if (fill) {
+						ctx.fill();
+					} else {
+						ctx.stroke();
+					}
+				}
+
+				function drawLabels() {
+
+					var currentAngle = startAngle;
+					var radius = options.series.pie.label.radius > 1 ? options.series.pie.label.radius : maxRadius * options.series.pie.label.radius;
+
+					for (var i = 0; i < slices.length; ++i) {
+						if (slices[i].percent >= options.series.pie.label.threshold * 100) {
+							if (!drawLabel(slices[i], currentAngle, i)) {
+								return false;
+							}
+						}
+						currentAngle += slices[i].angle;
+					}
+
+					return true;
+
+					function drawLabel(slice, startAngle, index) {
+
+						if (slice.data[0][1] == 0) {
+							return true;
+						}
+
+						// format label text
+
+						var lf = options.legend.labelFormatter, text, plf = options.series.pie.label.formatter;
+
+						if (lf) {
+							text = lf(slice.label, slice);
+						} else {
+							text = slice.label;
+						}
+
+						if (plf) {
+							text = plf(text, slice);
+						}
+
+						var halfAngle = ((startAngle + slice.angle) + startAngle) / 2;
+						var x = centerLeft + Math.round(Math.cos(halfAngle) * radius);
+						var y = centerTop + Math.round(Math.sin(halfAngle) * radius) * options.series.pie.tilt;
+
+						var html = "<span class='pieLabel' id='pieLabel" + index + "' style='position:absolute;top:" + y + "px;left:" + x + "px;'>" + text + "</span>";
+						target.append(html);
+
+						var label = target.children("#pieLabel" + index);
+						var labelTop = (y - label.height() / 2);
+						var labelLeft = (x - label.width() / 2);
+
+						label.css("top", labelTop);
+						label.css("left", labelLeft);
+
+						// check to make sure that the label is not outside the canvas
+
+						if (0 - labelTop > 0 || 0 - labelLeft > 0 || canvasHeight - (labelTop + label.height()) < 0 || canvasWidth - (labelLeft + label.width()) < 0) {
+							return false;
+						}
+
+						if (options.series.pie.label.background.opacity != 0) {
+
+							// put in the transparent background separately to avoid blended labels and label boxes
+
+							var c = options.series.pie.label.background.color;
+
+							if (c == null) {
+								c = slice.color;
+							}
+
+							var pos = "top:" + labelTop + "px;left:" + labelLeft + "px;";
+							$("<div class='pieLabelBackground' style='position:absolute;width:" + label.width() + "px;height:" + label.height() + "px;" + pos + "background-color:" + c + ";'></div>")
+								.css("opacity", options.series.pie.label.background.opacity)
+								.insertBefore(label);
+						}
+
+						return true;
+					} // end individual label function
+				} // end drawLabels function
+			} // end drawPie function
+		} // end draw function
+
+		// Placed here because it needs to be accessed from multiple locations
+
+		function drawDonutHole(layer) {
+			if (options.series.pie.innerRadius > 0) {
+
+				// subtract the center
+
+				layer.save();
+				var innerRadius = options.series.pie.innerRadius > 1 ? options.series.pie.innerRadius : maxRadius * options.series.pie.innerRadius;
+				layer.globalCompositeOperation = "destination-out"; // this does not work with excanvas, but it will fall back to using the stroke color
+				layer.beginPath();
+				layer.fillStyle = options.series.pie.stroke.color;
+				layer.arc(0, 0, innerRadius, 0, Math.PI * 2, false);
+				layer.fill();
+				layer.closePath();
+				layer.restore();
+
+				// add inner stroke
+
+				layer.save();
+				layer.beginPath();
+				layer.strokeStyle = options.series.pie.stroke.color;
+				layer.arc(0, 0, innerRadius, 0, Math.PI * 2, false);
+				layer.stroke();
+				layer.closePath();
+				layer.restore();
+
+				// TODO: add extra shadow inside hole (with a mask) if the pie is tilted.
+			}
+		}
+
+		//-- Additional Interactive related functions --
+
+		function isPointInPoly(poly, pt) {
+			for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+				((poly[i][1] <= pt[1] && pt[1] < poly[j][1]) || (poly[j][1] <= pt[1] && pt[1]< poly[i][1]))
+				&& (pt[0] < (poly[j][0] - poly[i][0]) * (pt[1] - poly[i][1]) / (poly[j][1] - poly[i][1]) + poly[i][0])
+				&& (c = !c);
+			return c;
+		}
+
+		function findNearbySlice(mouseX, mouseY) {
+
+			var slices = plot.getData(),
+				options = plot.getOptions(),
+				radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius,
+				x, y;
+
+			for (var i = 0; i < slices.length; ++i) {
+
+				var s = slices[i];
+
+				if (s.pie.show) {
+
+					ctx.save();
+					ctx.beginPath();
+					ctx.moveTo(0, 0); // Center of the pie
+					//ctx.scale(1, options.series.pie.tilt);	// this actually seems to break everything when here.
+					ctx.arc(0, 0, radius, s.startAngle, s.startAngle + s.angle / 2, false);
+					ctx.arc(0, 0, radius, s.startAngle + s.angle / 2, s.startAngle + s.angle, false);
+					ctx.closePath();
+					x = mouseX - centerLeft;
+					y = mouseY - centerTop;
+
+					if (ctx.isPointInPath) {
+						if (ctx.isPointInPath(mouseX - centerLeft, mouseY - centerTop)) {
+							ctx.restore();
+							return {
+								datapoint: [s.percent, s.data],
+								dataIndex: 0,
+								series: s,
+								seriesIndex: i
+							};
+						}
+					} else {
+
+						// excanvas for IE doesn;t support isPointInPath, this is a workaround.
+
+						var p1X = radius * Math.cos(s.startAngle),
+							p1Y = radius * Math.sin(s.startAngle),
+							p2X = radius * Math.cos(s.startAngle + s.angle / 4),
+							p2Y = radius * Math.sin(s.startAngle + s.angle / 4),
+							p3X = radius * Math.cos(s.startAngle + s.angle / 2),
+							p3Y = radius * Math.sin(s.startAngle + s.angle / 2),
+							p4X = radius * Math.cos(s.startAngle + s.angle / 1.5),
+							p4Y = radius * Math.sin(s.startAngle + s.angle / 1.5),
+							p5X = radius * Math.cos(s.startAngle + s.angle),
+							p5Y = radius * Math.sin(s.startAngle + s.angle),
+							arrPoly = [[0, 0], [p1X, p1Y], [p2X, p2Y], [p3X, p3Y], [p4X, p4Y], [p5X, p5Y]],
+							arrPoint = [x, y];
+
+						// TODO: perhaps do some mathmatical trickery here with the Y-coordinate to compensate for pie tilt?
+
+						if (isPointInPoly(arrPoly, arrPoint)) {
+							ctx.restore();
+							return {
+								datapoint: [s.percent, s.data],
+								dataIndex: 0,
+								series: s,
+								seriesIndex: i
+							};
+						}
+					}
+
+					ctx.restore();
+				}
+			}
+
+			return null;
+		}
+
+		function onMouseMove(e) {
+			triggerClickHoverEvent("plothover", e);
+		}
+
+		function onClick(e) {
+			triggerClickHoverEvent("plotclick", e);
+		}
+
+		// trigger click or hover event (they send the same parameters so we share their code)
+
+		function triggerClickHoverEvent(eventname, e) {
+
+			var offset = plot.offset();
+			var canvasX = parseInt(e.pageX - offset.left);
+			var canvasY =  parseInt(e.pageY - offset.top);
+			var item = findNearbySlice(canvasX, canvasY);
+
+			if (options.grid.autoHighlight) {
+
+				// clear auto-highlights
+
+				for (var i = 0; i < highlights.length; ++i) {
+					var h = highlights[i];
+					if (h.auto == eventname && !(item && h.series == item.series)) {
+						unhighlight(h.series);
+					}
+				}
+			}
+
+			// highlight the slice
+
+			if (item) {
+				highlight(item.series, eventname);
+			}
+
+			// trigger any hover bind events
+
+			var pos = { pageX: e.pageX, pageY: e.pageY };
+			target.trigger(eventname, [pos, item]);
+		}
+
+		function highlight(s, auto) {
+			//if (typeof s == "number") {
+			//	s = series[s];
+			//}
+
+			var i = indexOfHighlight(s);
+
+			if (i == -1) {
+				highlights.push({ series: s, auto: auto });
+				plot.triggerRedrawOverlay();
+			} else if (!auto) {
+				highlights[i].auto = false;
+			}
+		}
+
+		function unhighlight(s) {
+			if (s == null) {
+				highlights = [];
+				plot.triggerRedrawOverlay();
+			}
+
+			//if (typeof s == "number") {
+			//	s = series[s];
+			//}
+
+			var i = indexOfHighlight(s);
+
+			if (i != -1) {
+				highlights.splice(i, 1);
+				plot.triggerRedrawOverlay();
+			}
+		}
+
+		function indexOfHighlight(s) {
+			for (var i = 0; i < highlights.length; ++i) {
+				var h = highlights[i];
+				if (h.series == s)
+					return i;
+			}
+			return -1;
+		}
+
+		function drawOverlay(plot, octx) {
+
+			var options = plot.getOptions();
+
+			var radius = options.series.pie.radius > 1 ? options.series.pie.radius : maxRadius * options.series.pie.radius;
+
+			octx.save();
+			octx.translate(centerLeft, centerTop);
+			octx.scale(1, options.series.pie.tilt);
+
+			for (var i = 0; i < highlights.length; ++i) {
+				drawHighlight(highlights[i].series);
+			}
+
+			drawDonutHole(octx);
+
+			octx.restore();
+
+			function drawHighlight(series) {
+
+				if (series.angle <= 0 || isNaN(series.angle)) {
+					return;
+				}
+
+				//octx.fillStyle = parseColor(options.series.pie.highlight.color).scale(null, null, null, options.series.pie.highlight.opacity).toString();
+				octx.fillStyle = "rgba(255, 255, 255, " + options.series.pie.highlight.opacity + ")"; // this is temporary until we have access to parseColor
+				octx.beginPath();
+				if (Math.abs(series.angle - Math.PI * 2) > 0.000000001) {
+					octx.moveTo(0, 0); // Center of the pie
+				}
+				octx.arc(0, 0, radius, series.startAngle, series.startAngle + series.angle / 2, false);
+				octx.arc(0, 0, radius, series.startAngle + series.angle / 2, series.startAngle + series.angle, false);
+				octx.closePath();
+				octx.fill();
+			}
+		}
+	} // end init (plugin body)
+
+	// define pie specific options and their default values
+
+	var options = {
+		series: {
+			pie: {
+				show: false,
+				radius: "auto",	// actual radius of the visible pie (based on full calculated radius if <=1, or hard pixel value)
+				innerRadius: 0, /* for donut */
+				startAngle: 3/2,
+				tilt: 1,
+				shadow: {
+					left: 5,	// shadow left offset
+					top: 15,	// shadow top offset
+					alpha: 0.02	// shadow alpha
+				},
+				offset: {
+					top: 0,
+					left: "auto"
+				},
+				stroke: {
+					color: "#fff",
+					width: 1
+				},
+				label: {
+					show: "auto",
+					formatter: function(label, slice) {
+						return "<div style='font-size:x-small;text-align:center;padding:2px;color:" + slice.color + ";'>" + label + "<br/>" + Math.round(slice.percent) + "%</div>";
+					},	// formatter function
+					radius: 1,	// radius at which to place the labels (based on full calculated radius if <=1, or hard pixel value)
+					background: {
+						color: null,
+						opacity: 0
+					},
+					threshold: 0	// percentage at which to hide the label (i.e. the slice is too narrow)
+				},
+				combine: {
+					threshold: -1,	// percentage at which to combine little slices into one larger slice
+					color: null,	// color to give the new slice (auto-generated if null)
+					label: "Other"	// label to give the new slice
+				},
+				highlight: {
+					//color: "#fff",		// will add this functionality once parseColor is available
+					opacity: 0.5
+				}
+			}
+		}
+	};
+
+	$.plot.plugins.push({
+		init: init,
+		options: options,
+		name: "pie",
+		version: "1.1"
+	});
+
+})(jQuery);
+
+/* Flot plugin for automatically redrawing plots as the placeholder resizes.
+
+Copyright (c) 2007-2014 IOLA and Ole Laursen.
+Licensed under the MIT license.
+
+It works by listening for changes on the placeholder div (through the jQuery
+resize event plugin) - if the size changes, it will redraw the plot.
+
+There are no options. If you need to disable the plugin for some plots, you
+can just fix the size of their placeholders.
+
+*/
+
+/* Inline dependency:
+ * jQuery resize event - v1.1 - 3/14/2010
+ * http://benalman.com/projects/jquery-resize-plugin/
+ *
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ */
+(function($,e,t){"$:nomunge";var i=[],n=$.resize=$.extend($.resize,{}),a,r=false,s="setTimeout",u="resize",m=u+"-special-event",o="pendingDelay",l="activeDelay",f="throttleWindow";n[o]=200;n[l]=20;n[f]=true;$.event.special[u]={setup:function(){if(!n[f]&&this[s]){return false}var e=$(this);i.push(this);e.data(m,{w:e.width(),h:e.height()});if(i.length===1){a=t;h()}},teardown:function(){if(!n[f]&&this[s]){return false}var e=$(this);for(var t=i.length-1;t>=0;t--){if(i[t]==this){i.splice(t,1);break}}e.removeData(m);if(!i.length){if(r){cancelAnimationFrame(a)}else{clearTimeout(a)}a=null}},add:function(e){if(!n[f]&&this[s]){return false}var i;function a(e,n,a){var r=$(this),s=r.data(m)||{};s.w=n!==t?n:r.width();s.h=a!==t?a:r.height();i.apply(this,arguments)}if($.isFunction(e)){i=e;return a}else{i=e.handler;e.handler=a}}};function h(t){if(r===true){r=t||1}for(var s=i.length-1;s>=0;s--){var l=$(i[s]);if(l[0]==e||l.is(":visible")){var f=l.width(),c=l.height(),d=l.data(m);if(d&&(f!==d.w||c!==d.h)){l.trigger(u,[d.w=f,d.h=c]);r=t||true}}else{d=l.data(m);d.w=0;d.h=0}}if(a!==null){if(r&&(t==null||t-r<1e3)){a=e.requestAnimationFrame(h)}else{a=setTimeout(h,n[o]);r=false}}}if(!e.requestAnimationFrame){e.requestAnimationFrame=function(){return e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(t,i){return e.setTimeout(function(){t((new Date).getTime())},n[l])}}()}if(!e.cancelAnimationFrame){e.cancelAnimationFrame=function(){return e.webkitCancelRequestAnimationFrame||e.mozCancelRequestAnimationFrame||e.oCancelRequestAnimationFrame||e.msCancelRequestAnimationFrame||clearTimeout}()}})(jQuery,this);
+
+(function ($) {
+    var options = { }; // no options
+
+    function init(plot) {
+        function onResize() {
+            var placeholder = plot.getPlaceholder();
+
+            // somebody might have hidden us and we can't plot
+            // when we don't have the dimensions
+            if (placeholder.width() == 0 || placeholder.height() == 0)
+                return;
+
+            plot.resize();
+            plot.setupGrid();
+            plot.draw();
+        }
+        
+        function bindEvents(plot, eventHolder) {
+            plot.getPlaceholder().resize(onResize);
+        }
+
+        function shutdown(plot, eventHolder) {
+            plot.getPlaceholder().unbind("resize", onResize);
+        }
+        
+        plot.hooks.bindEvents.push(bindEvents);
+        plot.hooks.shutdown.push(shutdown);
+    }
+    
+    $.plot.plugins.push({
+        init: init,
+        options: options,
+        name: 'resize',
+        version: '1.0'
+    });
+})(jQuery);
+
+/* Pretty handling of time axes.
+
+Copyright (c) 2007-2014 IOLA and Ole Laursen.
+Licensed under the MIT license.
+
+Set axis.mode to "time" to enable. See the section "Time series data" in
+API.txt for details.
+
+*/
+
+(function($) {
+
+	var options = {
+		xaxis: {
+			timezone: null,		// "browser" for local to the client or timezone for timezone-js
+			timeformat: null,	// format string to use
+			twelveHourClock: false,	// 12 or 24 time in time mode
+			monthNames: null	// list of names of months
+		}
+	};
+
+	// round to nearby lower multiple of base
+
+	function floorInBase(n, base) {
+		return base * Math.floor(n / base);
+	}
+
+	// Returns a string with the date d formatted according to fmt.
+	// A subset of the Open Group's strftime format is supported.
+
+	function formatDate(d, fmt, monthNames, dayNames) {
+
+		if (typeof d.strftime == "function") {
+			return d.strftime(fmt);
+		}
+
+		var leftPad = function(n, pad) {
+			n = "" + n;
+			pad = "" + (pad == null ? "0" : pad);
+			return n.length == 1 ? pad + n : n;
+		};
+
+		var r = [];
+		var escape = false;
+		var hours = d.getHours();
+		var isAM = hours < 12;
+
+		if (monthNames == null) {
+			monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		}
+
+		if (dayNames == null) {
+			dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+		}
+
+		var hours12;
+
+		if (hours > 12) {
+			hours12 = hours - 12;
+		} else if (hours == 0) {
+			hours12 = 12;
+		} else {
+			hours12 = hours;
+		}
+
+		for (var i = 0; i < fmt.length; ++i) {
+
+			var c = fmt.charAt(i);
+
+			if (escape) {
+				switch (c) {
+					case 'a': c = "" + dayNames[d.getDay()]; break;
+					case 'b': c = "" + monthNames[d.getMonth()]; break;
+					case 'd': c = leftPad(d.getDate()); break;
+					case 'e': c = leftPad(d.getDate(), " "); break;
+					case 'h':	// For back-compat with 0.7; remove in 1.0
+					case 'H': c = leftPad(hours); break;
+					case 'I': c = leftPad(hours12); break;
+					case 'l': c = leftPad(hours12, " "); break;
+					case 'm': c = leftPad(d.getMonth() + 1); break;
+					case 'M': c = leftPad(d.getMinutes()); break;
+					// quarters not in Open Group's strftime specification
+					case 'q':
+						c = "" + (Math.floor(d.getMonth() / 3) + 1); break;
+					case 'S': c = leftPad(d.getSeconds()); break;
+					case 'y': c = leftPad(d.getFullYear() % 100); break;
+					case 'Y': c = "" + d.getFullYear(); break;
+					case 'p': c = (isAM) ? ("" + "am") : ("" + "pm"); break;
+					case 'P': c = (isAM) ? ("" + "AM") : ("" + "PM"); break;
+					case 'w': c = "" + d.getDay(); break;
+				}
+				r.push(c);
+				escape = false;
+			} else {
+				if (c == "%") {
+					escape = true;
+				} else {
+					r.push(c);
+				}
+			}
+		}
+
+		return r.join("");
+	}
+
+	// To have a consistent view of time-based data independent of which time
+	// zone the client happens to be in we need a date-like object independent
+	// of time zones.  This is done through a wrapper that only calls the UTC
+	// versions of the accessor methods.
+
+	function makeUtcWrapper(d) {
+
+		function addProxyMethod(sourceObj, sourceMethod, targetObj, targetMethod) {
+			sourceObj[sourceMethod] = function() {
+				return targetObj[targetMethod].apply(targetObj, arguments);
+			};
+		};
+
+		var utc = {
+			date: d
+		};
+
+		// support strftime, if found
+
+		if (d.strftime != undefined) {
+			addProxyMethod(utc, "strftime", d, "strftime");
+		}
+
+		addProxyMethod(utc, "getTime", d, "getTime");
+		addProxyMethod(utc, "setTime", d, "setTime");
+
+		var props = ["Date", "Day", "FullYear", "Hours", "Milliseconds", "Minutes", "Month", "Seconds"];
+
+		for (var p = 0; p < props.length; p++) {
+			addProxyMethod(utc, "get" + props[p], d, "getUTC" + props[p]);
+			addProxyMethod(utc, "set" + props[p], d, "setUTC" + props[p]);
+		}
+
+		return utc;
+	};
+
+	// select time zone strategy.  This returns a date-like object tied to the
+	// desired timezone
+
+	function dateGenerator(ts, opts) {
+		if (opts.timezone == "browser") {
+			return new Date(ts);
+		} else if (!opts.timezone || opts.timezone == "utc") {
+			return makeUtcWrapper(new Date(ts));
+		} else if (typeof timezoneJS != "undefined" && typeof timezoneJS.Date != "undefined") {
+			var d = new timezoneJS.Date();
+			// timezone-js is fickle, so be sure to set the time zone before
+			// setting the time.
+			d.setTimezone(opts.timezone);
+			d.setTime(ts);
+			return d;
+		} else {
+			return makeUtcWrapper(new Date(ts));
+		}
+	}
+	
+	// map of app. size of time units in milliseconds
+
+	var timeUnitSize = {
+		"second": 1000,
+		"minute": 60 * 1000,
+		"hour": 60 * 60 * 1000,
+		"day": 24 * 60 * 60 * 1000,
+		"month": 30 * 24 * 60 * 60 * 1000,
+		"quarter": 3 * 30 * 24 * 60 * 60 * 1000,
+		"year": 365.2425 * 24 * 60 * 60 * 1000
+	};
+
+	// the allowed tick sizes, after 1 year we use
+	// an integer algorithm
+
+	var baseSpec = [
+		[1, "second"], [2, "second"], [5, "second"], [10, "second"],
+		[30, "second"], 
+		[1, "minute"], [2, "minute"], [5, "minute"], [10, "minute"],
+		[30, "minute"], 
+		[1, "hour"], [2, "hour"], [4, "hour"],
+		[8, "hour"], [12, "hour"],
+		[1, "day"], [2, "day"], [3, "day"],
+		[0.25, "month"], [0.5, "month"], [1, "month"],
+		[2, "month"]
+	];
+
+	// we don't know which variant(s) we'll need yet, but generating both is
+	// cheap
+
+	var specMonths = baseSpec.concat([[3, "month"], [6, "month"],
+		[1, "year"]]);
+	var specQuarters = baseSpec.concat([[1, "quarter"], [2, "quarter"],
+		[1, "year"]]);
+
+	function init(plot) {
+		plot.hooks.processOptions.push(function (plot, options) {
+			$.each(plot.getAxes(), function(axisName, axis) {
+
+				var opts = axis.options;
+
+				if (opts.mode == "time") {
+					axis.tickGenerator = function(axis) {
+
+						var ticks = [];
+						var d = dateGenerator(axis.min, opts);
+						var minSize = 0;
+
+						// make quarter use a possibility if quarters are
+						// mentioned in either of these options
+
+						var spec = (opts.tickSize && opts.tickSize[1] ===
+							"quarter") ||
+							(opts.minTickSize && opts.minTickSize[1] ===
+							"quarter") ? specQuarters : specMonths;
+
+						if (opts.minTickSize != null) {
+							if (typeof opts.tickSize == "number") {
+								minSize = opts.tickSize;
+							} else {
+								minSize = opts.minTickSize[0] * timeUnitSize[opts.minTickSize[1]];
+							}
+						}
+
+						for (var i = 0; i < spec.length - 1; ++i) {
+							if (axis.delta < (spec[i][0] * timeUnitSize[spec[i][1]]
+											  + spec[i + 1][0] * timeUnitSize[spec[i + 1][1]]) / 2
+								&& spec[i][0] * timeUnitSize[spec[i][1]] >= minSize) {
+								break;
+							}
+						}
+
+						var size = spec[i][0];
+						var unit = spec[i][1];
+
+						// special-case the possibility of several years
+
+						if (unit == "year") {
+
+							// if given a minTickSize in years, just use it,
+							// ensuring that it's an integer
+
+							if (opts.minTickSize != null && opts.minTickSize[1] == "year") {
+								size = Math.floor(opts.minTickSize[0]);
+							} else {
+
+								var magn = Math.pow(10, Math.floor(Math.log(axis.delta / timeUnitSize.year) / Math.LN10));
+								var norm = (axis.delta / timeUnitSize.year) / magn;
+
+								if (norm < 1.5) {
+									size = 1;
+								} else if (norm < 3) {
+									size = 2;
+								} else if (norm < 7.5) {
+									size = 5;
+								} else {
+									size = 10;
+								}
+
+								size *= magn;
+							}
+
+							// minimum size for years is 1
+
+							if (size < 1) {
+								size = 1;
+							}
+						}
+
+						axis.tickSize = opts.tickSize || [size, unit];
+						var tickSize = axis.tickSize[0];
+						unit = axis.tickSize[1];
+
+						var step = tickSize * timeUnitSize[unit];
+
+						if (unit == "second") {
+							d.setSeconds(floorInBase(d.getSeconds(), tickSize));
+						} else if (unit == "minute") {
+							d.setMinutes(floorInBase(d.getMinutes(), tickSize));
+						} else if (unit == "hour") {
+							d.setHours(floorInBase(d.getHours(), tickSize));
+						} else if (unit == "month") {
+							d.setMonth(floorInBase(d.getMonth(), tickSize));
+						} else if (unit == "quarter") {
+							d.setMonth(3 * floorInBase(d.getMonth() / 3,
+								tickSize));
+						} else if (unit == "year") {
+							d.setFullYear(floorInBase(d.getFullYear(), tickSize));
+						}
+
+						// reset smaller components
+
+						d.setMilliseconds(0);
+
+						if (step >= timeUnitSize.minute) {
+							d.setSeconds(0);
+						}
+						if (step >= timeUnitSize.hour) {
+							d.setMinutes(0);
+						}
+						if (step >= timeUnitSize.day) {
+							d.setHours(0);
+						}
+						if (step >= timeUnitSize.day * 4) {
+							d.setDate(1);
+						}
+						if (step >= timeUnitSize.month * 2) {
+							d.setMonth(floorInBase(d.getMonth(), 3));
+						}
+						if (step >= timeUnitSize.quarter * 2) {
+							d.setMonth(floorInBase(d.getMonth(), 6));
+						}
+						if (step >= timeUnitSize.year) {
+							d.setMonth(0);
+						}
+
+						var carry = 0;
+						var v = Number.NaN;
+						var prev;
+
+						do {
+
+							prev = v;
+							v = d.getTime();
+							ticks.push(v);
+
+							if (unit == "month" || unit == "quarter") {
+								if (tickSize < 1) {
+
+									// a bit complicated - we'll divide the
+									// month/quarter up but we need to take
+									// care of fractions so we don't end up in
+									// the middle of a day
+
+									d.setDate(1);
+									var start = d.getTime();
+									d.setMonth(d.getMonth() +
+										(unit == "quarter" ? 3 : 1));
+									var end = d.getTime();
+									d.setTime(v + carry * timeUnitSize.hour + (end - start) * tickSize);
+									carry = d.getHours();
+									d.setHours(0);
+								} else {
+									d.setMonth(d.getMonth() +
+										tickSize * (unit == "quarter" ? 3 : 1));
+								}
+							} else if (unit == "year") {
+								d.setFullYear(d.getFullYear() + tickSize);
+							} else {
+								d.setTime(v + step);
+							}
+						} while (v < axis.max && v != prev);
+
+						return ticks;
+					};
+
+					axis.tickFormatter = function (v, axis) {
+
+						var d = dateGenerator(v, axis.options);
+
+						// first check global format
+
+						if (opts.timeformat != null) {
+							return formatDate(d, opts.timeformat, opts.monthNames, opts.dayNames);
+						}
+
+						// possibly use quarters if quarters are mentioned in
+						// any of these places
+
+						var useQuarters = (axis.options.tickSize &&
+								axis.options.tickSize[1] == "quarter") ||
+							(axis.options.minTickSize &&
+								axis.options.minTickSize[1] == "quarter");
+
+						var t = axis.tickSize[0] * timeUnitSize[axis.tickSize[1]];
+						var span = axis.max - axis.min;
+						var suffix = (opts.twelveHourClock) ? " %p" : "";
+						var hourCode = (opts.twelveHourClock) ? "%I" : "%H";
+						var fmt;
+
+						if (t < timeUnitSize.minute) {
+							fmt = hourCode + ":%M:%S" + suffix;
+						} else if (t < timeUnitSize.day) {
+							if (span < 2 * timeUnitSize.day) {
+								fmt = hourCode + ":%M" + suffix;
+							} else {
+								fmt = "%b %d " + hourCode + ":%M" + suffix;
+							}
+						} else if (t < timeUnitSize.month) {
+							fmt = "%b %d";
+						} else if ((useQuarters && t < timeUnitSize.quarter) ||
+							(!useQuarters && t < timeUnitSize.year)) {
+							if (span < timeUnitSize.year) {
+								fmt = "%b";
+							} else {
+								fmt = "%b %Y";
+							}
+						} else if (useQuarters && t < timeUnitSize.year) {
+							if (span < timeUnitSize.year) {
+								fmt = "Q%q";
+							} else {
+								fmt = "Q%q %Y";
+							}
+						} else {
+							fmt = "%Y";
+						}
+
+						var rt = formatDate(d, fmt, opts.monthNames, opts.dayNames);
+
+						return rt;
+					};
+				}
+			});
+		});
+	}
+
+	$.plot.plugins.push({
+		init: init,
+		options: options,
+		name: 'time',
+		version: '1.0'
+	});
+
+	// Time-axis support used to be in Flot core, which exposed the
+	// formatDate function on the plot object.  Various plugins depend
+	// on the function, so we need to re-expose it here.
+
+	$.plot.formatDate = formatDate;
+	$.plot.dateGenerator = dateGenerator;
+
+})(jQuery);
+
+/*
+ * jquery.flot.tooltip
+ * 
+ * description: easy-to-use tooltips for Flot charts
+ * version: 0.8.5
+ * authors: Krzysztof Urbas @krzysu [myviews.pl],Evan Steinkerchner @Roundaround
+ * website: https://github.com/krzysu/flot.tooltip
+ * 
+ * build on 2015-05-11
+ * released under MIT License, 2012
+*/ 
+!function(a){var b={tooltip:{show:!1,cssClass:"flotTip",content:"%s | X: %x | Y: %y",xDateFormat:null,yDateFormat:null,monthNames:null,dayNames:null,shifts:{x:10,y:20},defaultTheme:!0,lines:!1,onHover:function(a,b){},$compat:!1}};b.tooltipOpts=b.tooltip;var c=function(a){this.tipPosition={x:0,y:0},this.init(a)};c.prototype.init=function(b){function c(a){var c={};c.x=a.pageX,c.y=a.pageY,b.setTooltipPosition(c)}function d(c,d,f){var g=function(a,b,c,d){return Math.sqrt((c-a)*(c-a)+(d-b)*(d-b))},h=function(a,b,c,d,e,f,h){if(!h||(h=function(a,b,c,d,e,f){if("undefined"!=typeof c)return{x:c,y:b};if("undefined"!=typeof d)return{x:a,y:d};var g,h=-1/((f-d)/(e-c));return{x:g=(e*(a*h-b+d)+c*(a*-h+b-f))/(h*(e-c)+d-f),y:h*g-h*a+b}}(a,b,c,d,e,f),h.x>=Math.min(c,e)&&h.x<=Math.max(c,e)&&h.y>=Math.min(d,f)&&h.y<=Math.max(d,f))){var i=d-f,j=e-c,k=c*f-d*e;return Math.abs(i*a+j*b+k)/Math.sqrt(i*i+j*j)}var l=g(a,b,c,d),m=g(a,b,e,f);return l>m?m:l};if(f)b.showTooltip(f,d);else if(e.plotOptions.series.lines.show&&e.tooltipOptions.lines===!0){var i=e.plotOptions.grid.mouseActiveRadius,j={distance:i+1};a.each(b.getData(),function(a,c){for(var e=0,f=-1,i=1;i<c.data.length;i++)c.data[i-1][0]<=d.x&&c.data[i][0]>=d.x&&(e=i-1,f=i);if(-1===f)return void b.hideTooltip();var k={x:c.data[e][0],y:c.data[e][1]},l={x:c.data[f][0],y:c.data[f][1]},m=h(c.xaxis.p2c(d.x),c.yaxis.p2c(d.y),c.xaxis.p2c(k.x),c.yaxis.p2c(k.y),c.xaxis.p2c(l.x),c.yaxis.p2c(l.y),!1);if(m<j.distance){var n=g(k.x,k.y,d.x,d.y)<g(d.x,d.y,l.x,l.y)?e:f,o=(c.datapoints.pointsize,[d.x,k.y+(l.y-k.y)*((d.x-k.x)/(l.x-k.x))]),p={datapoint:o,dataIndex:n,series:c,seriesIndex:a};j={distance:m,item:p}}}),j.distance<i+1?b.showTooltip(j.item,d):b.hideTooltip()}else b.hideTooltip()}var e=this,f=a.plot.plugins.length;if(this.plotPlugins=[],f)for(var g=0;f>g;g++)this.plotPlugins.push(a.plot.plugins[g].name);b.hooks.bindEvents.push(function(b,f){if(e.plotOptions=b.getOptions(),"boolean"==typeof e.plotOptions.tooltip&&(e.plotOptions.tooltipOpts.show=e.plotOptions.tooltip,e.plotOptions.tooltip=e.plotOptions.tooltipOpts,delete e.plotOptions.tooltipOpts),e.plotOptions.tooltip.show!==!1&&"undefined"!=typeof e.plotOptions.tooltip.show){e.tooltipOptions=e.plotOptions.tooltip,e.tooltipOptions.$compat?(e.wfunc="width",e.hfunc="height"):(e.wfunc="innerWidth",e.hfunc="innerHeight");e.getDomElement();a(b.getPlaceholder()).bind("plothover",d),a(f).bind("mousemove",c)}}),b.hooks.shutdown.push(function(b,e){a(b.getPlaceholder()).unbind("plothover",d),a(e).unbind("mousemove",c)}),b.setTooltipPosition=function(b){var c=e.getDomElement(),d=c.outerWidth()+e.tooltipOptions.shifts.x,f=c.outerHeight()+e.tooltipOptions.shifts.y;b.x-a(window).scrollLeft()>a(window)[e.wfunc]()-d&&(b.x-=d),b.y-a(window).scrollTop()>a(window)[e.hfunc]()-f&&(b.y-=f),e.tipPosition.x=b.x,e.tipPosition.y=b.y},b.showTooltip=function(a,c){var d=e.getDomElement(),f=e.stringFormat(e.tooltipOptions.content,a);""!==f&&(d.html(f),b.setTooltipPosition({x:c.pageX,y:c.pageY}),d.css({left:e.tipPosition.x+e.tooltipOptions.shifts.x,top:e.tipPosition.y+e.tooltipOptions.shifts.y}).show(),"function"==typeof e.tooltipOptions.onHover&&e.tooltipOptions.onHover(a,d))},b.hideTooltip=function(){e.getDomElement().hide().html("")}},c.prototype.getDomElement=function(){var b=a("."+this.tooltipOptions.cssClass);return 0===b.length&&(b=a("<div />").addClass(this.tooltipOptions.cssClass),b.appendTo("body").hide().css({position:"absolute"}),this.tooltipOptions.defaultTheme&&b.css({background:"#fff","z-index":"1040",padding:"0.4em 0.6em","border-radius":"0.5em","font-size":"0.8em",border:"1px solid #111",display:"none","white-space":"nowrap"})),b},c.prototype.stringFormat=function(a,b){var c,d,e,f,g=/%p\.{0,1}(\d{0,})/,h=/%s/,i=/%c/,j=/%lx/,k=/%ly/,l=/%x\.{0,1}(\d{0,})/,m=/%y\.{0,1}(\d{0,})/,n="%x",o="%y",p="%ct";if("undefined"!=typeof b.series.threshold?(c=b.datapoint[0],d=b.datapoint[1],e=b.datapoint[2]):"undefined"!=typeof b.series.lines&&b.series.lines.steps?(c=b.series.datapoints.points[2*b.dataIndex],d=b.series.datapoints.points[2*b.dataIndex+1],e=""):(c=b.series.data[b.dataIndex][0],d=b.series.data[b.dataIndex][1],e=b.series.data[b.dataIndex][2]),null===b.series.label&&b.series.originSeries&&(b.series.label=b.series.originSeries.label),"function"==typeof a&&(a=a(b.series.label,c,d,b)),"boolean"==typeof a&&!a)return"";if("undefined"!=typeof b.series.percent?f=b.series.percent:"undefined"!=typeof b.series.percents&&(f=b.series.percents[b.dataIndex]),"number"==typeof f&&(a=this.adjustValPrecision(g,a,f)),a="undefined"!=typeof b.series.label?a.replace(h,b.series.label):a.replace(h,""),a="undefined"!=typeof b.series.color?a.replace(i,b.series.color):a.replace(i,""),a=this.hasAxisLabel("xaxis",b)?a.replace(j,b.series.xaxis.options.axisLabel):a.replace(j,""),a=this.hasAxisLabel("yaxis",b)?a.replace(k,b.series.yaxis.options.axisLabel):a.replace(k,""),this.isTimeMode("xaxis",b)&&this.isXDateFormat(b)&&(a=a.replace(l,this.timestampToDate(c,this.tooltipOptions.xDateFormat,b.series.xaxis.options))),this.isTimeMode("yaxis",b)&&this.isYDateFormat(b)&&(a=a.replace(m,this.timestampToDate(d,this.tooltipOptions.yDateFormat,b.series.yaxis.options))),"number"==typeof c&&(a=this.adjustValPrecision(l,a,c)),"number"==typeof d&&(a=this.adjustValPrecision(m,a,d)),"undefined"!=typeof b.series.xaxis.ticks){var q;q=this.hasRotatedXAxisTicks(b)?"rotatedTicks":"ticks";var r=b.dataIndex+b.seriesIndex;for(var s in b.series.xaxis[q])if(b.series.xaxis[q].hasOwnProperty(r)&&!this.isTimeMode("xaxis",b)){var t=this.isCategoriesMode("xaxis",b)?b.series.xaxis[q][r].label:b.series.xaxis[q][r].v;t===c&&(a=a.replace(l,b.series.xaxis[q][r].label))}}if("undefined"!=typeof b.series.yaxis.ticks)for(var s in b.series.yaxis.ticks)if(b.series.yaxis.ticks.hasOwnProperty(s)){var u=this.isCategoriesMode("yaxis",b)?b.series.yaxis.ticks[s].label:b.series.yaxis.ticks[s].v;u===d&&(a=a.replace(m,b.series.yaxis.ticks[s].label))}return"undefined"!=typeof b.series.xaxis.tickFormatter&&(a=a.replace(n,b.series.xaxis.tickFormatter(c,b.series.xaxis).replace(/\$/g,"$$"))),"undefined"!=typeof b.series.yaxis.tickFormatter&&(a=a.replace(o,b.series.yaxis.tickFormatter(d,b.series.yaxis).replace(/\$/g,"$$"))),e&&(a=a.replace(p,e)),a},c.prototype.isTimeMode=function(a,b){return"undefined"!=typeof b.series[a].options.mode&&"time"===b.series[a].options.mode},c.prototype.isXDateFormat=function(a){return"undefined"!=typeof this.tooltipOptions.xDateFormat&&null!==this.tooltipOptions.xDateFormat},c.prototype.isYDateFormat=function(a){return"undefined"!=typeof this.tooltipOptions.yDateFormat&&null!==this.tooltipOptions.yDateFormat},c.prototype.isCategoriesMode=function(a,b){return"undefined"!=typeof b.series[a].options.mode&&"categories"===b.series[a].options.mode},c.prototype.timestampToDate=function(b,c,d){var e=a.plot.dateGenerator(b,d);return a.plot.formatDate(e,c,this.tooltipOptions.monthNames,this.tooltipOptions.dayNames)},c.prototype.adjustValPrecision=function(a,b,c){var d,e=b.match(a);return null!==e&&""!==RegExp.$1&&(d=RegExp.$1,c=c.toFixed(d),b=b.replace(a,c)),b},c.prototype.hasAxisLabel=function(b,c){return-1!==a.inArray(this.plotPlugins,"axisLabels")&&"undefined"!=typeof c.series[b].options.axisLabel&&c.series[b].options.axisLabel.length>0},c.prototype.hasRotatedXAxisTicks=function(b){return-1!==a.inArray(this.plotPlugins,"tickRotor")&&"undefined"!=typeof b.series.xaxis.rotatedTicks};var d=function(a){new c(a)};a.plot.plugins.push({init:d,options:b,name:"tooltip",version:"0.8.5"})}(jQuery);
+//# sourceMappingURL=flot-bundle.js.map

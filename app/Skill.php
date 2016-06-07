@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
@@ -17,6 +18,19 @@ class Skill extends Model
         'start_date',
         'end_date',
     ];
+
+    public function presentEndDate()
+    {
+        $today = Carbon::today();
+
+        if($this->end_date > $today) {
+            return $today;
+        }
+
+        return $this->end_date;
+    }c
     
-    
+    public function practicedFor() {
+        return $this->start_date->diffInMonths($this->presentEndDate());
+    }
 }

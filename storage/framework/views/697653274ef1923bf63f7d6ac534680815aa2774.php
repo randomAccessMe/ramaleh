@@ -6,9 +6,19 @@
         <hr/>
         <?php foreach($jobs as $job): ?>
         <h2><?php echo e($job->title); ?></h2>
+        <?php /*TODO: extract this into externall css file */ ?>
         <p style="margin: 10px auto"><?php echo e($job->city); ?>, <?php echo e($job->state ? $job->state . ', ' : ''); ?><?php echo e($job->country); ?></p>
         <p style="width:550px; color: #0c0c0c; margin-top: 0"><?php echo e($job->experience); ?></p>
         <?php endforeach; ?>
+        <h2>Skills </h2>
+        <p style="margin: 10px auto">(Size represents experience)</p>
+        <p>
+            <?php $__empty_1 = true; foreach($skills as $skill): $__empty_1 = false; ?>
+                 <span style="font-size: <?php echo e($skill->practicedFor()); ?>px; color: #8a6343; font-weight: bold"><?php echo e($skill->name); ?> (<?php echo e($skill->practicedFor()); ?>)</span>&nbsp
+            <?php endforeach; if ($__empty_1): ?>
+                <p>No skills were entered.</p>
+            <?php endif; ?>
+        </p>
         <div class="column-one">
 
             <a href="https://github.com/randomAccessMe/ramaleh">

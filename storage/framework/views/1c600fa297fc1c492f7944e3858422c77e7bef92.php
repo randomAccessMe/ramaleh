@@ -55,7 +55,7 @@
                 name: fieldName.replace(/[a-z]{3}\[\d\]/i, 'new['+iteration+']')
             });
         });
-        clone.find('.delete-skill').attr('href', '#');
+        clone.find('.delete-skill').removeAttr('href')
         clone.appendTo('#form-container');
     });
 

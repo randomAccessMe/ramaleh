@@ -6,29 +6,31 @@
 
         <div class="form">
 
-            <form method="post" action="mail.php" name="kontakt">
+            {!! Form::open(['route'=>'contact']) !!}
 
                 <div class="column">
                     YOUR NAME<br/><br/>
-                    <input name="name" id="name" value=""/>
+                    {!! Form::text('name', null, ['id'=>'name', 'required']) !!}
                 </div>
 
                 <div class="column-2">
                     YOUR E-MAIL<br/><br/>
-                    <input name="email" id="email" value=""/>
+                    {!! Form::text('email', null, ['id'=>'email', 'required']) !!}
                 </div>
 
 
                 <div class="column-3">
                     MESSAGE<br/><br/>
-                    <textarea id="message" name="message"></textarea>
+                    {!! Form::textarea('message', null, ['id'=>'message', 'required']) !!}
                 </div>
 
                 <div class="button">
-                    <span><input class="submit" id="submit" name="submit" type="submit" value="SEND"></span>
+                    <span>
+                        {!! Form::submit('SEND', ['id'=>'submit', 'class'=>'submit']) !!}
+                    </span>
                 </div>
 
-            </form>
+            {!! Form::close() !!}
 
         </div>
 
@@ -42,7 +44,7 @@
 
             <strong>Rami AlMaleh</strong><br/><br/>
 
-            e-mail: <strong><a href="mailto:ramaleh91@gmail.com">ramaleh91@gmail.com</a></strong>
+            e-mail: <strong><a href="mailto:{{ config('mail.to') }}">ramaleh91@gmail.com</a></strong>
 
         </div>
 

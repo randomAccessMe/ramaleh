@@ -10,6 +10,15 @@
         <p style="margin: 10px auto">{{ $job->city }}, {{ $job->state ? $job->state . ', ' : '' }}{{ $job->country }}</p>
         <p style="width:550px; color: #0c0c0c; margin-top: 0">{{ $job->experience }}</p>
         @endforeach
+        <h2>Skills </h2>
+        <p style="margin: 10px auto">(Size represents experience)</p>
+        <p>
+            @forelse($skills as $skill)
+                 <span style="font-size: {{ $skill->practicedFor() }}px; color: #8a6343; font-weight: bold">{{ $skill->name }} ({{ $skill->practicedFor() }})</span>&nbsp
+            @empty
+                <p>No skills were entered.</p>
+            @endforelse
+        </p>
         <div class="column-one">
 
             <a href="https://github.com/randomAccessMe/ramaleh">
