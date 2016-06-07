@@ -28,7 +28,7 @@ class Skill extends Model
         }
 
         return $this->end_date;
-    }c
+    }
     
     public function practicedFor() {
         return $this->start_date->diffInMonths($this->presentEndDate());
