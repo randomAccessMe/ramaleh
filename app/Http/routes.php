@@ -42,6 +42,7 @@ $router->group([
 
 
 $router->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+$router->get('/resume', ['as' => 'resume', 'uses' => 'HomeController@resume']);
 $router->post('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);
 
 Route::auth();

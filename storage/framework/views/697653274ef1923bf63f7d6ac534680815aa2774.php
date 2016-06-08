@@ -12,13 +12,14 @@
         <?php endforeach; ?>
         <h2>Skills </h2>
         <p style="margin: 10px auto">(Size represents experience)</p>
-        <p>
+        <p style="width: 550px">
             <?php $__empty_1 = true; foreach($skills as $skill): $__empty_1 = false; ?>
-                 <span style="font-size: <?php echo e($skill->practicedFor()); ?>px; color: #8a6343; font-weight: bold"><?php echo e($skill->name); ?> (<?php echo e($skill->practicedFor()); ?>)</span>&nbsp
+                 <span style="font-size: <?php echo e($skill->practicedFor()); ?>px; color: #8a6343; font-weight: bold"><?php echo e($skill->name); ?></span>&nbsp
             <?php endforeach; if ($__empty_1): ?>
                 <p>No skills were entered.</p>
             <?php endif; ?>
         </p>
+
         <div class="column-one">
 
             <a href="https://github.com/randomAccessMe/ramaleh">
@@ -52,7 +53,9 @@
 
         <div class="column-three">
 
-            <div class="circle-three"></div>
+            <a href="<?php echo e(route('resume')); ?>">
+                <div class="circle-three"></div>
+            </a>
 
             <h2>DOWNLOAD MY RESUME</h2>
             <p>

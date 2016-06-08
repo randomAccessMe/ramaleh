@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Http\Requests;
 use App\Job;
 use App\ResumeInfo;
@@ -37,9 +38,23 @@ class HomeController extends Controller
         Mail::send('emails.contact', ['data' => $request], function ($mail) use ($request) {
             $mail->from($request->get('email'), env('APP_NAME'));
 
-            $mail->to(config('mail.to'), 'Rami AlMaleh')->subject('Someone contacted you from '. env('APP_NAME'));
+            $mail->to(config('mail.to'), 'Rami AlMaleh')->subject('Someone contacted you from ' . env('APP_NAME'));
         });
 
         return redirect()->back();
     }
+
+    /**
+     * Download resume.
+     * @return \Illuminate\Http\Response
+     */
+    public function resume()
+    {
+
+        $pdf = \PDF::loadView('pdf.resume');
+
+        return $pdf->stream();
+    }
+
+
 }
