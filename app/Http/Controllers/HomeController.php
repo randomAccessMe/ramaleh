@@ -51,9 +51,14 @@ class HomeController extends Controller
     public function resume()
     {
 
-        $pdf = \PDF::loadView('pdf.resume');
+        $pdf = \PDF::loadView('pdf.resume', [
+            'resume' => ResumeInfo::first(),
+            'skills' => Skill::all(),
+            'jobs'   => Job::all(),
+            'sites'  => Site::all()
+        ]);
 
-        return $pdf->stream();
+        return $pdf->download('Rami AlMaleh.pdf');
     }
 
 
