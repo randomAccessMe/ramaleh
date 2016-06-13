@@ -51,7 +51,7 @@
 <div class="row">
     @for($i=0; $i<count($jobs); $i++)
     <div class="left body-left">
-        @if($i=0)
+        @if($i==0)
             <h2>Experience</h2>
         @endif
     </div>
@@ -63,7 +63,7 @@
         <div class="right body-right" style="width: 50%">
             <p>{{ $jobs[$i]->start_date }} - {{ $jobs[$i]->until_date }}</p>
         </div>
-        <p>{{ $jobs[$i]->description }}</p>
+        <p>{{ $jobs[$i]->experience }}</p>
     </div>
     @endfor
 </div>

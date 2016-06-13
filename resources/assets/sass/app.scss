@@ -3,3 +3,8 @@
 @import '../vendors/onepage/css/style';
 @import '../vendors/onepage/css/style-responsive';
 @import 'vendors/elbow-room/elbow-room';
+
+.grid p {
+  margin: 0;
+  padding: 0 20px 0 10px;
+}

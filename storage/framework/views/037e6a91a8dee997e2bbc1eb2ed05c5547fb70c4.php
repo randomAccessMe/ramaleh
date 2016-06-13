@@ -6,7 +6,7 @@
 
             <div class="logo"><img src="img/logo.png"></div>
 
-            <h1><?php echo e(env('APP_NAME', 'Rami AlMaleh')); ?></h1>
+            <h1>Rami AlMaleh</h1>
             <hr/>
             <p><?php echo e($resume->summary); ?></p>
 

@@ -6,7 +6,7 @@
 
             <div class="logo"><img src="img/logo.png"></div>
 
-            <h1>{{ env('APP_NAME', 'Rami AlMaleh') }}</h1>
+            <h1>Rami AlMaleh</h1>
             <hr/>
             <p>{{ $resume->summary }}</p>
 
