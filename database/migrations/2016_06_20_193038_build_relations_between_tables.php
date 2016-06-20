@@ -13,11 +13,11 @@ class BuildRelationsBetweenTables extends Migration
     public function up()
     {
         Schema::table('skills', function (Blueprint $table) {
-            $table->integer('resume_id')->unsigned()->index()->after('id');
+            $table->integer('resume_id')->unsigned()->index()->after('id')->nullable();
             $table->foreign('resume_id')->references('id')->on('resumes');
         });
         Schema::table('jobs', function (Blueprint $table) {
-            $table->integer('resume_id')->unsigned()->index()->after('id');
+            $table->integer('resume_id')->unsigned()->index()->after('id')->nullable();
             $table->foreign('resume_id')->references('id')->on('resumes');
         });
     }

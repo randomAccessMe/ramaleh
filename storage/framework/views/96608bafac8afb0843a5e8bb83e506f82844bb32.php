@@ -39,8 +39,8 @@
     </div>
     <div class="right body-right skills">
         <div class="row">
-            <?php for($i=0; $i<count($skills); $i++): ?>
-                <span><?php echo e($skills[$i]->name); ?></span>
+            <?php for($i=0; $i<count($resume->skills); $i++): ?>
+                <span><?php echo e($resume->skills[$i]->name); ?></span>
                 <?php if(($i + 1) % 5 == 0): ?>
                     </div>
                     <div class="row">
@@ -49,7 +49,7 @@
     </div>
 </div>
 <div class="row">
-    <?php for($i=0; $i<count($jobs); $i++): ?>
+    <?php for($i=0; $i<count($resume->jobs); $i++): ?>
     <div class="left body-left">
         <?php if($i==0): ?>
             <h2>Experience</h2>
@@ -57,13 +57,13 @@
     </div>
     <div class="right body-right row">
         <div class="left" style="width: 50%">
-            <h3><?php echo e($jobs[$i]->employer); ?></h3>
-            <h4><?php echo e($jobs[$i]->title); ?></h4>
+            <h3><?php echo e($resume->jobs[$i]->employer); ?></h3>
+            <h4><?php echo e($resume->jobs[$i]->title); ?></h4>
         </div>
         <div class="right body-right" style="width: 50%">
-            <p><?php echo e($jobs[$i]->start_date); ?> - <?php echo e($jobs[$i]->until_date); ?></p>
+            <p><?php echo e($resume->jobs[$i]->start_date->format('M, Y')); ?> / <?php echo e($resume->jobs[$i]->until_date->format('M, Y')); ?></p>
         </div>
-        <p><?php echo e($jobs[$i]->experience); ?></p>
+        <p><?php echo e($resume->jobs[$i]->experience); ?></p>
     </div>
     <?php endfor; ?>
 </div>

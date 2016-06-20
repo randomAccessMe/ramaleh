@@ -61,7 +61,7 @@
             <h4>{{ $resume->jobs[$i]->title }}</h4>
         </div>
         <div class="right body-right" style="width: 50%">
-            <p>{{ $resume->jobs[$i]->start_date }} - {{ $resume->jobs[$i]->until_date }}</p>
+            <p>{{ $resume->jobs[$i]->start_date->format('M, Y') }} / {{ $resume->jobs[$i]->until_date->format('M, Y') }}</p>
         </div>
         <p>{{ $resume->jobs[$i]->experience }}</p>
     </div>
