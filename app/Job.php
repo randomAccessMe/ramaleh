@@ -22,4 +22,9 @@ class Job extends Model
         'start_date',
         'until_date',
     ];
+
+    public function resume()
+    {
+        return $this->belongsTo(Resume::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Job;
+use App\Resume;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -36,7 +37,7 @@ class ExperienceController extends Controller
 //        ]);
 
         foreach ($request->get('new', []) as $new_skill) {
-            Job::create($new_skill);
+            Resume::first()->jobs()->create($new_skill);
         }
         foreach ($request->get('old', []) as $old_job_id => $old_job) {
             Job::find($old_job_id)->update($old_job);

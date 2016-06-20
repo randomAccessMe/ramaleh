@@ -19,18 +19,24 @@ class Skill extends Model
         'end_date',
     ];
 
+    public function resume()
+    {
+        return $this->belongsTo(Resume::class);
+    }
+
     public function presentEndDate()
     {
         $today = Carbon::today();
 
-        if($this->end_date > $today) {
+        if ($this->end_date > $today) {
             return $today;
         }
 
         return $this->end_date;
     }
-    
-    public function practicedFor() {
+
+    public function practicedFor()
+    {
         return $this->start_date->diffInMonths($this->presentEndDate());
     }
 }

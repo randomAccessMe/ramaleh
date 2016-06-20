@@ -51,12 +51,14 @@
                     Portfolio
                 </a>
             </li>
+            <?php if(auth()->user()->isAdministrator()): ?>
             <li>
                 <a href="<?php echo e(route('admin::log')); ?>">
                     <i class="fa fa-database fa-fw"></i>
                     Error Logs
                 </a>
             </li>
+            <?php endif; ?>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

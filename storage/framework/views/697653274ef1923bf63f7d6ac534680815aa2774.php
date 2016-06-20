@@ -4,7 +4,7 @@
 
         <h1>ABOUT Me</h1>
         <hr/>
-        <?php foreach($jobs as $job): ?>
+        <?php foreach($resume->jobs as $job): ?>
         <h2><?php echo e($job->title); ?></h2>
         <?php /*TODO: extract this into externall css file */ ?>
         <p style="margin: 10px auto"><?php echo e($job->city); ?>, <?php echo e($job->state ? $job->state . ', ' : ''); ?><?php echo e($job->country); ?></p>
@@ -13,8 +13,8 @@
         <h2>Skills </h2>
         <p style="margin: 10px auto">(Size represents experience)</p>
         <p style="width: 550px">
-            <?php $__empty_1 = true; foreach($skills as $skill): $__empty_1 = false; ?>
-                 <span style="font-size: <?php echo e($skill->practicedFor()); ?>px; color: #8a6343; font-weight: bold"><?php echo e($skill->name); ?></span>&nbsp
+            <?php $__empty_1 = true; foreach($resume->skills as $skill): $__empty_1 = false; ?>
+                 <span style="font-size: <?php echo e($skill->practicedFor() / 2); ?>px; font-weight: bold"><?php echo e($skill->name); ?></span>&nbsp
             <?php endforeach; if ($__empty_1): ?>
                 <p>No skills were entered.</p>
             <?php endif; ?>

@@ -4,7 +4,7 @@
 
         <h1>ABOUT Me</h1>
         <hr/>
-        @foreach($jobs as $job)
+        @foreach($resume->jobs as $job)
         <h2>{{ $job->title }}</h2>
         {{--TODO: extract this into externall css file --}}
         <p style="margin: 10px auto">{{ $job->city }}, {{ $job->state ? $job->state . ', ' : '' }}{{ $job->country }}</p>
@@ -13,8 +13,8 @@
         <h2>Skills </h2>
         <p style="margin: 10px auto">(Size represents experience)</p>
         <p style="width: 550px">
-            @forelse($skills as $skill)
-                 <span style="font-size: {{ $skill->practicedFor() }}px; color: #8a6343; font-weight: bold">{{ $skill->name }}</span>&nbsp
+            @forelse($resume->skills as $skill)
+                 <span style="font-size: {{ $skill->practicedFor() / 2 }}px; font-weight: bold">{{ $skill->name }}</span>&nbsp
             @empty
                 <p>No skills were entered.</p>
             @endforelse

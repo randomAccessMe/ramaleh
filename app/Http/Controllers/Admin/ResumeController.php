@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ResumeInfo;
+use App\Resume;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,7 +17,7 @@ class ResumeController extends Controller
     public function edit()
     {
 
-        return view('admin.resume.info')->withResume(ResumeInfo::first());
+        return view('admin.resume.info')->withResume(Resume::first());
     }
 
     /**
@@ -28,7 +28,7 @@ class ResumeController extends Controller
     public function update(Request $request)
     {
 
-        ResumeInfo::first()->update($request->all());
+        Resume::first()->update($request->all());
 
         flash()->success('Resume updated successfully');
 

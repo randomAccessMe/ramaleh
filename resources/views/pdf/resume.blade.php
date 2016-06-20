@@ -39,8 +39,8 @@
     </div>
     <div class="right body-right skills">
         <div class="row">
-            @for($i=0; $i<count($skills); $i++)
-                <span>{{ $skills[$i]->name }}</span>
+            @for($i=0; $i<count($resume->skills); $i++)
+                <span>{{ $resume->skills[$i]->name }}</span>
                 @if(($i + 1) % 5 == 0)
                     </div>
                     <div class="row">
@@ -49,7 +49,7 @@
     </div>
 </div>
 <div class="row">
-    @for($i=0; $i<count($jobs); $i++)
+    @for($i=0; $i<count($resume->jobs); $i++)
     <div class="left body-left">
         @if($i==0)
             <h2>Experience</h2>
@@ -57,13 +57,13 @@
     </div>
     <div class="right body-right row">
         <div class="left" style="width: 50%">
-            <h3>{{ $jobs[$i]->employer }}</h3>
-            <h4>{{ $jobs[$i]->title }}</h4>
+            <h3>{{ $resume->jobs[$i]->employer }}</h3>
+            <h4>{{ $resume->jobs[$i]->title }}</h4>
         </div>
         <div class="right body-right" style="width: 50%">
-            <p>{{ $jobs[$i]->start_date }} - {{ $jobs[$i]->until_date }}</p>
+            <p>{{ $resume->jobs[$i]->start_date }} - {{ $resume->jobs[$i]->until_date }}</p>
         </div>
-        <p>{{ $jobs[$i]->experience }}</p>
+        <p>{{ $resume->jobs[$i]->experience }}</p>
     </div>
     @endfor
 </div>

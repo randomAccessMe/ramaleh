@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Resume;
 use App\Skill;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class SkillsController extends Controller
 //        ]);
 
         foreach ($request->get('new', []) as $new_skill) {
-            Skill::create($new_skill);
+            Resume::first()->skills()->create($new_skill);
         }
         foreach ($request->get('old', []) as $old_skill_id => $old_skill) {
             Skill::find($old_skill_id)->update($old_skill);

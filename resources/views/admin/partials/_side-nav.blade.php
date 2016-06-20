@@ -51,12 +51,14 @@
                     Portfolio
                 </a>
             </li>
+            @if(auth()->user()->isAdministrator())
             <li>
                 <a href="{{ route('admin::log') }}">
                     <i class="fa fa-database fa-fw"></i>
                     Error Logs
                 </a>
             </li>
+            @endif
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

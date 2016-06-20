@@ -10,6 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
+// guest accessible
 $router->group([
     'prefix'     => 'admin',
     'namespace'  => 'Admin',
@@ -26,6 +28,7 @@ $router->group([
     $router->resource('/site', 'SiteController');
 });
 
+// admin only
 $router->group([
     'prefix'     => 'admin',
     'namespace'  => 'Admin',
@@ -40,7 +43,7 @@ $router->group([
     $router->get('experience/{job}/delete', ['as' => 'experience.delete', 'uses' => 'ExperienceController@destroy']);
 });
 
-
+// everyone
 $router->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 $router->get('/resume', ['as' => 'resume', 'uses' => 'HomeController@resume']);
 $router->post('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);

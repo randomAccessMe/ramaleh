@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App;
 use App\Http\Requests;
 use App\Job;
-use App\ResumeInfo;
+use App\Resume;
 use App\Site;
 use App\Skill;
 use Illuminate\Http\Request;
@@ -21,9 +21,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('#app')
-            ->withResume(ResumeInfo::first())
-            ->withSkills(Skill::all())
-            ->withJobs(Job::all())
+            ->withResume(Resume::first())
             ->withSites(Site::all());
     }
 
@@ -52,9 +50,7 @@ class HomeController extends Controller
     {
 
         $pdf = \PDF::loadView('pdf.resume', [
-            'resume' => ResumeInfo::first(),
-            'skills' => Skill::all(),
-            'jobs'   => Job::all(),
+            'resume' => Resume::first(),
             'sites'  => Site::all()
         ]);
 
