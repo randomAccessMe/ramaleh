@@ -1,12 +1,17 @@
 @php($prefix = (isset($job) ? 'old['.$job->id.']' : 'new[1]'))
+@php($unique_id = uniqid())
 <div class="job-form-fields">
     <div class="panel panel-default">
-        <div class="panel-heading">Job
-                <a class="pull-right delete-job" href="{{ isset($job) ? route('admin::experience.delete', $job) : ''}}">
-                    <i class="fa fa-trash"></i>
-                </a>
+        <div class="collapse-trigger panel-heading" href="#panel-body{{ $unique_id }}" data-toggle="collapse">
+            <span>{{ isset($job) ? $job->title : 'New Job' }}</span>
+            <a class="collapse-trigger pull-right buffer-left" href="#panel-body{{ $unique_id }}" data-toggle="collapse">
+                <i class="fa fa-arrow-circle-down"></i>
+            </a>
+            <a class="pull-right buffer-left delete-job" href="{{ isset($job) ? route('admin::experience.delete', $job) : ''}}" style="">
+                <i class="fa fa-trash"></i>
+            </a>
         </div>
-        <div class="panel-body">
+        <div class="panel-body collapse" id="panel-body{{ $unique_id }}">
             <div class="row buffer">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="row">

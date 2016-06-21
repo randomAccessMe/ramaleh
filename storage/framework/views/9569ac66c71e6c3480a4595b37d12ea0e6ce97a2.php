@@ -42,26 +42,71 @@
 <?php $__env->startPush('scripts'); ?>
 <script>
     $('#add-job').data('iterator', 1).on('click', function () {
-        $(this).data('iterator', $(this).data('iterator') + 1);
-        var iteration = $(this).data('iterator');
-        var clone = $('.job-form-fields').first().clone();
+
+        freshDuplicate($(this), 'job', function(clone) {
+            var uniqueId = new Date().valueOf();
+            clone.find('.collapse-trigger').each(function() {
+                $(this).attr('href', '#panel-body' + uniqueId);
+            });
+            clone.find('.collapse').attr('id', 'panel-body' + uniqueId);
+            clone.find('.panel-heading span').text('New Job');
+            $('.job-form-fields .panel-body').slideUp();
+            clone.find('.panel-body').show();
+        });
+
+//        $(this).data('iterator', $(this).data('iterator') + 1);
+//        var iteration = $(this).data('iterator');
+//        var clone = $('.job-form-fields').first().clone();
+//        var uniqueId = new Date().valueOf();
+//        clone.find('.collapse-trigger').each(function() {
+//            $(this).attr('href', '#panel-body' + uniqueId);
+//        });
+//        clone.find('.collapse').attr('id', 'panel-body' + uniqueId);
+//        clone.find('.panel-heading span').text('New Job');
+//        $('.job-form-fields .panel-body').slideUp();
+//        clone.find('.panel-body').show();
+//        clone.find('input, textarea').each(function () {
+//            var fieldName = $(this).attr('name');
+//            $(this).val(null).attr({
+//                name: fieldName.replace(/[a-z]{3}\[\d\]/i, 'new['+iteration+']')
+//            });
+//        });
+//        clone.find('.delete-job').removeAttr('href');
+//        clone.appendTo('#form-container');
+    });
+
+    function freshDuplicate(element, elementName, Callback) {
+
+        element.data('iterator', element.data('iterator') + 1);
+        var iteration = element.data('iterator');
+        var clone = $('.' + elementName + '-form-fields').first().clone();
         clone.find('input, textarea').each(function () {
             var fieldName = $(this).attr('name');
             $(this).val(null).attr({
                 name: fieldName.replace(/[a-z]{3}\[\d\]/i, 'new['+iteration+']')
             });
         });
-        clone.find('.delete-job').removeAttr('href');
+        Callback(clone);
+        clone.find('.delete-' + elementName + '').removeAttr('href')
         clone.appendTo('#form-container');
-    });
+    }
+
 
     $('#form-container').on('click', '.delete-job', function() {
-        if($('.job-form-fields').length <= 1) {
-            alert('This is the last Job!');
+        deleteInstance($(this), 'job');
+    });
+
+    function deleteInstance(instanceElement, instanceName) {
+        if($('.' + instanceName + '-form-fields').length <= 1) {
+            alert('This is the last ' + instanceName.capitalizeFirstLetter() + '!');
             return;
         }
-        $(this).parents('.job-form-fields').remove();
-    });
+        instanceElement.parents('.' + instanceName + '-form-fields').remove();
+    }
+
+    String.prototype.capitalizeFirstLetter = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    }
 </script>
 <?php $__env->stopPush(); ?>
 <?php echo $__env->make('#admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

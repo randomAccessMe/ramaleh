@@ -21,6 +21,7 @@ elixir(function (mix) {
         '../vendors/sb-admin/bower_components/bootstrap/dist/js/bootstrap.min.js',
         '../vendors/sb-admin/bower_components/metisMenu/dist/metisMenu.min.js',
         'vendors/laravel-restful-links.js',
+        'admin.js',
     ]);
 
     mix.scripts([
