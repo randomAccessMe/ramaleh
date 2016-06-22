@@ -13,13 +13,6 @@ use Mockery\Exception;
 class SiteController extends Controller
 {
 
-    private $validation_rules = [
-        'name'        => 'required',
-        'description' => 'required',
-        'url'         => 'required|active_url',
-        'screenshot'  => 'required|image',
-    ];
-
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
@@ -47,7 +40,7 @@ class SiteController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, $this->validation_rules);
+        $this->validate($request, Site::$validation_rules);
 
         $screenshot  = $request->file('screenshot');
         $filename    = time() . '.' . $screenshot->guessExtension();
@@ -86,7 +79,7 @@ class SiteController extends Controller
      */
     public function update(Request $request, Site $site)
     {
-        $this->validate($request, $this->validation_rules);
+        $this->validate($request, Site::$validation_rules);
 
         $screenshot  = $request->file('screenshot');
         $filename    = time() . '.' . $screenshot->guessExtension();
