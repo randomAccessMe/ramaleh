@@ -5,6 +5,8 @@
         <h1>PORTFOLIO</h1>
         <hr/>
 
+        <p style="width:550px; color: #0c0c0c; text-align: center; margin:auto">Disclaimer: I do not own the websites listed in my portfolio, I have only worked on them doing some all on  my own and contributing to others with a team of developers.</p>
+
         <ul class="grid">
 
             @foreach($sites as $site)

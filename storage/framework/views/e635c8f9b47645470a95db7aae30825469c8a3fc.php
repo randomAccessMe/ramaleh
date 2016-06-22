@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title><?php echo e(env('APP_NAME', 'Rami AlMaleh')); ?></title>
+    <title>Rami AlMaleh</title>
 
     <title>Ramaleh</title>
 

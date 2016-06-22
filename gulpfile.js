@@ -22,6 +22,7 @@ elixir(function (mix) {
         '../vendors/sb-admin/bower_components/metisMenu/dist/metisMenu.min.js',
         'vendors/laravel-restful-links.js',
         'admin.js',
+        'analytics.js',
     ]);
 
     mix.scripts([
@@ -33,7 +34,8 @@ elixir(function (mix) {
             'imagesloaded.pkgd.min.js',
             'vendors/jquery.parallax.js',
             'script.js',
-        ], 'public/js/app.js')
+            'analytics.js',
+    ], 'public/js/app.js')
         .version([
             '/css/app.css',
             '/css/admin.css',
