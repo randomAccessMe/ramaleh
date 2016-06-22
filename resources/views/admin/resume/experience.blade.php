@@ -50,8 +50,8 @@
             clone.find('.collapse').attr('id', 'panel-body' + uniqueId);
             clone.find('.panel-heading span').text('New Job');
             $('.job-form-fields .panel-body').slideUp();
-            clone.find('.panel-body').show();
         });
+        $('.collapse-trigger').last().trigger('click');
     });
 
 
