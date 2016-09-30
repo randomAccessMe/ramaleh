@@ -5,6 +5,9 @@ Homestead.yaml
 Homestead.json
 .env
 
+#custom additions
+/public/uploads
+
 #PhpStorm files
 .idea/
 ide-helper.php
